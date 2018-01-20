@@ -25,22 +25,22 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	
 	// Drive Train Motor Control IDs
-	public static final int Drv_LEFT_FRONT  = 10;
-	public static final int Drv_LEFT_MID    = 12;
-	public static final int Drv_LEFT_BACK   = 14;
-	public static final int Drv_RIGHT_FRONT = 11;
-	public static final int Drv_RIGHT_MID   = 13;
-	public static final int Drv_RIGHT_BACK  = 15;
+	public static final int DRV_LEFT_FRONT  = 10;
+	public static final int DRV_LEFT_MID    = 12;
+	public static final int DRV_LEFT_BACK   = 14;
+	public static final int DRV_RIGHT_FRONT = 11;
+	public static final int DRV_RIGHT_MID   = 13;
+	public static final int DRV_RIGHT_BACK  = 15;
 	
 	// Elevator Motor Control IDs
-	public static final int Elv_RIGHT       = 21;
-	public static final int Elv_LEFT        = 20;
+	public static final int ELV_RIGHT       = 21;
+	public static final int ELV_LEFT        = 20;
 	
 	// Claw Motor Control IDs
-	public static final int Clw_RIGHT       = 31;
-	public static final int Clw_LEFT        = 30;
+	public static final int CLW_RIGHT       = 31;
+	public static final int CLW_LEFT        = 30;
 	
 	// Climber Motor Control IDs
-	public static final int Clb__RIGHT		= 41;
-	public static final int Clb__LEFT		= 40;
+	public static final int CLB__RIGHT		= 41;
+	public static final int CLB__LEFT		= 40;
 }

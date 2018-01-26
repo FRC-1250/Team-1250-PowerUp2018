@@ -26,7 +26,7 @@ import org.usfirst.frc.team1250.robot.subsystems.Sub_DriveTrain;
 public class Robot extends TimedRobot {
 
 	
-	public static final Sub_DriveTrain s_drivtrain 
+	public static final Sub_DriveTrain s_drivetrain 
 			= new Sub_DriveTrain();
 	
 	public static OI m_oi;
@@ -41,8 +41,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		//m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 

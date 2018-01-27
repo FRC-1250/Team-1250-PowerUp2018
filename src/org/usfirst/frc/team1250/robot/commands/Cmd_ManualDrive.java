@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Cmd_ManualDrive extends Command {
 	
-	private static Timer cluthTimer= new Timer();
-	private final double CLUTCH_DELAY = 0.2;
+	private static Timer clutchTimer= new Timer();
+	private final double CLUTCH_DELAY = 0.05;
 	private boolean prevClutchState = false;
     public Cmd_ManualDrive() {
     	requires(Robot.s_drivetrain);
@@ -31,13 +31,13 @@ public class Cmd_ManualDrive extends Command {
     	Robot.shiftState=Robot.s_drivetrain.getState(Robot.m_oi.getGamepad(), Robot.shiftState);
     	
     	if (this.prevClutchState != Robot.shiftState ) {
-    		cluthTimer.start();
-    		while(cluthTimer.get() <= CLUTCH_DELAY) {
+    		clutchTimer.start();
+    		while(clutchTimer.get() <= CLUTCH_DELAY) {
     			Robot.s_drivetrain.pause();
     		}
     	}
-    	cluthTimer.stop();
-		cluthTimer.reset();
+    	clutchTimer.stop();
+		clutchTimer.reset();
     }
 
     // Make this return true when this Command no longer needs to run execute()

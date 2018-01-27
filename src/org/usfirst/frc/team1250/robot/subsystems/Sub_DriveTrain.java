@@ -33,9 +33,11 @@ public class Sub_DriveTrain extends Subsystem {
 	private DifferentialDrive diffDriveGroup
 	= new DifferentialDrive(gLeftMotor, gRightMotor);
 	
+	private final double SHIFTER_TIMEOUT = 1;
+	
 	// High and Low RPM thresholds for shifting
-	private final double THRESH_RPM_HI= 1500;
-	private final double THRESH_RPM_LO = 1200;
+	private final double THRESH_RPM_HI= 2000;
+	private final double THRESH_RPM_LO = 1400;
 	
     
 	// Initial Commands Loaded on Robot
@@ -51,14 +53,11 @@ public class Sub_DriveTrain extends Subsystem {
 		drive(-joy.getY(), -joy.getThrottle());
 	}
     
-//
-// NEEDS WORK TO FIX    
-//    
     public boolean getState(Joystick joy, boolean state) {
     	
-    	boolean joyCompare = false;
     	double leftJoy = 0;
     	double rightJoy = 0;
+    	
     	
     	// Button OverRide for shifting low
     	if (Robot.m_oi.getButtonState(8)){
@@ -68,21 +67,25 @@ public class Sub_DriveTrain extends Subsystem {
 		leftJoy = -joy.getY();
 		rightJoy = -joy.getThrottle();
 		
-		joyCompare = ((int)Math.signum(leftJoy) != (int)Math.signum(rightJoy));
+		if (Robot.robotTimer.get() > SHIFTER_TIMEOUT && state == false) {
+			
+			if((int)Math.signum(leftJoy) != (int)Math.signum(rightJoy))
+				state= false;
+			else if (Math.abs(fLeftMotor.getSelectedSensorVelocity(0)) > THRESH_RPM_HI && Math.abs(fRightMotor.getSelectedSensorVelocity(0)) > THRESH_RPM_HI)
+				state =  true;
+			
+			Robot.robotTimer.reset();
+		}
+		else {
+			
+			if (Math.abs(fLeftMotor.getSelectedSensorVelocity(0)) < THRESH_RPM_LO || Math.abs(fRightMotor.getSelectedSensorVelocity(0)) < THRESH_RPM_LO )
+				state =  false;
+
+		}
 		
-		if (joyCompare) {	
-			return false;		
-		}
-		else if(!state && (Math.abs(leftJoy)< this.THRESH_RPM_LO || Math.abs(rightJoy)<this.THRESH_RPM_LO )) {
-			return false;
-		}
-		else if (Math.abs(leftJoy) > this.THRESH_RPM_HI && Math.abs(rightJoy) > this.THRESH_RPM_HI) {
-			return true;
-		}
-		 else  {
-			return false;
-		} 
- 	}
+		return state;
+	
+    }
     
     public void pause() {
     	drive(0,0);

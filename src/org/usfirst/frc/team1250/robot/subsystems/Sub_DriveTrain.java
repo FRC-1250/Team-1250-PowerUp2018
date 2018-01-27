@@ -2,7 +2,7 @@ package org.usfirst.frc.team1250.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1250.robot.Robot;
-
+import org.usfirst.frc.team1250.robot.OI;
 import org.usfirst.frc.team1250.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -25,14 +25,14 @@ public class Sub_DriveTrain extends Subsystem {
 	WPI_TalonSRX fRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_FRONT);
 	WPI_TalonSRX mRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_MID);
 	
-	private SpeedController m_leftMotor
+	private SpeedController gLeftMotor
 	= new SpeedControllerGroup(fLeftMotor, bLeftMotor, mLeftMotor);
 	
-	private SpeedController m_rightMotor
+	private SpeedController gRightMotor
 	= new SpeedControllerGroup(fRightMotor, bRightMotor, mRightMotor);
 	
-	private DifferentialDrive m_drive
-	= new DifferentialDrive(m_leftMotor, m_rightMotor);
+	private DifferentialDrive diffDriveGroup
+	= new DifferentialDrive(gLeftMotor, gRightMotor);
 	
 	// High and Low RPM thresholds for shifting
 	private final double THRESH_RPM_HI= 0;
@@ -44,7 +44,7 @@ public class Sub_DriveTrain extends Subsystem {
     }
 	
    public void drive(double left, double right) {
-		m_drive.tankDrive(left, right);	
+		diffDriveGroup.tankDrive(left, right);	
 	}
    
     public void drive(Joystick joy) {

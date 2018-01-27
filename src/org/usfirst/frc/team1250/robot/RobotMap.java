@@ -43,4 +43,16 @@ public class RobotMap {
 	// Climber Motor Control IDs
 	public static final int CLB__RIGHT		= 41;
 	public static final int CLB__LEFT		= 40;
+	
+	// Solenoids for Claw
+	public static final int CLW_RIGHT_SOL   = 1;
+	public static final int CLW_LEFT_SOL    = 2;
+	public static final int CLW_LIFT_SOL    = 3;
+	
+	// Sensors for Claw
+	public static final int CLW_SENS_RIGHT  = 1;
+	public static final int CLW_SENS_LEFT   = 2;
+	public static final int CLW_SENS_LIFT   = 3;
+	
+	
 }

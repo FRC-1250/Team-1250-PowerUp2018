@@ -70,9 +70,12 @@ public class Sub_Claw extends Subsystem {
 	public void soloLiftUnPinch() {
 		SolLift.set(false);
 	}
+	public boolean CheckSoloLift() {
+		return SolLift.get();
+	}
 	
 
-
+		@Override
 		protected void initDefaultCommand() {
 			setDefaultCommand(new Cmd_PassiveClawCollect());
 		}

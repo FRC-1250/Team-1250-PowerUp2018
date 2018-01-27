@@ -6,7 +6,6 @@ import org.usfirst.frc.team1250.robot.Robot;
 public class Cmd_PassiveClawCollect extends Command {
 	
 	  public Cmd_PassiveClawCollect() {
-	        // Use requires() here to declare subsystem dependencies
 	        requires(Robot.s_claw);
 	    }
 

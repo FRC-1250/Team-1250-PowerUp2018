@@ -2,7 +2,6 @@ package org.usfirst.frc.team1250.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1250.robot.Robot;
-import org.usfirst.frc.team1250.robot.OI;
 import org.usfirst.frc.team1250.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -35,8 +34,9 @@ public class Sub_DriveTrain extends Subsystem {
 	= new DifferentialDrive(gLeftMotor, gRightMotor);
 	
 	// High and Low RPM thresholds for shifting
-	private final double THRESH_RPM_HI= 0;
-	private final double THRESH_RPM_LO = 0;
+	private final double THRESH_RPM_HI= 1500;
+	private final double THRESH_RPM_LO = 1200;
+	
     
 	// Initial Commands Loaded on Robot
 	public void initDefaultCommand() {
@@ -57,52 +57,27 @@ public class Sub_DriveTrain extends Subsystem {
     public boolean getState(Joystick joy, boolean state) {
     	
     	boolean joyCompare = false;
-    	double lJoy = 0;
-    	double rJoy = 0;
-
+    	double leftJoy = 0;
+    	double rightJoy = 0;
+    	
+    	// Button OverRide for shifting low
     	if (Robot.m_oi.getButtonState(8)){
-    		System.out.print("Button 8 Pressed");
     		return false;
     	}
     	
-		lJoy = -joy.getY();
-		rJoy = -joy.getThrottle();
+		leftJoy = -joy.getY();
+		rightJoy = -joy.getThrottle();
 		
-//		SmartDashboard.putNumber("Left Joy", fLeftMotor.getSelectedSensorVelocity(0));
-//		SmartDashboard.putNumber("Right Joy", fRightMotor.getSelectedSensorVelocity(0));
+		joyCompare = ((int)Math.signum(leftJoy) != (int)Math.signum(rightJoy));
 		
-		//RIP Ruiqi
-		//SmartDashboard.putNumber("Left Joy", lJoy);
-		//SmartDashboard.putNumber("Right Joy", rJoy);
-		
-		// Signs of the inputs
-		//int lJoySign = (int)Math.signum(lJoy);
-		//int rJoySign = (int)Math.signum(rJoy);
-//		int lRPMSign = (int)Math.signum(lRPM);
-//		int rRPMSign = (int)Math.signum(rRPM);
-		
-		
-		// Check for joystick direction change and RPM Change
-		joyCompare = ((int)Math.signum(lJoy) != (int)Math.signum(rJoy));
-		
-//		if((int)Math.signum(lJoy) != (int)Math.signum(rJoy))
-//			return false;
-//		else if ( fLeftMotor.getSelectedSensorVelocity(0) < kLowRPMThresh || fRightMotor.getSelectedSensorVelocity(0) < kLowRPMThresh )
-//			return false;
-//		else if (fLeftMotor.getSelectedSensorVelocity(0) > kHighRPMThresh && fRightMotor.getSelectedSensorVelocity(0) > kHighRPMThresh)
-//			return true;
-//		else 
-//			return false;
-			
-		//RIP Ruiqi
 		if (joyCompare) {	
 			return false;		
 		}
-		else if(!state && (Math.abs(lJoy)< this.THRESH_RPM_LO || Math.abs(rJoy)<this.THRESH_RPM_LO )) {
+		else if(!state && (Math.abs(leftJoy)< this.THRESH_RPM_LO || Math.abs(rightJoy)<this.THRESH_RPM_LO )) {
 			return false;
 		}
-		else if (Math.abs(lJoy) > this.THRESH_RPM_HI && Math.abs(rJoy) > this.THRESH_RPM_HI) {
-			return false; // should be true to shift high
+		else if (Math.abs(leftJoy) > this.THRESH_RPM_HI && Math.abs(rightJoy) > this.THRESH_RPM_HI) {
+			return true;
 		}
 		 else  {
 			return false;

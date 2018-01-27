@@ -21,6 +21,7 @@ public class OI {
 		
 		Button a = new JoystickButton(m_joystick, 1);
 		Button x = new JoystickButton(m_joystick, 2);
+		Button rt = new JoystickButton(m_joystick,8);
 
 	}
 	

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team1250.robot.subsystems.Sub_DriveTrain;
+import org.usfirst.frc.team1250.robot.subsystems.*;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 
 
@@ -28,9 +28,11 @@ public class Robot extends TimedRobot {
 	
 	public static final Sub_DriveTrain s_drivetrain 
 			= new Sub_DriveTrain();
-	
+	public static final Sub_Shifter s_shifter
+			= new Sub_Shifter();
 	public static OI m_oi;
-
+	
+	public static boolean shiftState = false;
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 

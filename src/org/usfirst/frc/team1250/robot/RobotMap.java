@@ -54,5 +54,9 @@ public class RobotMap {
 	public static final int CLW_SENS_LEFT   = 2;
 	public static final int CLW_SENS_LIFT   = 3;
 	
+	// Elevator stuff
+	public static final int ELE_MOTOR       = 18;
+	public static final int ELE_LIMIT_SW    = 4;
+	
 	
 }

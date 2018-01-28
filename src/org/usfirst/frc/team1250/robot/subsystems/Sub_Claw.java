@@ -19,6 +19,7 @@ public class Sub_Claw extends Subsystem {
 	private DigitalInput LightSens = new DigitalInput(RobotMap.CLW_SENS_RIGHT);
 	private DigitalInput LaserSens = new DigitalInput(RobotMap.CLW_SENS_LEFT);
 	private DigitalInput LightSensTwo = new DigitalInput(RobotMap.CLW_SENS_LIFT);
+	private WPI_TalonSRX EleMotor = new WPI_TalonSRX(RobotMap.ELE_MOTOR);
 
 	public void collect() {
 		LeftClaw.set(-.5);
@@ -73,8 +74,15 @@ public class Sub_Claw extends Subsystem {
 	public boolean CheckSoloLift() {
 		return SolLift.get();
 	}
-	
-
+	public void LiftUp() {
+		EleMotor.set(.5);
+	}
+	public void LiftDown() {
+		EleMotor.set(-.5);
+	}
+	public void LiftStop() {
+		EleMotor.set(0);
+	}
 		@Override
 		protected void initDefaultCommand() {
 			setDefaultCommand(new Cmd_PassiveClawCollect());

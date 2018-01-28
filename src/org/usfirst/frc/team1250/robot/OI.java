@@ -9,6 +9,9 @@ package org.usfirst.frc.team1250.robot;
 
 import org.usfirst.frc.team1250.robot.commands.Cmd_ClawCollect;
 import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
+import org.usfirst.frc.team1250.robot.commands.Cmd_EleHigh;
+import org.usfirst.frc.team1250.robot.commands.Cmd_EleHome;
+import org.usfirst.frc.team1250.robot.commands.Cmd_EleSwitch;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -33,6 +36,9 @@ public class OI {
 	public OI(){
 		x.whenPressed(new Cmd_ClawCollect());
 		a.whenPressed(new Cmd_EleUnpinch());
+		y.whenPressed(new Cmd_EleHigh());
+		b.whenPressed(new Cmd_EleHome());
+		lb.whenPressed(new Cmd_EleSwitch());
 	}
 	
 	public Joystick getGamepad() {

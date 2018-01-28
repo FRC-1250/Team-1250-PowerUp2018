@@ -8,11 +8,12 @@
 package org.usfirst.frc.team1250.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team1250.robot.subsystems.Sub_DriveTrain;
+import org.usfirst.frc.team1250.robot.subsystems.*;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 
 
@@ -26,11 +27,14 @@ import org.usfirst.frc.team1250.robot.subsystems.Sub_DriveTrain;
 public class Robot extends TimedRobot {
 
 	
-	public static final Sub_DriveTrain s_drivtrain 
+	public static final Sub_DriveTrain s_drivetrain 
 			= new Sub_DriveTrain();
-	
+	public static final Sub_Shifter s_shifter
+			= new Sub_Shifter();
 	public static OI m_oi;
-
+	
+	public static boolean shiftState = false;
+	public static Timer robotTimer= new Timer();
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -41,9 +45,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		//m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		robotTimer.start();
 	}
 
 	/**

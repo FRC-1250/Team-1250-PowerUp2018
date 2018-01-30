@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Cmd_EleUnpinch extends Command {
 
     public Cmd_EleUnpinch() {
-    	requires(Robot.s_claw);
+    	requires(Robot.s_elevator);
     }
 
     // Called just before this Command runs the first time
@@ -28,7 +28,7 @@ public class Cmd_EleUnpinch extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.s_claw.soloLiftUnPinch();
+    	Robot.s_elevator.soloLiftUnPinch();
     }
     
 

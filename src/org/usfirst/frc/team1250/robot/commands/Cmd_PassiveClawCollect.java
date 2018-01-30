@@ -25,9 +25,9 @@ public class Cmd_PassiveClawCollect extends Command {
 		else 
 		Robot.s_claw.stop();
 		Robot.s_claw.unpinch();
-	if (!Robot.s_claw.isIn()) {
-		Robot.s_claw.soloLiftPinch();		
-	}
+//	if (!Robot.s_claw.isIn()) {
+//		Robot.s_claw.soloLiftPinch();		
+//	}
 }
 
     protected void execute() {

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Cmd_EleSwitch extends Command {
 
     public Cmd_EleSwitch() {
-    	requires(Robot.s_claw);
+    	requires(Robot.s_elevator);
     }
 
     // Called just before this Command runs the first time
@@ -19,12 +19,12 @@ public class Cmd_EleSwitch extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.s_claw.LiftSwitch();
+    	Robot.s_elevator.LiftSwitch();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.s_claw.GetLiftPos() == 1157.06 * 19)
+    	if (Robot.s_elevator.GetLiftPos() == 1157.06 * 19)
         	return true;
         	else
         	return false;

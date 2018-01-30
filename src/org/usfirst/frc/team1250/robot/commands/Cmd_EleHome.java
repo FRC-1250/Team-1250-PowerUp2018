@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Cmd_EleHome extends Command {
 
     public Cmd_EleHome() {
-    	requires(Robot.s_claw);
+    	requires(Robot.s_elevator);
     }
 
     // Called just before this Command runs the first time
@@ -19,12 +19,12 @@ public class Cmd_EleHome extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.s_claw.LiftHome();
+    	Robot.s_elevator.LiftHome();
 }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.s_claw.GetLiftPos() == -1)
+    	if (Robot.s_elevator.GetLiftPos() == -1)
         	return true;
         	else
         	return false;

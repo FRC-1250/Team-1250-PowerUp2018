@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Cmd_EleHigh extends Command {
 
     public Cmd_EleHigh() {
-    	requires(Robot.s_claw);
+    	requires(Robot.s_elevator);
 
     }
 
@@ -18,13 +18,13 @@ public class Cmd_EleHigh extends Command {
     }
 
     protected void execute() {
-    	Robot.s_claw.LiftTop();
+    	Robot.s_elevator.LiftTop();
 
     }
     
 
     protected boolean isFinished() {
-    	if (Robot.s_claw.GetLiftPos() == 1157.06 * 81)
+    	if (Robot.s_elevator.GetLiftPos() == 1157.06 * 81)
     	return true;
     	else
     	return false;

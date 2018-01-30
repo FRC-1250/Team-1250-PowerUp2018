@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Cmd_ElePinch extends Command {
 
     public Cmd_ElePinch() {
-    	requires(Robot.s_claw);
+    	requires(Robot.s_elevator);
     }
 
 
@@ -25,10 +25,10 @@ public class Cmd_ElePinch extends Command {
     }
 
     protected void end() {
-    	if (!Robot.s_claw.CheckSoloLift())
-    		Robot.s_claw.soloLiftPinch();
+    	if (!Robot.s_elevator.CheckSoloLift())
+    		Robot.s_elevator.soloLiftPinch();
     	else
-    		Robot.s_claw.soloLiftUnPinch();
+    		Robot.s_elevator.soloLiftUnPinch();
     }
     
 

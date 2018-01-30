@@ -53,10 +53,6 @@ public class Sub_Elevator extends Subsystem {
 		return liftSol.get();
 	}
 	
-	public void LiftHome() {
-		eleMotor.set(ControlMode.Position, -1);
-		SmartDashboard.putNumber("test", eleMotor.getSelectedSensorPosition(0));
-	}
 	
 	public double GetLiftPos() {
 		return eleMotor.getSelectedSensorPosition(0);

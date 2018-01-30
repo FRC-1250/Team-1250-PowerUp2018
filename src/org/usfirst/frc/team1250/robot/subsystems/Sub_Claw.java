@@ -1,17 +1,14 @@
 package org.usfirst.frc.team1250.robot.subsystems;
 
 import org.usfirst.frc.team1250.robot.RobotMap;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import org.usfirst.frc.team1250.robot.commands.Cmd_PassiveClawCollect;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 public class Sub_Claw extends Subsystem {
 	private WPI_VictorSPX LeftClaw = new WPI_VictorSPX(RobotMap.CLW_LEFT);
 	private WPI_VictorSPX RightClaw = new WPI_VictorSPX(RobotMap.CLW_RIGHT);

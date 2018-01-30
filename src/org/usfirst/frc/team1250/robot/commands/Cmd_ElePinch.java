@@ -25,7 +25,7 @@ public class Cmd_ElePinch extends Command {
     }
 
     protected void end() {
-    	if (!Robot.s_elevator.CheckSoloLift())
+    	if (!Robot.s_elevator.checkSoloLift())
     		Robot.s_elevator.soloLiftPinch();
     	else
     		Robot.s_elevator.soloLiftUnPinch();

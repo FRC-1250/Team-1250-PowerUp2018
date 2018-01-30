@@ -35,10 +35,12 @@ public class OI {
 	
 	public OI(){
 		x.whenPressed(new Cmd_ClawCollect());
-		a.whenPressed(new Cmd_EleUnpinch());
+		
+		a.whenPressed(new Cmd_EleHome());
+		b.whenPressed(new Cmd_EleSwitch());
 		y.whenPressed(new Cmd_EleHigh());
-		b.whenPressed(new Cmd_EleHome());
-		lb.whenPressed(new Cmd_EleSwitch());
+		
+		lb.whenPressed(new Cmd_EleUnpinch());
 	}
 	
 	public Joystick getGamepad() {

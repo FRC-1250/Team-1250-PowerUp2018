@@ -19,14 +19,14 @@ public class Cmd_EleSwitch extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.s_elevator.LiftSwitch();
+    	Robot.s_elevator.setLiftPosition(Robot.s_elevator.SWITCH_POS);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.s_elevator.GetLiftPos() == 1157.06 * 19)
+    	if (Robot.s_elevator.GetLiftPos() == Robot.s_elevator.ELE_TICKS * Robot.s_elevator.SWITCH_POS)
         	return true;
-        	else
+    	else
         	return false;
 
     }

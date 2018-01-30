@@ -24,14 +24,18 @@ public class Cmd_EleHome extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.s_elevator.GetLiftPos() == -1)
-        	return true;
-    	else
-        	return false;
+    	return (Robot.s_elevator.getLiftPos() == -1) || (!Robot.s_elevator.getSwitchLift());
+        	
+   
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	if (!Robot.s_elevator.getSwitchLift()){
+    		Robot.s_elevator.setTicksToZero();
+    	}
+    	
+    	
     }
 
     // Called when another command which requires one or more of the same

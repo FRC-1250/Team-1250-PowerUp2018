@@ -56,7 +56,7 @@ public class RobotMap {
 	
 	// Elevator stuff
 	public static final int ELE_MOTOR       = 18;
-	public static final int ELE_LIMIT_SW    = 4;
+	public static final int ELE_LIMIT_SW    = 0;
 	
 	
 }

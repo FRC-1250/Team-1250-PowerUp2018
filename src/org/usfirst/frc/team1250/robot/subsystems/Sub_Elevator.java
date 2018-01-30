@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  *
@@ -17,7 +18,8 @@ public class Sub_Elevator extends Subsystem {
 
 	private WPI_TalonSRX eleMotor = new WPI_TalonSRX(RobotMap.ELE_MOTOR);
 	private Solenoid liftSol = new Solenoid(RobotMap.CLW_LIFT_SOL);
-	
+	private DigitalInput liftSwitch = new DigitalInput(RobotMap.ELE_LIMIT_SW);
+
 	// In inches from ground
 	public final int SCALE_POS = 81;
 	public final int SWITCH_POS = 19;
@@ -52,26 +54,30 @@ public class Sub_Elevator extends Subsystem {
 	public boolean checkSoloLift() {
 		return liftSol.get();
 	}
+	public boolean getSwitchLift() {
+		return liftSwitch.get();
+	}
 	
-	
-	public double GetLiftPos() {
+	public double getLiftPos() {
 		return eleMotor.getSelectedSensorPosition(0);
 	}
 	
 	public void setLiftPosition(int pos) {
 		double liftPos = ELE_TICKS * pos;
 		eleMotor.set(ControlMode.Position,liftPos);
-		this.log();
 	}
 	
 	// Default lift position is home
 	public void setLiftPosition() {
 		eleMotor.set(ControlMode.Position, -1);
-		this.log();
 	}
 	
-	private void log() {
-		SmartDashboard.putNumber("test", eleMotor.getSelectedSensorPosition(0));
+	public void setTicksToZero() {
+		eleMotor.setSelectedSensorPosition(0, 0, 10);
+	}
+	
+	public int getTicks() {
+		return eleMotor.getSelectedSensorPosition(0);
 	}
     
     

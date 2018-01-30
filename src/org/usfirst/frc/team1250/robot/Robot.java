@@ -119,6 +119,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		this.log();
 	}
 
 	/**
@@ -126,5 +127,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+	
+	public void log() {
+		SmartDashboard.putBoolean("Is Limit Seen???????", s_elevator.getSwitchLift());
+		SmartDashboard.putNumber("test", s_elevator.getTicks());
 	}
 }

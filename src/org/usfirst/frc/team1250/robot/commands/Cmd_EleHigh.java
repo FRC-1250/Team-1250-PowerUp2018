@@ -24,7 +24,7 @@ public class Cmd_EleHigh extends Command {
     
 
     protected boolean isFinished() {
-    	if (Robot.s_elevator.GetLiftPos() == Robot.s_elevator.ELE_TICKS * Robot.s_elevator.SCALE_POS)
+    	if (Robot.s_elevator.getLiftPos() == Robot.s_elevator.ELE_TICKS * Robot.s_elevator.SCALE_POS)
     		return true;
     	else
     		return false;

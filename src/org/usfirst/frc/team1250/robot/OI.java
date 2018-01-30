@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	Joystick Gamepad = new Joystick(0);
-	Joystick Arcadepad = new Joystick(1);
+	//Joystick Arcadepad = new Joystick(1);
 
 	JoystickButton x = new JoystickButton(Gamepad, 1);
 	JoystickButton a = new JoystickButton(Gamepad, 2);
@@ -34,10 +34,10 @@ public class OI {
 	JoystickButton rb = new JoystickButton(Gamepad, 8);
 	
 	
-	JoystickButton btnHome = new JoystickButton(Arcadepad, 12);
-	JoystickButton btnSwitch = new JoystickButton(Arcadepad, 11);
-	JoystickButton btnScale = new JoystickButton(Arcadepad, 10);
-	
+//	JoystickButton btnHome = new JoystickButton(Arcadepad, 12);
+//	JoystickButton btnSwitch = new JoystickButton(Arcadepad, 11);
+//	JoystickButton btnScale = new JoystickButton(Arcadepad, 10);
+//	
 	
 	public OI(){
 		x.whenPressed(new Cmd_ClawCollect());
@@ -49,9 +49,9 @@ public class OI {
 		lb.whenPressed(new Cmd_EleUnpinch());
 		
 		
-		btnHome.whenInactive(new Cmd_EleHome());;
-		btnSwitch.whenInactive(new Cmd_EleSwitch());
-		btnScale.whenInactive(new Cmd_EleHigh());
+//		btnHome.whenInactive(new Cmd_EleHome());;
+//		btnSwitch.whenInactive(new Cmd_EleSwitch());
+//		btnScale.whenInactive(new Cmd_EleHigh());
 	}
 	
 	public Joystick getGamepad() {

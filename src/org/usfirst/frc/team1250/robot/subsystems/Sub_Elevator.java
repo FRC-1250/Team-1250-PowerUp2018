@@ -1,14 +1,13 @@
 package org.usfirst.frc.team1250.robot.subsystems;
 
 import org.usfirst.frc.team1250.robot.RobotMap;
-
+import org.usfirst.frc.team1250.robot.commands.Cmd_EleManual;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
@@ -16,9 +15,9 @@ import edu.wpi.first.wpilibj.DigitalInput;
  */
 public class Sub_Elevator extends Subsystem {
 
-	private WPI_TalonSRX eleMotor = new WPI_TalonSRX(RobotMap.ELE_MOTOR);
-	private Solenoid liftSol = new Solenoid(RobotMap.CLW_LIFT_SOL);
-	private DigitalInput liftSwitch = new DigitalInput(RobotMap.ELE_LIMIT_SW);
+	public WPI_TalonSRX eleMotor = new WPI_TalonSRX(RobotMap.ELE_MOTOR);
+	private Solenoid eleSol = new Solenoid(RobotMap.CLW_LIFT_SOL);
+	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
 	public final int SCALE_POS = 81;
@@ -42,20 +41,20 @@ public class Sub_Elevator extends Subsystem {
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new Cmd_EleManual());
     }
     
     public void soloLiftPinch() {
-		liftSol.set(true);
+		eleSol.set(true);
 	}
 	public void soloLiftUnPinch() {
-		liftSol.set(false);
+		eleSol.set(false);
 	}
 	public boolean checkSoloLift() {
-		return liftSol.get();
+		return eleSol.get();
 	}
-	public boolean getSwitchLift() {
-		return liftSwitch.get();
+	public boolean getEleSensor() {
+		return eleLowSensor.get();
 	}
 	
 	public double getLiftPos() {
@@ -79,6 +78,12 @@ public class Sub_Elevator extends Subsystem {
 	public int getTicks() {
 		return eleMotor.getSelectedSensorPosition(0);
 	
+	}
+	
+	public void setBump(int val) {
+		int bumpMath = (int)(val * 4 * ELE_TICKS + (eleMotor.getSelectedSensorPosition(0)));
+		eleMotor.set(ControlMode.Position, bumpMath);
+		
 	}
 	public void bumpUp() {
 		double bumpUpMath = 4 * ELE_TICKS + (eleMotor.getSelectedSensorPosition(0));

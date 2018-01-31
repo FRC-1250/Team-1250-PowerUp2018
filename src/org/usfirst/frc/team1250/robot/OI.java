@@ -12,8 +12,6 @@ import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
 import org.usfirst.frc.team1250.robot.commands.Cmd_EleHigh;
 import org.usfirst.frc.team1250.robot.commands.Cmd_EleHome;
 import org.usfirst.frc.team1250.robot.commands.Cmd_EleSwitch;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleBumpUp;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleBumpDown;
 
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -41,8 +39,6 @@ public class OI {
 	JoystickButton btnHome = new JoystickButton(Arcadepad, 12);
 	JoystickButton btnSwitch = new JoystickButton(Arcadepad, 11);
 	JoystickButton btnScale = new JoystickButton(Arcadepad, 10);
-	JoystickButton btnBmpDown = new JoystickButton(Arcadepad, 9);
-	JoystickButton btnBmpHigh = new JoystickButton(Arcadepad, 8);
 	
 	
 	
@@ -57,23 +53,15 @@ public class OI {
 		btnHome.whenInactive(new Cmd_EleHome());;
 		btnSwitch.whenInactive(new Cmd_EleSwitch());
 		btnScale.whenInactive(new Cmd_EleHigh());
-		btnBmpHigh.whenInactive(new Cmd_EleBumpUp());
-		btnBmpDown.whenInactive(new Cmd_EleBumpDown());
 		
-		double yStick = Arcadepad.getRawAxis(2);
-		SmartDashboard.putNumber("yin", yStick);
-		//		double yStick = Arcadepad.getY();
-//		SmartDashboard.putNumber("yin", yStick);
-//		if (yStick > 0){
-//	    	Robot.s_elevator.bumpUp();
-//		}
-//		if (yStick < 0){
-//	    	Robot.s_elevator.bumpDown();
-//		}
 	}
 	
 	public Joystick getGamepad() {
 		return Gamepad;
+	}
+	
+	public Joystick getArcadepad() {
+		return Arcadepad;
 	}
 	
 }

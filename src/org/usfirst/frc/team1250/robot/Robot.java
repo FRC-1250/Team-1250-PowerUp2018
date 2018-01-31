@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team1250.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,7 +28,7 @@ import org.usfirst.frc.team1250.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 
-	
+	Joystick Arcadepad = new Joystick(1);
 	public static final Sub_DriveTrain s_drivtrain 
 			= new Sub_DriveTrain();
 	public static final Sub_Claw s_claw
@@ -49,6 +50,9 @@ public class Robot extends TimedRobot {
 		//m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+	
+	
 	}
 
 	/**
@@ -110,8 +114,12 @@ public class Robot extends TimedRobot {
 		// this line or comment it out.
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
+
 		}
-	}
+		
+		
+		}
+	
 
 	/**
 	 * This function is called periodically during operator control.
@@ -132,5 +140,15 @@ public class Robot extends TimedRobot {
 	public void log() {
 		SmartDashboard.putBoolean("Is Limit Seen???????", s_elevator.getSwitchLift());
 		SmartDashboard.putNumber("test", s_elevator.getTicks());
+	}
+	public Robot() {
+//		double yStick = Arcadepad.getY();
+//		SmartDashboard.putNumber("yin", yStick);
+//		if (yStick > 0){
+//	    	Robot.s_elevator.bumpUp();
+//		}
+//		if (yStick < 0){
+//	    	Robot.s_elevator.bumpDown();
+//		}
 	}
 }

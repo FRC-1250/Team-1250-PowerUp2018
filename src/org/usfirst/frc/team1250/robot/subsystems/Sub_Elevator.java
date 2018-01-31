@@ -78,8 +78,16 @@ public class Sub_Elevator extends Subsystem {
 	
 	public int getTicks() {
 		return eleMotor.getSelectedSensorPosition(0);
+	
 	}
-    
+	public void bumpUp() {
+		double bumpUpMath = 4 * ELE_TICKS + (eleMotor.getSelectedSensorPosition(0));
+		eleMotor.set(ControlMode.Position, bumpUpMath);
+	}
+	public void bumpDown() {
+		double bumpDownMath = (eleMotor.getSelectedSensorPosition(0) - (4 * ELE_TICKS));
+		eleMotor.set(ControlMode.Position, bumpDownMath);
+	}
     
 }
 

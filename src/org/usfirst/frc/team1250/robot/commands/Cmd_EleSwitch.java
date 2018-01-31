@@ -15,6 +15,7 @@ public class Cmd_EleSwitch extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	setTimeout(2);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -24,10 +25,7 @@ public class Cmd_EleSwitch extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.s_elevator.getLiftPos() == Robot.s_elevator.ELE_TICKS * Robot.s_elevator.SWITCH_POS)
-        	return true;
-    	else
-        	return false;
+    	return (Robot.s_elevator.getLiftPos() == Robot.s_elevator.ELE_TICKS * Robot.s_elevator.SWITCH_POS) || isTimedOut();
 
     }
 

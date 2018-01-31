@@ -6,6 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team1250.robot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.*;
+import org.usfirst.frc.team1250.robot.commands.*;
 
 import org.usfirst.frc.team1250.robot.commands.Cmd_ClawCollect;
 import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
@@ -54,6 +57,10 @@ public class OI {
 		btnSwitch.whenInactive(new Cmd_EleSwitch());
 		btnScale.whenInactive(new Cmd_EleHigh());
 		
+	}
+	
+	public boolean getButtonState(int btn) {
+		return Gamepad.getRawButton(btn);
 	}
 	
 	public Joystick getGamepad() {

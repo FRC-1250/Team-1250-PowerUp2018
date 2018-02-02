@@ -15,6 +15,7 @@ public class Cmd_EleHome extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	setTimeout(2);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -24,7 +25,7 @@ public class Cmd_EleHome extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (Robot.s_elevator.getLiftPos() == -1) || (!Robot.s_elevator.getEleSensor());
+    	return (Robot.s_elevator.getLiftPosTicks() == Robot.s_elevator.HOME_POS_TEMP) || (!Robot.s_elevator.getEleSensor() || isTimedOut());
         	
    
     }
@@ -32,7 +33,7 @@ public class Cmd_EleHome extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	if (!Robot.s_elevator.getEleSensor()){
-    		Robot.s_elevator.setTicksToZero();
+    		Robot.s_elevator.setTicksToHome();
     	}
     	
     	

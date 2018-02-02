@@ -21,25 +21,23 @@ public class Cmd_EleManual extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	// Initialized to Home Position
-    	Robot.s_elevator.setLiftPosition(0);
-    	loop = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	currentTicks = Robot.s_elevator.getTicks();
-    	bumpVal = (int) Robot.m_oi.getArcadepad().getRawAxis(1);
+    	bumpVal = (int) -Robot.m_oi.getArcadepad().getRawAxis(1);
     	
 //    	if (!Robot.s_elevator.getEleSensor() && bumpVal<0){
 //    		bumpVal = 0;
 //    	}
     	
-    	if (loop > 100){
+    	if (loop > 10){
     		System.out.println(bumpVal);
     		loop = 0;
     	}
-    	
-    	Robot.s_elevator.setBump(bumpVal);
+    	if (bumpVal != 0)
+    		Robot.s_elevator.setBump(bumpVal);
     	
     	loop +=1;
     }

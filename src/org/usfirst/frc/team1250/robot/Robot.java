@@ -60,12 +60,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+//		Robot.s_elevator.setTicksToHome();
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
+		//Scheduler.getInstance().run();
+		this.log();
 	}
 
 	/**
@@ -142,6 +143,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
+		
 	}
 	public Robot() {
 //		double yStick = Arcadepad.getY();

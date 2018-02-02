@@ -4,6 +4,7 @@ import org.usfirst.frc.team1250.robot.RobotMap;
 import org.usfirst.frc.team1250.robot.commands.Cmd_EleManual;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -20,12 +21,13 @@ public class Sub_Elevator extends Subsystem {
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
-	public final int SCALE_POS = 81;
-	public final int SWITCH_POS = 19;
-	
+	public final int SCALE_POS = -50;
+	public final int SWITCH_POS = -19;
+	public final double HOME_POS_TEMP = -15;
 	public final double  ELE_TICKS = 1157.06;
-	
+	public static int eleSetpoint;
 	public Sub_Elevator() {
+		eleSetpoint = (int)(ELE_TICKS * HOME_POS_TEMP);
 		
 		eleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
 				10);
@@ -33,11 +35,14 @@ public class Sub_Elevator extends Subsystem {
 		eleMotor.configNominalOutputReverse(0, 10);
 		eleMotor.configPeakOutputForward(1, 10);
 		eleMotor.configPeakOutputReverse(-1, 10);
-		
+		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);
-		eleMotor.config_kP(0, 0.1, 10);
+		eleMotor.config_kP(0, 0.05, 10);
 		eleMotor.config_kI(0, 0, 10);
 		eleMotor.config_kD(0, 0, 10);
+		eleMotor.set(ControlMode.Position,eleSetpoint);
+		eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
+		
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -57,22 +62,24 @@ public class Sub_Elevator extends Subsystem {
 		return eleLowSensor.get();
 	}
 	
-	public double getLiftPos() {
-		return eleMotor.getSelectedSensorPosition(0);
+	public double getLiftPosTicks() {
+		return eleMotor.getSelectedSensorPosition(0) * ELE_TICKS ;
 	}
 	
 	public void setLiftPosition(int pos) {
-		double liftPos = ELE_TICKS * pos;
-		eleMotor.set(ControlMode.Position,liftPos);
+		eleSetpoint = (int)(ELE_TICKS * pos);
+		eleMotor.set(ControlMode.Position,eleSetpoint);
 	}
 	
 	// Default lift position is home
+	
 	public void setLiftPosition() {
 		eleMotor.set(ControlMode.Position, -1);
 	}
 	
-	public void setTicksToZero() {
-		eleMotor.setSelectedSensorPosition(0, 0, 10);
+	public void setTicksToHome() {
+		eleSetpoint = (int)(HOME_POS_TEMP * ELE_TICKS);
+		eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
 	}
 	
 	public int getTicks() {
@@ -81,18 +88,10 @@ public class Sub_Elevator extends Subsystem {
 	}
 	
 	public void setBump(int val) {
-		int bumpMath = (int)(val * 4 * ELE_TICKS + (eleMotor.getSelectedSensorPosition(0)));
-		eleMotor.set(ControlMode.Position, bumpMath);
+		eleSetpoint = (int)(val * 4 * ELE_TICKS + (getTicks()));
+		eleMotor.set(ControlMode.Position, eleSetpoint);
 		
 	}
-	public void bumpUp() {
-		double bumpUpMath = 4 * ELE_TICKS + (eleMotor.getSelectedSensorPosition(0));
-		eleMotor.set(ControlMode.Position, bumpUpMath);
-	}
-	public void bumpDown() {
-		double bumpDownMath = (eleMotor.getSelectedSensorPosition(0) - (4 * ELE_TICKS));
-		eleMotor.set(ControlMode.Position, bumpDownMath);
-	}
-    
+
 }
 

@@ -20,12 +20,12 @@ public class Cmd_EleHome extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.s_elevator.setLiftPosition();
+    	Robot.s_elevator.setLiftPosition(Robot.s_elevator.HOME_POS);
 }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (Robot.s_elevator.getLiftPosTicks() == Robot.s_elevator.HOME_POS_TEMP) || (!Robot.s_elevator.getEleSensor() || isTimedOut());
+    	return (Robot.s_elevator.getLiftPosTicks() == Robot.s_elevator.HOME_POS) || (!Robot.s_elevator.getEleSensor() || isTimedOut());
         	
    
     }

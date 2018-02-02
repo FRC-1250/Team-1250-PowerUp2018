@@ -23,11 +23,11 @@ public class Sub_Elevator extends Subsystem {
 	// In inches from ground
 	public final int SCALE_POS = -50;
 	public final int SWITCH_POS = -19;
-	public final double HOME_POS_TEMP = -15;
+	public final int HOME_POS = -15;
 	public final double  ELE_TICKS = 1157.06;
 	public static int eleSetpoint;
 	public Sub_Elevator() {
-		eleSetpoint = (int)(ELE_TICKS * HOME_POS_TEMP);
+		eleSetpoint = (int)(ELE_TICKS * HOME_POS);
 		
 		eleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
 				10);
@@ -63,7 +63,8 @@ public class Sub_Elevator extends Subsystem {
 	}
 	
 	public double getLiftPosTicks() {
-		return eleMotor.getSelectedSensorPosition(0) * ELE_TICKS ;
+		return eleMotor.getSelectedSensorPosition(0) +
+				ELE_TICKS ;
 	}
 	
 	public void setLiftPosition(int pos) {
@@ -73,12 +74,9 @@ public class Sub_Elevator extends Subsystem {
 	
 	// Default lift position is home
 	
-	public void setLiftPosition() {
-		eleMotor.set(ControlMode.Position, -1);
-	}
 	
 	public void setTicksToHome() {
-		eleSetpoint = (int)(HOME_POS_TEMP * ELE_TICKS);
+		eleSetpoint = (int)(HOME_POS * ELE_TICKS);
 		eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
 	}
 	

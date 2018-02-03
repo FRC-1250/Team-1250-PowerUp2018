@@ -25,8 +25,7 @@ public class Cmd_EleSwitch extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (Robot.s_elevator.getLiftPosTicks() == Robot.s_elevator.ELE_TICKS * Robot.s_elevator.SWITCH_POS) || isTimedOut();
-
+    	return (Robot.s_elevator.getLiftPosInTicks() == Robot.s_elevator.ELE_TICKS * Robot.s_elevator.SWITCH_POS) || isTimedOut();
     }
 
     // Called once after isFinished returns true

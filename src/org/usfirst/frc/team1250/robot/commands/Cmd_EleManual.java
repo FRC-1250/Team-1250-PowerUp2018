@@ -25,7 +25,7 @@ public class Cmd_EleManual extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	currentTicks = Robot.s_elevator.getTicks();
+    	currentTicks = Robot.s_elevator.getLiftPosInTicks();
     	bumpVal = (int) -Robot.m_oi.getArcadepad().getRawAxis(1);
     	
 //    	if (!Robot.s_elevator.getEleSensor() && bumpVal<0){

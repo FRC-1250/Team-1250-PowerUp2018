@@ -139,7 +139,7 @@ public class Robot extends TimedRobot {
 	
 	public void log() {
 		SmartDashboard.putBoolean("Is Limit Seen???????", s_elevator.getEleSensor());
-		SmartDashboard.putNumber("test", s_elevator.getTicks());
+		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));

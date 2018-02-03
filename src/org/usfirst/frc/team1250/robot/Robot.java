@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team1250.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -14,6 +15,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team1250.robot.commands.Auto_PosA;
+import org.usfirst.frc.team1250.robot.commands.Auto_PosB;
+import org.usfirst.frc.team1250.robot.commands.Auto_PosC;
 import org.usfirst.frc.team1250.robot.subsystems.*;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 
@@ -38,6 +43,8 @@ public class Robot extends TimedRobot {
 			= new Sub_Elevator();
 	public static OI m_oi;
 	
+	static DriverStation driverStation;
+	
 	public static boolean shiftState = false;
 	public static Timer robotTimer= new Timer();
 	Command m_autonomousCommand;
@@ -50,6 +57,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
+		m_chooser.addDefault("Auto_PosB", new Auto_PosB());
+		m_chooser.addObject("Auto_PosA", new Auto_PosA());
+		m_chooser.addObject("Auto_PosC", new Auto_PosC());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 
@@ -82,16 +92,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+		m_autonomousCommand = (Command) m_chooser.getSelected();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -143,8 +144,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
-		
 	}
+	
+	public static String getAutoMessage()
+	{
+		return DriverStation.getInstance().getGameSpecificMessage().substring(0, 1); 
+	}
+	
 	public Robot() {
 //		double yStick = Arcadepad.getY();
 //		SmartDashboard.putNumber("yin", yStick);

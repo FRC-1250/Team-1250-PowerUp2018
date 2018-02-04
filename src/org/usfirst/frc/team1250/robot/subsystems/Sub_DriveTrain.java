@@ -19,9 +19,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
  *
  */
 public class Sub_DriveTrain extends Subsystem {
-
-	static int driveSetpoint = 0;
-	double WHEELBASE_RADIUS = 23 / 2;
+	
 	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	WPI_TalonSRX fLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_FRONT);
 	WPI_TalonSRX bLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_BACK);
@@ -39,13 +37,15 @@ public class Sub_DriveTrain extends Subsystem {
 	private DifferentialDrive diffDriveGroup
 	= new DifferentialDrive(gLeftMotor, gRightMotor);
 	
-	private final double SHIFTER_TIMEOUT = 1;
+	static int driveSetpoint = 0;
 	
 	// High and Low RPM thresholds for shifting
 	private final double THRESH_RPM_HI= 2000;
 	private final double THRESH_RPM_LO = 1400;
 	private final double DRIVE_TICKS = 310.5;
-    
+	private final double SHIFTER_TIMEOUT = 1;
+	double WHEELBASE_RADIUS = 23 / 2;
+
 	// Initial Commands Loaded on Robot
 	public void initDefaultCommand() {
 		setDefaultCommand(new Cmd_ManualDrive());
@@ -98,24 +98,33 @@ public class Sub_DriveTrain extends Subsystem {
     }
     
     public void driveToPos (int distance) {
+		//Need to set others as slaves
+		mRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
+		bRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
+		mLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
+		bLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
     	//Distance in inches
     	driveSetpoint = (int)DRIVE_TICKS * distance;
     	//Negate one side
 		fRightMotor.set(ControlMode.Position, driveSetpoint);
-		fLeftMotor.set(ControlMode.Position, driveSetpoint);
-		
-		//Need to set values to the rest of the drivetrain
+		fLeftMotor.set(ControlMode.Position, -driveSetpoint);		
     }
     
     public void turn (double angle) {
-    	//driveSetpoint = (int)DRIVE_TICKS
+		//Need to set others as slaves
+    	mRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
+		bRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
+		mLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
+		bLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
+		
     	double currentAngle = getGyroAngle();
     	
-    	//Need to confirm that this works
+    	//Need to confirm that this works...
     	driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
+    	
+    	//No negate
     	fRightMotor.set(ControlMode.Position, driveSetpoint);
 		fLeftMotor.set(ControlMode.Position, driveSetpoint);
-		//Need to set values to the rest of the drivetrain
     }
     
     public double getGyroAngle() {

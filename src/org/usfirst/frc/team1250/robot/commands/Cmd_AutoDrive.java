@@ -8,23 +8,29 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Cmd_AutoDrive extends Command {
+	
+	int distance = 0;
 
-    public Cmd_AutoDrive() {
+    public Cmd_AutoDrive(int distance) {
     	requires(Robot.s_drivtrain);
+    	this.distance = distance;
     }
 
     protected void initialize() {
+    	setTimeout(2);
     }
 
     protected void execute() {
+    	Robot.s_drivtrain.driveToPos(distance);
     }
 
     protected boolean isFinished() {
     	//Check encoder distance or timeout
-        return false;
+    	return Robot.s_drivtrain.isDoneDriving() || isTimedOut();
     }
 
     protected void end() {
+    	Robot.s_drivtrain.resetSensorPos();
     }
 
     protected void interrupted() {

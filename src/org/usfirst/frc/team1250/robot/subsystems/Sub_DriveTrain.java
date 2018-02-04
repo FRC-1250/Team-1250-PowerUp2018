@@ -3,6 +3,8 @@ package org.usfirst.frc.team1250.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedController;
@@ -11,12 +13,16 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import edu.wpi.first.wpilibj.drive.*;
 import org.usfirst.frc.team1250.robot.commands.*;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 /**
  *
  */
 public class Sub_DriveTrain extends Subsystem {
 
+	static int driveSetpoint = 0;
+	double WHEELBASE_RADIUS = 23 / 2;
+	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	WPI_TalonSRX fLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_FRONT);
 	WPI_TalonSRX bLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_BACK);
 	WPI_TalonSRX mLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_MID);
@@ -38,7 +44,7 @@ public class Sub_DriveTrain extends Subsystem {
 	// High and Low RPM thresholds for shifting
 	private final double THRESH_RPM_HI= 2000;
 	private final double THRESH_RPM_LO = 1400;
-	
+	private final double DRIVE_TICKS = 310.5;
     
 	// Initial Commands Loaded on Robot
 	public void initDefaultCommand() {
@@ -89,5 +95,48 @@ public class Sub_DriveTrain extends Subsystem {
     
     public void pause() {
     	drive(0,0);
+    }
+    
+    public void driveToPos (int distance) {
+    	//Distance in inches
+    	driveSetpoint = (int)DRIVE_TICKS * distance;
+    	//Negate one side
+		fRightMotor.set(ControlMode.Position, driveSetpoint);
+		fLeftMotor.set(ControlMode.Position, driveSetpoint);
+		
+		//Need to set values to the rest of the drivetrain
+    }
+    
+    public void turn (double angle) {
+    	//driveSetpoint = (int)DRIVE_TICKS
+    	double currentAngle = getGyroAngle();
+    	
+    	//Need to confirm that this works
+    	driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
+    	fRightMotor.set(ControlMode.Position, driveSetpoint);
+		fLeftMotor.set(ControlMode.Position, driveSetpoint);
+		//Need to set values to the rest of the drivetrain
+    }
+    
+    public double getGyroAngle() {
+    	return gyro.getAngle();
+    }
+    
+    public int getLeftSideSensorPosInTicks() {
+    	return fLeftMotor.getSelectedSensorPosition(0);
+    }
+    
+    public int getRightSideSensorPosInTicks() {
+    	return fRightMotor.getSelectedSensorPosition(0);
+    }
+    
+    public void resetSensorPos() {
+    	fRightMotor.setSelectedSensorPosition(0, 0, 10);
+    	fLeftMotor.setSelectedSensorPosition(0, 0, 10);
+    }
+    
+    public boolean isDoneDriving() {
+    	return (getLeftSideSensorPosInTicks() >= driveSetpoint + 250 || getLeftSideSensorPosInTicks() <= driveSetpoint - 250 ) && 
+    			(getRightSideSensorPosInTicks() >= driveSetpoint + 250 || getRightSideSensorPosInTicks() <= driveSetpoint - 250);
     }
 }

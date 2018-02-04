@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		i2c = new I2C(I2C.Port.kOnboard,8);
+		i2c = new I2C(I2C.Port.kOnboard,84);
 		m_oi = new OI();
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
@@ -69,8 +69,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 
-		toSend[0] = 111;
-		i2c.transaction(toSend,  1, null, 0);
+		toSend[0] = 76;
+		i2c.writeBulk(toSend,  1);
 
 	}
 

@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
 
 	Joystick Arcadepad = new Joystick(1);
 	public static I2C i2c; 
-	DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
+	static DriverStation.Alliance color;
 	public static final Sub_DriveTrain s_drivtrain 
 			= new Sub_DriveTrain();
 	public static final Sub_Shifter s_shifter
@@ -76,6 +76,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		color =  DriverStation.getInstance().getAlliance();
 
 	}
 
@@ -137,9 +138,20 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		this.log();
+		if(color == DriverStation.Alliance.Blue){
+			toSend[0] = 72;
+			i2c.writeBulk(toSend,  1);
+		}
+			else {
+				toSend[0] = 74;
+				i2c.writeBulk(toSend,  1);
+		}
+
+			
+		}
 		
 
-	}
+	
 
 	/**
 	 * This function is called periodically during test mode.

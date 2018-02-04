@@ -10,16 +10,24 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Auto_PosA extends CommandGroup {
 
     public Auto_PosA() {
+    	addSequential(new Cmd_EleErectTower());
+ 		addSequential(new Cmd_AutoDrive(45));
     	
     	String autoMessage = Robot.getAutoMessage();
     	
     	if(autoMessage == "RL" || autoMessage =="LL")
     	{
     		//Left Scale case
+     		addParallel(new Cmd_AutoDrive(45));
+     		addParallel(new Cmd_EleHigh());
+     		addSequential(new Cmd_AutoTurn(90));
     	}
     	else if(autoMessage == "LR")
     	{
     		//Left Switch case
+    		addParallel(new Cmd_AutoDrive(45));
+     		addParallel(new Cmd_EleSwitch());
+     		addSequential(new Cmd_AutoTurn(90));
     	}
     	else
     	{

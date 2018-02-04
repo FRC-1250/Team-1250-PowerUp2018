@@ -9,22 +9,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class Auto_PosB extends CommandGroup {
 
-    public Auto_PosB() {
+    public Auto_PosB() {    	
+ 		addSequential(new Cmd_EleErectTower());
     	
     	String autoMessage = Robot.getAutoMessage();
-    	
+    	    	
      	if(autoMessage == "LR" || autoMessage =="LL")
     	{
     		//Right Switch case
-     		//addSequential(new Cmd_AutoDrive(6));
-     		//addSequential(new Cmd_AutoTurn(30));
+     		addSequential(new Cmd_AutoDrive(6));
+     		addSequential(new Cmd_AutoTurn(30));
      		addSequential(new Cmd_AutoDrive(45));
     	}
     	else if(autoMessage == "RL" || autoMessage == "RR")
     	{
     		//Left Switch case
-    		//addSequential(new Cmd_AutoDrive(6));
-     		//addSequential(new Cmd_AutoTurn(-30));
+    		addSequential(new Cmd_AutoDrive(6));
+     		addSequential(new Cmd_AutoTurn(-30));
      		addSequential(new Cmd_AutoDrive(45));
     	}
     	else

@@ -10,13 +10,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 import org.usfirst.frc.team1250.robot.commands.*;
 
-import org.usfirst.frc.team1250.robot.commands.Cmd_ClawCollect;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleHigh;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleHome;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleSwitch;
-
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -52,7 +45,7 @@ public class OI {
 		b.whenPressed(new Cmd_EleSwitch());
 		y.whenPressed(new Cmd_EleHigh());
 		lb.whenPressed(new Cmd_EleUnpinch());
-			
+		
 		btnHome.whenInactive(new Cmd_EleHome());;
 		btnSwitch.whenInactive(new Cmd_EleSwitch());
 		btnScale.whenInactive(new Cmd_EleHigh());

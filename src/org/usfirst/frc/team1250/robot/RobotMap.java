@@ -37,21 +37,23 @@ public class RobotMap {
 	public static final int CLB__LEFT		= 40;
 	
 	//Pneumatic Shifter Solenoid
-		public static final int SOL_SHIFTER		=  0;
+	public static final int SOL_SHIFTER		=  0;
 	
 	// Solenoids for Claw
-	public static final int CLW_RIGHT_SOL   = 1;
-	public static final int CLW_LEFT_SOL    = 2;
-	public static final int CLW_LIFT_SOL    = 3;
+	public static final int CLW_RIGHT_SOL   =  1;
+	public static final int CLW_LEFT_SOL    =  2;
+	public static final int CLW_LIFT_SOL    =  3;
 	
 	// Sensors for Claw
-	public static final int CLW_SENS_RIGHT  = 1;
-	public static final int CLW_SENS_LEFT   = 2;
-	public static final int CLW_SENS_LIFT   = 3;
+	public static final int CLW_SENS_RIGHT  =  1;
+	public static final int CLW_SENS_LEFT   =  2;
+	public static final int CLW_SENS_LIFT   =  3;
 	
 	// Elevator stuff
 	public static final int ELE_MOTOR       = 18;
-	public static final int ELE_LIMIT_SW    = 0;
+	public static final int ELE_LIMIT_SW    =  0;
 	
+	// LEDs.... I guess
+	public static final int LED_I2CPORT     = 84;
 	
 }

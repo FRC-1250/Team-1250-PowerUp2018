@@ -33,8 +33,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
 public class Robot extends TimedRobot {
 
 	Joystick Arcadepad = new Joystick(1);
-	I2C i2c = new I2C(I2C.Port.kOnboard,84);
-	byte[] toSend = new byte[1];
+	public static I2C i2c; 
 	DriverStation.Alliance color = DriverStation.getInstance().getAlliance();
 	public static final Sub_DriveTrain s_drivtrain 
 			= new Sub_DriveTrain();
@@ -50,13 +49,14 @@ public class Robot extends TimedRobot {
 	public static Timer robotTimer= new Timer();
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
-
+	static byte[] toSend = new byte[1];
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
+		i2c = new I2C(I2C.Port.kOnboard,8);
 		m_oi = new OI();
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
@@ -68,16 +68,15 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-//		Robot.s_elevator.setTicksToHome();
+
+		toSend[0] = 111;
+		i2c.transaction(toSend,  1, null, 0);
 
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		toSend[0] = 74;
-    	i2c.transaction(toSend,  1, null, 0);
-		this.log();
-		
+
 	}
 
 	/**
@@ -138,14 +137,6 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		this.log();
-		if(color == DriverStation.Alliance.Blue){
-			toSend[0] = 72;
-	    	i2c.transaction(toSend,  1, null, 0);
-		}
-		else {
-			toSend[0] = 76;
-	    	i2c.transaction(toSend,  1, null, 0);
-		}
 		
 
 	}
@@ -164,7 +155,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
-		System.out.printf("Value Sent = %d", toSend[0]);
 	}
 	
 }

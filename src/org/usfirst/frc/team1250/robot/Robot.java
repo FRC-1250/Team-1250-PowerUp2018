@@ -19,7 +19,7 @@ import org.usfirst.frc.team1250.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DriverStation;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.I2C.Port;
+//import edu.wpi.first.wpilibj.I2C.Port;
 //import com.kauailabs.sf2.frc.navXSensor;
 
 
@@ -33,8 +33,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
 public class Robot extends TimedRobot {
 
 	Joystick Arcadepad = new Joystick(1);
-	public static I2C i2c; 
-	static DriverStation.Alliance color;
+	public static DriverStation.Alliance allianceColor;
 	public static final Sub_DriveTrain s_drivtrain 
 			= new Sub_DriveTrain();
 	public static final Sub_Shifter s_shifter
@@ -43,20 +42,21 @@ public class Robot extends TimedRobot {
 			= new Sub_Claw();
 	public static final Sub_Elevator s_elevator
 			= new Sub_Elevator();
+	public static final Sub_Leds s_leds
+	= new Sub_Leds();
 	public static OI m_oi;
 	
 	public static boolean shiftState = false;
 	public static Timer robotTimer= new Timer();
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
-	static byte[] toSend = new byte[1];
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		i2c = new I2C(I2C.Port.kOnboard,84);
+		
 		m_oi = new OI();
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
@@ -69,15 +69,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 
-		toSend[0] = 76;
-		i2c.writeBulk(toSend,  1);
-
+//		toSend[0] = 76;
+//		toSend[1] = 127;
+//		i2c.writeBulk(toSend,  1);
+		
+		
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		color =  DriverStation.getInstance().getAlliance();
-
+		allianceColor =  DriverStation.getInstance().getAlliance();
+		s_leds.disableChaser();
 	}
 
 	/**
@@ -118,15 +120,11 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 
 		}
-		
+		s_leds.allyLed();
 		
 		}
 	
@@ -138,18 +136,9 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		this.log();
-		if(color == DriverStation.Alliance.Blue){
-			toSend[0] = 72;
-			i2c.writeBulk(toSend,  1);
-		}
-			else {
-				toSend[0] = 74;
-				i2c.writeBulk(toSend,  1);
-		}
 
-			
-		}
-		
+	}
+//		
 
 	
 

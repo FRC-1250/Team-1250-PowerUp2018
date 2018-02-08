@@ -42,20 +42,30 @@ public class OI {
 	JoystickButton btnHome = new JoystickButton(Arcadepad, 12);
 	JoystickButton btnSwitch = new JoystickButton(Arcadepad, 11);
 	JoystickButton btnScale = new JoystickButton(Arcadepad, 10);
+	JoystickButton btn9 = new JoystickButton(Arcadepad, 9);
+	JoystickButton btn8 = new JoystickButton(Arcadepad, 8);
+	JoystickButton btn7 = new JoystickButton(Arcadepad, 7);
+	JoystickButton btn6 = new JoystickButton(Arcadepad, 6);
+	JoystickButton btn5 = new JoystickButton(Arcadepad, 5);
 	
 	
 	
 	public OI(){
 		
-		x.whenPressed(new Cmd_ClawCollect());		
+//		x.whenPressed(new Cmd_EleInstaPinch());		
 		a.whenPressed(new Cmd_EleHome());
 		b.whenPressed(new Cmd_EleSwitch());
 		y.whenPressed(new Cmd_EleHigh());
+		
 		lb.whenPressed(new Cmd_EleUnpinch());
-			
+		btn9.whenInactive(new Cmd_ClawStop());	
 		btnHome.whenInactive(new Cmd_EleHome());;
 		btnSwitch.whenInactive(new Cmd_EleSwitch());
 		btnScale.whenInactive(new Cmd_EleHigh());
+		btn8.whenInactive(new Cmd_ClawCollect());
+		btn7.whenInactive(new Cmd_ClawToggle());
+		btn6.whenInactive(new Cmd_ClawUnPinch());
+		btn5.whenInactive(new Cmd_EleInstaPinch());
 		
 	}
 	

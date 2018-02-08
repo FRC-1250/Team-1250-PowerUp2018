@@ -15,10 +15,12 @@ public class Cmd_ClawPinchTog extends Command {
 
 
     protected void initialize() {
+    	
     }
 
 
     protected void execute() {
+
     }
 
 
@@ -28,10 +30,10 @@ public class Cmd_ClawPinchTog extends Command {
 
 
     protected void end() {
-    	if (!Robot.s_claw.CheckSoloClaw())
-    		Robot.s_claw.pinch();
-    	else
-    		Robot.s_claw.unpinch();
+//    	if (!Robot.s_claw.CheckSoloClaw())
+//    		Robot.s_claw.pinch();
+//    	else
+//    		Robot.s_claw.unpinch();
     }
 
 

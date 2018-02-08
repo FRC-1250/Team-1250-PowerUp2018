@@ -37,7 +37,7 @@ public class Sub_Elevator extends Subsystem {
 		eleMotor.configPeakOutputReverse(-1, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);
-		eleMotor.config_kP(0, 0.05, 10);
+		eleMotor.config_kP(0, 0.1, 10);
 		eleMotor.config_kI(0, 0, 10);
 		eleMotor.config_kD(0, 0, 10);
 		eleMotor.set(ControlMode.Position,eleSetpoint);

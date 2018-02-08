@@ -37,9 +37,9 @@ public class RobotMap {
 	public static final int SOL_SHIFTER		=  0;
 	
 	// Solenoids for Claw
-	public static final int CLW_RIGHT_SOL   = 1;
-	public static final int CLW_LEFT_SOL    = 2;
-	public static final int CLW_LIFT_SOL    = 3;
+	public static final int CLW_PINCH_SOL   = 1;
+
+	public static final int CLW_LIFT_SOL    = 5;
 	
 	// Sensors for Claw
 	public static final int CLW_SENS_RIGHT  = 1;
@@ -49,6 +49,7 @@ public class RobotMap {
 	// Elevator stuff
 	public static final int ELE_MOTOR = 20;
 	public static final int ELE_LIMIT_SW    = 2;
+	public static final int ELE_POP_SOL = 4;
 	
 	
 }

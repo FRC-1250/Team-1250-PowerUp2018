@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Sub_Claw extends Subsystem {
 	private WPI_VictorSPX LeftClaw = new WPI_VictorSPX(RobotMap.CLW_LEFT);
 	private WPI_VictorSPX RightClaw = new WPI_VictorSPX(RobotMap.CLW_RIGHT);
-	private Solenoid SolRight = new Solenoid(RobotMap.CLW_RIGHT_SOL);
-	private Solenoid SolLeft = new Solenoid(RobotMap.CLW_LEFT_SOL);
+	private Solenoid SolRight = new Solenoid(RobotMap.CLW_PINCH_SOL);
 
 	private DigitalInput LightSens = new DigitalInput(RobotMap.CLW_SENS_RIGHT);
 	private DigitalInput LightSensTwo = new DigitalInput(RobotMap.CLW_SENS_LEFT);
@@ -50,15 +49,15 @@ public Sub_Claw() {
 		RightClaw.set(0);	
 	}
 	public void pinch() {
-		SolLeft.set(true);
+	
 		SolRight.set(true);
 	}
 	public void unpinch() {
-		SolLeft.set(false);
+		
 		SolRight.set(false);
 	}
 	public boolean CheckSoloClaw() {
-		return SolLeft.get();
+		return SolRight.get();
 	}
 	public boolean isIn() {
 		return FinalSens.get();
@@ -72,7 +71,7 @@ public Sub_Claw() {
 	
 		@Override
 		protected void initDefaultCommand() {
-			setDefaultCommand(new Cmd_PassiveClawCollect());
+//			setDefaultCommand(new Cmd_PassiveClawCollect());
 		}
 }
 

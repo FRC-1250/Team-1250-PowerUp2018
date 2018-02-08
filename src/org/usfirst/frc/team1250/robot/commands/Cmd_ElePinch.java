@@ -18,6 +18,7 @@ public class Cmd_ElePinch extends Command {
     }
 
     protected void execute() {
+    	Robot.s_elevator.soloLiftPinch();
     }
 
     protected boolean isFinished() {

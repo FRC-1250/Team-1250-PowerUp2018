@@ -10,31 +10,40 @@ public class Cmd_PassiveClawCollect extends Command {
 	    }
 
 	protected void initialize() {
-	if (!Robot.s_claw.isSeenLeft()){
+	if (!Robot.s_claw.isSeenLeft() || !Robot.s_claw.isSeenRight()){
 		Robot.s_claw.leftCollect();
-	}
-		else Robot.s_claw.stopleftCollect();
-	if (!Robot.s_claw.isSeenRight()){
 		Robot.s_claw.rightCollect();
 	}
-		else Robot.s_claw.stoprightCollect();
+		else Robot.s_claw.stopleftCollect();
+			Robot.s_claw.stoprightCollect();
+//	if (!Robot.s_claw.isSeenRight()){
+//		Robot.s_claw.rightCollect();
+//	}
+//		else Robot.s_claw.stoprightCollect();
 	if (!Robot.s_claw.isSeenRight() & !Robot.s_claw.isSeenLeft()){
 		Robot.s_claw.collect();
 		Robot.s_claw.pinch();
 	}
-		else 
+	if (Robot.s_claw.isIn()){
 		Robot.s_claw.stop();
 		Robot.s_claw.unpinch();
-//	if (!Robot.s_claw.isIn()) {
-//		Robot.s_claw.soloLiftPinch();		
-//	}
+	}
+//		else 
+//		Robot.s_claw.stop();
+//		Robot.s_claw.unpinch();
+	if (Robot.s_claw.isIn()) {
+		Robot.s_elevator.soloLiftPinch();		
+	}
 }
 
     protected void execute() {
 }
 
 protected boolean isFinished() {
-    return false;
+	if (Robot.s_claw.isIn())
+		return true;
+	return false;
+
 }
 
 protected void end() {

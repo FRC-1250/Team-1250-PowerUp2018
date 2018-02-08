@@ -24,6 +24,8 @@ public class Sub_DriveTrain extends Subsystem {
 	WPI_TalonSRX fRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_FRONT);
 	WPI_TalonSRX mRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_MID);
 	
+	
+	
 	private SpeedController gLeftMotor
 	= new SpeedControllerGroup(fLeftMotor, bLeftMotor, mLeftMotor);
 	
@@ -39,6 +41,12 @@ public class Sub_DriveTrain extends Subsystem {
 	private final double THRESH_RPM_HI= 2000;
 	private final double THRESH_RPM_LO = 1400;
 	
+	
+	public Sub_DriveTrain(){
+		fLeftMotor.setInverted(true);
+		fRightMotor.setInverted(true);
+
+	}
     
 	// Initial Commands Loaded on Robot
 	public void initDefaultCommand() {

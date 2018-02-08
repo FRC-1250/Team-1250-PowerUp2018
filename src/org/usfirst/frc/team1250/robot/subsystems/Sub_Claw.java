@@ -17,7 +17,7 @@ public class Sub_Claw extends Subsystem {
 
 	private DigitalInput LightSens = new DigitalInput(RobotMap.CLW_SENS_RIGHT);
 	private DigitalInput LaserSens = new DigitalInput(RobotMap.CLW_SENS_LEFT);
-	private DigitalInput LightSensTwo = new DigitalInput(RobotMap.CLW_SENS_LIFT);
+	private DigitalInput LightSensTwo = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 	
 
 public Sub_Claw() {

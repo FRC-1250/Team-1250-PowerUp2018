@@ -18,26 +18,23 @@ public class RobotMap {
 	
 	// Drive Train Motor Control IDs
 	public static final int DRV_LEFT_FRONT  = 10;
-	public static final int DRV_LEFT_MID    = 12;
-	public static final int DRV_LEFT_BACK   = 14;
-	public static final int DRV_RIGHT_FRONT = 11;
-	public static final int DRV_RIGHT_MID   = 13;
-	public static final int DRV_RIGHT_BACK  = 15;
+	public static final int DRV_LEFT_MID    = 11;
+	public static final int DRV_LEFT_BACK   = 12;
+	public static final int DRV_RIGHT_FRONT = 25;
+	public static final int DRV_RIGHT_MID   = 24;
+	public static final int DRV_RIGHT_BACK  = 23;
 	
-	// Elevator Motor Control IDs
-	public static final int ELV_RIGHT       = 21;
-	public static final int ELV_LEFT        = 20;
 	
 	// Claw Motor Control IDs
-	public static final int CLW_RIGHT       = 31;
-	public static final int CLW_LEFT        = 30;
+	public static final int CLW_RIGHT       = 21;
+	public static final int CLW_LEFT        = 14;
 	
 	// Climber Motor Control IDs
-	public static final int CLB__RIGHT		= 41;
-	public static final int CLB__LEFT		= 40;
+	public static final int CLB__RIGHT		= 22;
+	public static final int CLB__LEFT		= 13;
 	
 	//Pneumatic Shifter Solenoid
-		public static final int SOL_SHIFTER		=  0;
+	public static final int SOL_SHIFTER		=  0;
 	
 	// Solenoids for Claw
 	public static final int CLW_RIGHT_SOL   = 1;
@@ -46,12 +43,13 @@ public class RobotMap {
 	
 	// Sensors for Claw
 	public static final int CLW_SENS_RIGHT  = 1;
-	public static final int CLW_SENS_LEFT   = 2;
+	public static final int CLW_SENS_LEFT   = 0;
 	public static final int CLW_SENS_LIFT   = 3;
 	
 	// Elevator stuff
-	public static final int ELE_MOTOR       = 18;
-	public static final int ELE_LIMIT_SW    = 0;
+	public static final int ELE_MOTOR_RIGHT = 18;
+	public static final int ELE_MOTOR_LEFT = 18;
+	public static final int ELE_LIMIT_SW    = 2;
 	
 	
 }

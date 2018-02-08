@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -18,12 +19,11 @@ import org.usfirst.frc.team1250.robot.commands.*;
 public class Sub_DriveTrain extends Subsystem {
 
 	WPI_TalonSRX fLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_FRONT);
-	WPI_TalonSRX bLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_BACK);
-	WPI_TalonSRX mLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_MID);
-	WPI_TalonSRX bRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_BACK);
+	WPI_VictorSPX bLeftMotor = new WPI_VictorSPX( RobotMap.DRV_LEFT_BACK);
+	WPI_VictorSPX mLeftMotor = new WPI_VictorSPX( RobotMap.DRV_LEFT_MID);
+	WPI_VictorSPX bRightMotor = new WPI_VictorSPX( RobotMap.DRV_RIGHT_BACK);
 	WPI_TalonSRX fRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_FRONT);
-	WPI_TalonSRX mRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_MID);
-	
+	WPI_VictorSPX mRightMotor = new WPI_VictorSPX( RobotMap.DRV_RIGHT_MID);
 	
 	
 	private SpeedController gLeftMotor

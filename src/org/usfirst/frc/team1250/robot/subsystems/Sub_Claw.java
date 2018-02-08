@@ -16,8 +16,9 @@ public class Sub_Claw extends Subsystem {
 	private Solenoid SolLeft = new Solenoid(RobotMap.CLW_LEFT_SOL);
 
 	private DigitalInput LightSens = new DigitalInput(RobotMap.CLW_SENS_RIGHT);
-	private DigitalInput LaserSens = new DigitalInput(RobotMap.CLW_SENS_LEFT);
-	private DigitalInput LightSensTwo = new DigitalInput(RobotMap.ELE_LIMIT_SW);
+	private DigitalInput LightSensTwo = new DigitalInput(RobotMap.CLW_SENS_LEFT);
+	private DigitalInput FinalSens = new DigitalInput(RobotMap.CLW_SENS_LIFT);
+
 	
 
 public Sub_Claw() {
@@ -60,7 +61,7 @@ public Sub_Claw() {
 		return SolLeft.get();
 	}
 	public boolean isIn() {
-		return LaserSens.get();
+		return FinalSens.get();
 	}
 	public boolean isSeenLeft() {
 		return LightSens.get();

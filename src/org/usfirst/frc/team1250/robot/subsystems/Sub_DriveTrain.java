@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import edu.wpi.first.wpilibj.drive.*;
 import org.usfirst.frc.team1250.robot.commands.*;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+//import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+//import edu.wpi.first.wpilibj.SPI.Port;
 
 
 /**
@@ -21,7 +22,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
  */
 public class Sub_DriveTrain extends Subsystem {
 	
-	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+//	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	WPI_TalonSRX fLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_FRONT);
 	WPI_TalonSRX bLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_BACK);
 	WPI_TalonSRX mLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_MID);
@@ -118,20 +119,20 @@ public class Sub_DriveTrain extends Subsystem {
 		mLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
 		bLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
 		
-    	double currentAngle = getGyroAngle();
+//    	double currentAngle = getGyroAngle();
     	
     	//Need to confirm that this works...
-    	driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
+//    	driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
     	
     	//No negate
     	fRightMotor.set(ControlMode.Position, driveSetpoint);
 		fLeftMotor.set(ControlMode.Position, driveSetpoint);
     }
-    
-    public double getGyroAngle() {
-    	return gyro.getAngle();
-    }
-    
+//    
+//    public double getGyroAngle() {
+//    	return gyro.getAngle();
+//    }
+//    
     public int getLeftSideSensorPosInTicks() {
     	return fLeftMotor.getSelectedSensorPosition(0);
     }

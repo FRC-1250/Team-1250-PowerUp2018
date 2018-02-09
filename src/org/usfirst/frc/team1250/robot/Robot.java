@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team1250.robot;
 
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -20,6 +21,7 @@ import org.usfirst.frc.team1250.robot.commands.Auto_PosA;
 import org.usfirst.frc.team1250.robot.commands.Auto_PosB;
 import org.usfirst.frc.team1250.robot.commands.Auto_PosC;
 import org.usfirst.frc.team1250.robot.subsystems.*;
+import edu.wpi.first.wpilibj.SPI;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 
 
@@ -33,6 +35,7 @@ import org.usfirst.frc.team1250.robot.subsystems.*;
 public class Robot extends TimedRobot {
 
 	Joystick Arcadepad = new Joystick(1);
+	AHRS ahrs;
 	public static final Sub_DriveTrain s_drivtrain 
 			= new Sub_DriveTrain();
 	public static final Sub_Shifter s_shifter
@@ -49,6 +52,11 @@ public class Robot extends TimedRobot {
 	public static Timer robotTimer= new Timer();
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	
+	public Robot() {
+		
+		ahrs = new AHRS(SPI.Port.kMXP); 
+	}
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -88,7 +96,7 @@ public class Robot extends TimedRobot {
 	 *
 	 * <p>You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * to the switch structure below with additional strings & commands.http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXL345_SPI.html
 	 */
 	@Override
 	public void autonomousInit() {
@@ -144,6 +152,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
+		SmartDashboard.putNumber("Gyro POS", ahrs.getAngle());
 	}
 	
 	public static String getAutoMessage()
@@ -151,14 +160,4 @@ public class Robot extends TimedRobot {
 		return DriverStation.getInstance().getGameSpecificMessage().substring(0, 1); 
 	}
 	
-	public Robot() {
-//		double yStick = Arcadepad.getY();
-//		SmartDashboard.putNumber("yin", yStick);
-//		if (yStick > 0){
-//	    	Robot.s_elevator.bumpUp();
-//		}
-//		if (yStick < 0){
-//	    	Robot.s_elevator.bumpDown();
-//		}
-	}
 }

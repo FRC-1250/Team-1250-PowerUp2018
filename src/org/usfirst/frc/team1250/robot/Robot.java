@@ -153,6 +153,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
 		SmartDashboard.putNumber("Gyro POS", ahrs.getAngle());
+		SmartDashboard.putNumber("Right Encoder Position", s_drivtrain.getRightSideSensorPosInTicks());
 	}
 	
 	public static String getAutoMessage()

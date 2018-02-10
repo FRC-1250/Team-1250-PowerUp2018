@@ -15,6 +15,12 @@ public class Cmd_AutoDrive extends Command {
     	requires(Robot.s_drivtrain);
     	this.distance = distance;
     }
+    
+    public Cmd_AutoDrive() {
+    	requires(Robot.s_drivtrain);
+    	distance = 12;
+    	
+    }
 
     protected void initialize() {
     	setTimeout(2);

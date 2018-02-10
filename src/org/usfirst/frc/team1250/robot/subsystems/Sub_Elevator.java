@@ -24,7 +24,7 @@ public class Sub_Elevator extends Subsystem {
 	public final int SCALE_POS = -50;
 	public final int SWITCH_POS = -19;
 	public final int HOME_POS = -15;
-	public final double ELE_TICKS = 1157.06;
+	public final double ELE_TICKS = 1157.06 / 9;
 	public static int eleSetpoint;
 	
 	public Sub_Elevator() {

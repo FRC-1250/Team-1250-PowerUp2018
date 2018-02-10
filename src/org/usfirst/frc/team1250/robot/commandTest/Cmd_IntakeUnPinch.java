@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1250.robot.commands;
+package org.usfirst.frc.team1250.robot.commandTest;
 
 import org.usfirst.frc.team1250.robot.Robot;
 
@@ -7,10 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Cmd_ClawStop extends Command {
+public class Cmd_IntakeUnPinch extends Command {
 
-    public Cmd_ClawStop() {
-    	requires(Robot.s_claw);
+    public Cmd_IntakeUnPinch() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.s_claw);
     }
 
     // Called just before this Command runs the first time
@@ -19,6 +20,7 @@ public class Cmd_ClawStop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.s_claw.unpinch();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -28,7 +30,6 @@ public class Cmd_ClawStop extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.s_claw.stop();
     }
 
     // Called when another command which requires one or more of the same

@@ -1,11 +1,11 @@
-package org.usfirst.frc.team1250.robot.commands;
+package org.usfirst.frc.team1250.robot.commandTest;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1250.robot.Robot;
 
-public class Cmd_PassiveClawCollect extends Command {
+public class Cmd_PassiveIntakeCollect extends Command {
 	
-	  public Cmd_PassiveClawCollect() {
+	  public Cmd_PassiveIntakeCollect() {
 	        requires(Robot.s_claw);
 	    }
 

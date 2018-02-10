@@ -8,14 +8,10 @@
 package org.usfirst.frc.team1250.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
+
+import org.usfirst.frc.team1250.robot.commandTest.Cmd_EleUnpinch;
+import org.usfirst.frc.team1250.robot.commandTest.Cmd_IntakeUnPinch;
 import org.usfirst.frc.team1250.robot.commands.*;
-
-import org.usfirst.frc.team1250.robot.commands.Cmd_ClawCollect;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleHigh;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleHome;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleSwitch;
-
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -52,20 +48,20 @@ public class OI {
 	
 	public OI(){
 		
-//		x.whenPressed(new Cmd_EleInstaPinch());		
+		x.whenPressed(new Cmd_ElePinchTog());		
 		a.whenPressed(new Cmd_EleHome());
 		b.whenPressed(new Cmd_EleSwitch());
 		y.whenPressed(new Cmd_EleHigh());
 		
 		lb.whenPressed(new Cmd_EleUnpinch());
-		btn9.whenInactive(new Cmd_ClawStop());	
+		btn9.whenInactive(new Cmd_IntakeStop());	
 		btnHome.whenInactive(new Cmd_EleHome());;
 		btnSwitch.whenInactive(new Cmd_EleSwitch());
 		btnScale.whenInactive(new Cmd_EleHigh());
-		btn8.whenInactive(new Cmd_ClawCollect());
-		btn7.whenInactive(new Cmd_ClawToggle());
-		btn6.whenInactive(new Cmd_ClawUnPinch());
-		btn5.whenInactive(new Cmd_EleInstaPinch());
+		btn8.whenInactive(new Cmd_IntakeCollect());
+		btn7.whenInactive(new Cmd_IntakeToggle());
+		btn6.whenInactive(new Cmd_IntakeUnPinch());
+		btn5.whenInactive(new Cmd_ElePinchTog());
 		
 	}
 	

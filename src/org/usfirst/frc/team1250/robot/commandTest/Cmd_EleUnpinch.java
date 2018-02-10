@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1250.robot.commands;
+package org.usfirst.frc.team1250.robot.commandTest;
 
 import org.usfirst.frc.team1250.robot.Robot;
 
@@ -7,11 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Cmd_ClawUnPinch extends Command {
+public class Cmd_EleUnpinch extends Command {
 
-    public Cmd_ClawUnPinch() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public Cmd_EleUnpinch() {
+    	requires(Robot.s_elevator);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +19,6 @@ public class Cmd_ClawUnPinch extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.s_claw.unpinch();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +28,9 @@ public class Cmd_ClawUnPinch extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.s_elevator.soloLiftUnPinch();
     }
+    
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run

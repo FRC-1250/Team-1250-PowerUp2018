@@ -32,8 +32,8 @@ public class Robot extends TimedRobot {
 			= new Sub_DriveTrain();
 	public static final Sub_Shifter s_shifter
 			= new Sub_Shifter();
-	public static final Sub_Claw s_claw
-			= new Sub_Claw();
+	public static final Sub_Intake s_claw
+			= new Sub_Intake();
 	public static final Sub_Elevator s_elevator
 			= new Sub_Elevator();
 	public static OI m_oi;

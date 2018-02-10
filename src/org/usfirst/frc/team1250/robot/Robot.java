@@ -153,6 +153,13 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
 		SmartDashboard.putNumber("Gyro POS", ahrs.getAngle());
+		SmartDashboard.putNumber("Right Encoder Ticks", s_drivtrain.getRightSideSensorPosInTicks());
+		SmartDashboard.putNumber("Left Encoder Ticks", s_drivtrain.getLeftSideSensorPosInTicks());
+		SmartDashboard.putNumber("Right Encoder Inches", s_drivtrain.getRightSideSensorPosInInches());
+		SmartDashboard.putNumber("Left Encoder Inches", s_drivtrain.getLeftSideSensorPosInInches());
+		SmartDashboard.putNumber("Setpoint", s_drivtrain.driveSetpoint);
+		SmartDashboard.putNumber("Joystick Left", m_oi.Gamepad.getY());
+		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
 	}
 	
 	public static String getAutoMessage()

@@ -39,7 +39,7 @@ public class Sub_DriveTrain extends Subsystem {
 	private DifferentialDrive diffDriveGroup
 	= new DifferentialDrive(gLeftMotor, gRightMotor);
 	
-	static int driveSetpoint = 0;
+	public int driveSetpoint = 0;
 	
 	// High and Low RPM thresholds for shifting
 	private final double THRESH_RPM_HI= 2000;
@@ -48,6 +48,13 @@ public class Sub_DriveTrain extends Subsystem {
 	private final double SHIFTER_TIMEOUT = 1;
 	double WHEELBASE_RADIUS = 23 / 2;
 
+	
+	public Sub_DriveTrain() {
+		// Sets Encoder values to 0
+		fRightMotor.setSelectedSensorPosition(0, 0, 10);
+		fLeftMotor.setSelectedSensorPosition(0, 0, 10);
+	}
+	
 	// Initial Commands Loaded on Robot
 	public void initDefaultCommand() {
 		setDefaultCommand(new Cmd_ManualDrive());
@@ -99,6 +106,24 @@ public class Sub_DriveTrain extends Subsystem {
     	drive(0,0);
     }
     
+    public double ticksToInches(int ticks) {
+    	
+    	return ticks/(double)DRIVE_TICKS;
+    }
+    
+    public int inchesToTicks(double inches) {
+    	return (int)(inches*DRIVE_TICKS);
+    }
+    
+    public void driveToPos() {
+    	diffDriveGroup.arcadeDrive(-0.5, 0);
+    }
+    
+    public void setSetpointPos(int distance) {
+    	driveSetpoint = (int)DRIVE_TICKS * distance;
+    }
+    
+    
     public void driveToPos (int distance) {
 		//Need to set others as slaves
 		mRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
@@ -111,6 +136,8 @@ public class Sub_DriveTrain extends Subsystem {
 		fRightMotor.set(ControlMode.Position, driveSetpoint);
 		fLeftMotor.set(ControlMode.Position, -driveSetpoint);		
     }
+    
+
     
     public void turn (double angle) {
 		//Need to set others as slaves
@@ -141,13 +168,22 @@ public class Sub_DriveTrain extends Subsystem {
     	return fRightMotor.getSelectedSensorPosition(0);
     }
     
+    public double getLeftSideSensorPosInInches() {
+    	return ticksToInches(getLeftSideSensorPosInTicks());
+    }
+    
+    public double getRightSideSensorPosInInches() {
+    	return ticksToInches(getRightSideSensorPosInTicks());
+    }
+    
     public void resetSensorPos() {
     	fRightMotor.setSelectedSensorPosition(0, 0, 10);
     	fLeftMotor.setSelectedSensorPosition(0, 0, 10);
     }
     
     public boolean isDoneDriving() {
-    	return (getLeftSideSensorPosInTicks() >= driveSetpoint + 250 || getLeftSideSensorPosInTicks() <= driveSetpoint - 250 ) && 
-    			(getRightSideSensorPosInTicks() >= driveSetpoint + 250 || getRightSideSensorPosInTicks() <= driveSetpoint - 250);
+    	return (Math.abs(Math.abs(getLeftSideSensorPosInTicks()) - driveSetpoint) < 100) && (Math.abs(Math.abs(getRightSideSensorPosInTicks()) - driveSetpoint) < 100);
     }
+    
+
 }

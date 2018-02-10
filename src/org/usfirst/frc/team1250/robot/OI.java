@@ -52,6 +52,7 @@ public class OI {
 		b.whenPressed(new Cmd_EleSwitch());
 		y.whenPressed(new Cmd_EleHigh());
 		lb.whenPressed(new Cmd_EleUnpinch());
+		rb.whenPressed(new Cmd_AutoDrive());
 			
 		btnHome.whenInactive(new Cmd_EleHome());;
 		btnSwitch.whenInactive(new Cmd_EleSwitch());

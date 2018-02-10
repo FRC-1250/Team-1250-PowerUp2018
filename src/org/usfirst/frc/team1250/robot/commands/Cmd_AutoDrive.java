@@ -15,22 +15,30 @@ public class Cmd_AutoDrive extends Command {
     	requires(Robot.s_drivtrain);
     	this.distance = distance;
     }
+    
+    public Cmd_AutoDrive()
+    {
+    	distance = 24;
+    	requires(Robot.s_drivtrain);
+    }
 
     protected void initialize() {
-    	setTimeout(2);
+    	Robot.s_drivtrain.resetSensorPos();
+    	Robot.s_drivtrain.setSetpointPos(distance);
+    	setTimeout(5);
     }
 
     protected void execute() {
-    	Robot.s_drivtrain.driveToPos(distance);
+    	Robot.s_drivtrain.driveToPos();
     }
 
     protected boolean isFinished() {
     	//Check encoder distance or timeout
-    	return Robot.s_drivtrain.isDoneDriving() || isTimedOut();
+    	return isTimedOut();
     }
 
     protected void end() {
-    	Robot.s_drivtrain.resetSensorPos();
+    	//Robot.s_drivtrain.resetSensorPos();
     }
 
     protected void interrupted() {

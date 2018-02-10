@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1250.robot.commands;
+package org.usfirst.frc.team1250.robot.commandIntake;
 
 import org.usfirst.frc.team1250.robot.Robot;
 
@@ -7,21 +7,16 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class Cmd_IntakeToggle extends InstantCommand {
+public class Cmd_IntakeStop extends InstantCommand {
 
-    public Cmd_IntakeToggle() {
+    public Cmd_IntakeStop() {
         super();
     	requires(Robot.s_claw);
-
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	if (!Robot.s_claw.CheckSoloClaw())
-    		Robot.s_claw.pinch();
-    	else
-    		Robot.s_claw.unpinch();
-
+    	Robot.s_claw.stop();
     }
 
 }

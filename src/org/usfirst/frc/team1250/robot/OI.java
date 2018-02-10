@@ -9,8 +9,10 @@ package org.usfirst.frc.team1250.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
-import org.usfirst.frc.team1250.robot.commandTest.Cmd_EleUnpinch;
-import org.usfirst.frc.team1250.robot.commandTest.Cmd_IntakeUnPinch;
+import org.usfirst.frc.team1250.robot.commandGroups.CmdG_FullCollect;
+import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Herd;
+import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeStop;
+import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeToggle;
 import org.usfirst.frc.team1250.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -35,9 +37,9 @@ public class OI {
 	JoystickButton lb = new JoystickButton(Gamepad, 7);
 	JoystickButton rb = new JoystickButton(Gamepad, 8);
 	
-	JoystickButton btnHome = new JoystickButton(Arcadepad, 12);
-	JoystickButton btnSwitch = new JoystickButton(Arcadepad, 11);
-	JoystickButton btnScale = new JoystickButton(Arcadepad, 10);
+	JoystickButton btn12 = new JoystickButton(Arcadepad, 12);
+	JoystickButton btn11 = new JoystickButton(Arcadepad, 11);
+	JoystickButton btn10 = new JoystickButton(Arcadepad, 10);
 	JoystickButton btn9 = new JoystickButton(Arcadepad, 9);
 	JoystickButton btn8 = new JoystickButton(Arcadepad, 8);
 	JoystickButton btn7 = new JoystickButton(Arcadepad, 7);
@@ -47,21 +49,20 @@ public class OI {
 	
 	
 	public OI(){
-		
-		x.whenPressed(new Cmd_ElePinchTog());		
+		//Drivers controller
+		x.whenPressed(new Cmd_ElePinch());		
 		a.whenPressed(new Cmd_EleHome());
 		b.whenPressed(new Cmd_EleSwitch());
 		y.whenPressed(new Cmd_EleHigh());
 		
-		lb.whenPressed(new Cmd_EleUnpinch());
-		btn9.whenInactive(new Cmd_IntakeStop());	
-		btnHome.whenInactive(new Cmd_EleHome());;
-		btnSwitch.whenInactive(new Cmd_EleSwitch());
-		btnScale.whenInactive(new Cmd_EleHigh());
-		btn8.whenInactive(new Cmd_IntakeCollect());
-		btn7.whenInactive(new Cmd_IntakeToggle());
-		btn6.whenInactive(new Cmd_IntakeUnPinch());
-		btn5.whenInactive(new Cmd_ElePinchTog());
+		//OPs controller
+		
+		btn12.whenInactive(new Cmd_EleHome());;
+		btn11.whenInactive(new Cmd_EleSwitch());
+		btn10.whenInactive(new Cmd_EleHigh());
+		btn9.whenInactive(new CmdG_FullCollect());	
+		btn8.whenInactive(new CmdG_Herd());
+
 		
 	}
 	

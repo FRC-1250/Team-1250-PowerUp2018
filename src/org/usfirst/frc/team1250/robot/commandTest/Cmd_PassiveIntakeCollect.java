@@ -38,6 +38,7 @@ public class Cmd_PassiveIntakeCollect extends Command {
 
     protected void execute() {
 }
+    
 
 protected boolean isFinished() {
 	if (Robot.s_claw.isIn())

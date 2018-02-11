@@ -14,28 +14,40 @@ package org.usfirst.frc.team1250.robot;
  * floating around.
  */
 public class RobotMap {
-
-	
 	// Drive Train Motor Control IDs
 	public static final int DRV_LEFT_FRONT  = 10;
-	public static final int DRV_LEFT_MID    = 12;
-	public static final int DRV_LEFT_BACK   = 14;
-	public static final int DRV_RIGHT_FRONT = 11;
-	public static final int DRV_RIGHT_MID   = 13;
-	public static final int DRV_RIGHT_BACK  = 15;
-	
-	// Elevator Motor Control IDs
-	public static final int ELV_RIGHT       = 21;
-	public static final int ELV_LEFT        = 20;
-	
-	// Claw Motor Control IDs
-	public static final int CLW_RIGHT       = 31;
-	public static final int CLW_LEFT        = 30;
-	
-	// Climber Motor Control IDs
-	public static final int CLB_RIGHT		= 41;
-	public static final int CLB_LEFT		= 40;
+	public static final int DRV_LEFT_MID    = 11;
+	public static final int DRV_LEFT_BACK   = 12;
+	public static final int DRV_RIGHT_FRONT = 25;
+	public static final int DRV_RIGHT_MID   = 24;
+	public static final int DRV_RIGHT_BACK  = 23;
 	
 	//Pneumatic Shifter Solenoid
 	public static final int SOL_SHIFTER		=  0;
+	
+	// Intake Motor Control IDs
+	public static final int INTAKE_RIGHT       = 21;
+	public static final int INTAKE_LEFT        = 14;
+	
+	// Solenoids for Intake
+	public static final int INTAKE_PINCH_SOL   = 1;
+		
+	// Sensors for Intake
+	public static final int INTAKE_SENS_RIGHT  = 1;
+	public static final int INTAKE_SENS_LEFT   = 0;
+	public static final int INTAKE_SENS_FINAL  = 2;
+	
+	//Elevator Motor Control IDs
+	public static final int ELE_MOTOR 		= 20;
+
+	//Elevator Sensor Control IDs
+	public static final int ELE_LIMIT_SW    = 3;
+
+	//Elevator Solenoids
+	public static final int ELE_POP_SOL 	= 4;
+	public static final int ELE_PINCH_SOL    = 5;
+	
+	// Climber Motor Control IDs
+	public static final int CLB_RIGHT		= 22;
+	public static final int CLB_LEFT		= 13;
 }

@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team1250.robot;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
@@ -15,9 +16,7 @@ import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHome;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_ElePinch;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
-import org.usfirst.frc.team1250.robot.groups.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.groups.CmdG_Herd;
-import org.usfirst.frc.team1250.robot.groups.CmdG_TimedCollect;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakePinch;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeStop;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeToggle;
@@ -33,7 +32,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+
 	Joystick Gamepad = new Joystick(0);
 	Joystick Arcadepad = new Joystick(1);
 
@@ -45,7 +44,7 @@ public class OI {
 	JoystickButton rt = new JoystickButton(Gamepad, 5);
 	JoystickButton lb = new JoystickButton(Gamepad, 7);
 	JoystickButton rb = new JoystickButton(Gamepad, 8);
-	
+
 	JoystickButton btn12 = new JoystickButton(Arcadepad, 12);
 	JoystickButton btn11 = new JoystickButton(Arcadepad, 11);
 	JoystickButton btn10 = new JoystickButton(Arcadepad, 10);
@@ -56,40 +55,37 @@ public class OI {
 	JoystickButton btn5 = new JoystickButton(Arcadepad, 5);
 	JoystickButton btn4 = new JoystickButton(Arcadepad, 4);
 	JoystickButton btn3 = new JoystickButton(Arcadepad, 3);
-	
-	
-	
-	public OI(){
-		//Drivers controller
-		x.whenPressed(new Cmd_ElePinch());		
+
+	public OI() {
+		// Drivers controller
+		x.whenPressed(new Cmd_ElePinch());
 		a.whenPressed(new Cmd_EleHome());
 		b.whenPressed(new Cmd_EleSwitch());
 		y.whenPressed(new Cmd_EleHigh());
-		
-		//OPs controller
-		
-//		btn11.whenInactive(new CmdG_TimedCollect());
+
+		// OPs controller
+
+		// btn11.whenInactive(new CmdG_TimedCollect());
 		btn10.whenInactive(new Cmd_ElePinch());
-		btn9.whenInactive(new Cmd_EleUnpinch());	
-//		btn8.whenInactive(new CmdG_Herd());
-		btn7.whenInactive(new Cmd_IntakeStop());	
+		btn9.whenInactive(new Cmd_EleUnpinch());
+		// btn8.whenInactive(new CmdG_Herd());
+		btn7.whenInactive(new Cmd_IntakeStop());
 		btn6.whenInactive(new Cmd_IntakeTest());
 		btn3.whenInactive(new Cmd_IntakePinch());
 		btn4.whenInactive(new Cmd_IntakeUnPinch());
 
-
 	}
-	
+
 	public boolean getButtonState(int btn) {
 		return Gamepad.getRawButton(btn);
 	}
-	
+
 	public Joystick getGamepad() {
 		return Gamepad;
 	}
-	
+
 	public Joystick getArcadepad() {
 		return Arcadepad;
 	}
-	
+
 }

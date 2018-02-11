@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Sub_Intake extends Subsystem {
 	private WPI_VictorSPX LeftClaw = new WPI_VictorSPX(RobotMap.INTAKE_LEFT);
 	private WPI_VictorSPX RightClaw = new WPI_VictorSPX(RobotMap.INTAKE_RIGHT);
-	private Solenoid SolRight = new Solenoid(RobotMap.INTAKE_PINCH_SOL);
+	private Solenoid pinchSol = new Solenoid(RobotMap.INTAKE_PINCH_SOL);
 
 	private DigitalInput LightSens = new DigitalInput(RobotMap.INTAKE_SENS_RIGHT);
 	private DigitalInput LightSensTwo = new DigitalInput(RobotMap.INTAKE_SENS_LEFT);
@@ -49,15 +49,15 @@ public class Sub_Intake extends Subsystem {
 	}
 
 	public void pinch() {
-		SolRight.set(true);
+		pinchSol.set(true);
 	}
 
 	public void unpinch() {
-		SolRight.set(false);
+		pinchSol.set(false);
 	}
 
 	public boolean CheckSoloClaw() {
-		return SolRight.get();
+		return pinchSol.get();
 	}
 
 	public boolean isIn() {

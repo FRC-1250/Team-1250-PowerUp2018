@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 /**
  *
  */
-public class Cmd_IntakeSpitTimed extends TimedCommand {
+public class Cmd_IntakeCollectTimed extends TimedCommand {
 
-    public Cmd_IntakeSpitTimed(double timeout) {
+    public Cmd_IntakeCollectTimed(double timeout) {
         super(timeout);
     	requires(Robot.s_claw);
     }
@@ -18,7 +18,7 @@ public class Cmd_IntakeSpitTimed extends TimedCommand {
     }
 
     protected void execute() {
-    	Robot.s_claw.dump();
+    	Robot.s_claw.collect();
     }
 
     // Called once after timeout

@@ -15,7 +15,7 @@ public class Sub_Intake extends Subsystem {
 
 	private DigitalInput LightSens = new DigitalInput(RobotMap.CLW_SENS_RIGHT);
 	private DigitalInput LightSensTwo = new DigitalInput(RobotMap.CLW_SENS_LEFT);
-	private DigitalInput FinalSens = new DigitalInput(RobotMap.CLW_SENS_LIFT);
+	private DigitalInput FinalSens = new DigitalInput(RobotMap.CLW_SENS_FINAL);
 
 	
 
@@ -24,18 +24,18 @@ public Sub_Intake() {
 
 }
 	public void collect() {
-		LeftClaw.set(-.5);
-		RightClaw.set(.5);
+		LeftClaw.set(-1);
+		RightClaw.set(-1);
 	}
 	public void dump() {
-		LeftClaw.set(-.5);
+		LeftClaw.set(.5);
 		RightClaw.set(.5);
 	}
 	public void leftCollect() {
 		LeftClaw.set(.5);
 	}
 	public void rightCollect() {
-		RightClaw.set(-.5);
+		RightClaw.set(.5);
 	}
 	public void stopleftCollect() {
 		LeftClaw.set(0);

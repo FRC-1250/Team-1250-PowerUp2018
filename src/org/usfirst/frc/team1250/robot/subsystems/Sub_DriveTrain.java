@@ -38,8 +38,8 @@ public class Sub_DriveTrain extends Subsystem {
 	private final double SHIFTER_TIMEOUT = 1;
 	
 	// High and Low RPM thresholds for shifting
-	private final double THRESH_RPM_HI= 2000;
-	private final double THRESH_RPM_LO = 1400;
+	private final double THRESH_RPM_HI= 1500;
+	private final double THRESH_RPM_LO = 1000;
 	
 	
 	public Sub_DriveTrain(){

@@ -44,12 +44,12 @@ public class RobotMap {
 	// Sensors for Claw
 	public static final int CLW_SENS_RIGHT  = 1;
 	public static final int CLW_SENS_LEFT   = 0;
-	public static final int CLW_SENS_LIFT   = 3;
+	public static final int CLW_SENS_FINAL  = 2;
 	
 	// Elevator stuff
-	public static final int ELE_MOTOR = 20;
-	public static final int ELE_LIMIT_SW    = 2;
-	public static final int ELE_POP_SOL = 4;
+	public static final int ELE_MOTOR 		= 20;
+	public static final int ELE_LIMIT_SW    = 3;
+	public static final int ELE_POP_SOL 	= 4;
 	
 	
 }

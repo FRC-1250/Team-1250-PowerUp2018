@@ -11,8 +11,12 @@ import edu.wpi.first.wpilibj.buttons.*;
 
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Herd;
+import org.usfirst.frc.team1250.robot.commandGroups.CmdG_TimedCollect;
+import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakePinch;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeStop;
+import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeTest;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeToggle;
+import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeUnPinch;
 import org.usfirst.frc.team1250.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -45,6 +49,8 @@ public class OI {
 	JoystickButton btn7 = new JoystickButton(Arcadepad, 7);
 	JoystickButton btn6 = new JoystickButton(Arcadepad, 6);
 	JoystickButton btn5 = new JoystickButton(Arcadepad, 5);
+	JoystickButton btn4 = new JoystickButton(Arcadepad, 4);
+	JoystickButton btn3 = new JoystickButton(Arcadepad, 3);
 	
 	
 	
@@ -57,13 +63,16 @@ public class OI {
 		
 		//OPs controller
 		
-		btn12.whenInactive(new Cmd_EleHome());;
-		btn11.whenInactive(new Cmd_EleSwitch());
-		btn10.whenInactive(new Cmd_EleHigh());
-		btn9.whenInactive(new CmdG_FullCollect());	
-		btn8.whenInactive(new CmdG_Herd());
+//		btn11.whenInactive(new CmdG_TimedCollect());
+		btn10.whenInactive(new Cmd_ElePinch());
+		btn9.whenInactive(new Cmd_EleUnpinch());	
+//		btn8.whenInactive(new CmdG_Herd());
+		btn7.whenInactive(new Cmd_IntakeStop());	
+		btn6.whenInactive(new Cmd_IntakeTest());
+		btn3.whenInactive(new Cmd_IntakePinch());
+		btn4.whenInactive(new Cmd_IntakeUnPinch());
 
-		
+
 	}
 	
 	public boolean getButtonState(int btn) {

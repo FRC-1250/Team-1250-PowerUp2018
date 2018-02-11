@@ -21,9 +21,9 @@ public class Sub_Elevator extends Subsystem {
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
-	public final int SCALE_POS = -50;
-	public final int SWITCH_POS = -19;
-	public final int HOME_POS = -15;
+	public final int SCALE_POS = 50;
+	public final int SWITCH_POS = 19;
+	public final int HOME_POS = 15;
 	public final double ELE_TICKS = 1157.06 / 9;
 	public static int eleSetpoint;
 	
@@ -37,7 +37,7 @@ public class Sub_Elevator extends Subsystem {
 		eleMotor.configPeakOutputReverse(-1, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);
-		eleMotor.config_kP(0, 0.1, 10);
+		eleMotor.config_kP(0, 0.15, 10);
 		eleMotor.config_kI(0, 0, 10);
 		eleMotor.config_kD(0, 0, 10);
 		eleMotor.set(ControlMode.Position,eleSetpoint);
@@ -80,7 +80,7 @@ public class Sub_Elevator extends Subsystem {
 	}	
 	
 	public void setBump(int val) {
-		eleSetpoint = (int)(val * 4 * ELE_TICKS + (getLiftPosInTicks()));
+		eleSetpoint = (int)(val * 12 * ELE_TICKS + (getLiftPosInTicks()));
 		eleMotor.set(ControlMode.Position, eleSetpoint);
 	}
 }

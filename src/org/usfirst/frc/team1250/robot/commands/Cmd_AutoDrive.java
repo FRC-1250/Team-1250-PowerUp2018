@@ -19,11 +19,13 @@ public class Cmd_AutoDrive extends Command {
     public Cmd_AutoDrive()
     {
     	distance = 24;
+    	
     	requires(Robot.s_drivtrain);
     }
 
     protected void initialize() {
     	Robot.s_drivtrain.resetSensorPos();
+    	Robot.s_drivtrain.resetGyro();
     	Robot.s_drivtrain.setSetpointPos(distance);
     	setTimeout(5);
     }

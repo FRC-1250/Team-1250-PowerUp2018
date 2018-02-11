@@ -161,6 +161,10 @@ public class Sub_DriveTrain extends Subsystem {
     	return gyro.getAngle();
     }
     
+    public void resetGyro() {
+    	gyro.reset();
+    }
+    
     public int getLeftSideSensorPosInTicks() {
     	return fLeftMotor.getSelectedSensorPosition(0);
     }

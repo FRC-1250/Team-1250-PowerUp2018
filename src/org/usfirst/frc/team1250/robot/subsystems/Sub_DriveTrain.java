@@ -10,11 +10,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Joystick;
-
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.*;
 import org.usfirst.frc.team1250.robot.commands.*;
-//import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-//import edu.wpi.first.wpilibj.SPI.Port;
+
+import com.kauailabs.navx.frc.AHRS;
 
 
 /**
@@ -22,6 +22,7 @@ import org.usfirst.frc.team1250.robot.commands.*;
  */
 public class Sub_DriveTrain extends Subsystem {
 	
+	AHRS gyro = new AHRS(SPI.Port.kMXP);
 //	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	WPI_TalonSRX fLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_FRONT);
 	WPI_TalonSRX bLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_BACK);
@@ -155,11 +156,11 @@ public class Sub_DriveTrain extends Subsystem {
     	fRightMotor.set(ControlMode.Position, driveSetpoint);
 		fLeftMotor.set(ControlMode.Position, driveSetpoint);
     }
-//    
-//    public double getGyroAngle() {
-//    	return gyro.getAngle();
-//    }
-//    
+    
+    public double getGyroAngle() {
+    	return gyro.getAngle();
+    }
+    
     public int getLeftSideSensorPosInTicks() {
     	return fLeftMotor.getSelectedSensorPosition(0);
     }
@@ -182,7 +183,7 @@ public class Sub_DriveTrain extends Subsystem {
     }
     
     public boolean isDoneDriving() {
-    	return (Math.abs(Math.abs(getLeftSideSensorPosInTicks()) - driveSetpoint) < 100) && (Math.abs(Math.abs(getRightSideSensorPosInTicks()) - driveSetpoint) < 100);
+    	return (Math.abs(Math.abs(getLeftSideSensorPosInTicks()) - driveSetpoint) < 250) || (Math.abs(Math.abs(getRightSideSensorPosInTicks()) - driveSetpoint) < 250);
     }
     
 

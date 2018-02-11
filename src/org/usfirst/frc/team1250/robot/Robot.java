@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team1250.robot;
 
-import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -35,7 +35,6 @@ import edu.wpi.first.wpilibj.SPI;
 public class Robot extends TimedRobot {
 
 	Joystick Arcadepad = new Joystick(1);
-	AHRS ahrs;
 	public static final Sub_DriveTrain s_drivtrain 
 			= new Sub_DriveTrain();
 	public static final Sub_Shifter s_shifter
@@ -55,7 +54,6 @@ public class Robot extends TimedRobot {
 	
 	public Robot() {
 		
-		ahrs = new AHRS(SPI.Port.kMXP); 
 	}
 
 	/**
@@ -152,7 +150,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
-		SmartDashboard.putNumber("Gyro POS", ahrs.getAngle());
+		SmartDashboard.putNumber("Gyro POS", s_drivtrain.getGyroAngle());
 		SmartDashboard.putNumber("Right Encoder Ticks", s_drivtrain.getRightSideSensorPosInTicks());
 		SmartDashboard.putNumber("Left Encoder Ticks", s_drivtrain.getLeftSideSensorPosInTicks());
 		SmartDashboard.putNumber("Right Encoder Inches", s_drivtrain.getRightSideSensorPosInInches());

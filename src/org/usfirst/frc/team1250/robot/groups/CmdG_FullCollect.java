@@ -1,9 +1,9 @@
-package org.usfirst.frc.team1250.robot.commandGroups;
+package org.usfirst.frc.team1250.robot.groups;
 
 import org.usfirst.frc.team1250.robot.Robot;
-import org.usfirst.frc.team1250.robot.commandIntake.Cmd_Intake;
-import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeUnPinch;
-import org.usfirst.frc.team1250.robot.commands.Cmd_ElePinch;
+import org.usfirst.frc.team1250.robot.elevator.Cmd_ElePinch;
+import org.usfirst.frc.team1250.robot.intake.Cmd_Intake;
+import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeUnPinch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CmdG_FullCollect extends CommandGroup {
 
     public CmdG_FullCollect() {
-    	requires(Robot.s_claw);
+    	requires(Robot.s_intake);
     	requires(Robot.s_elevator);
     	
     	addSequential(new Cmd_IntakeUnPinch());

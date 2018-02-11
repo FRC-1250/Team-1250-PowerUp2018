@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1250.robot.commands;
+package org.usfirst.frc.team1250.robot.elevator;
 
 import org.usfirst.frc.team1250.robot.Robot;
 
@@ -28,6 +28,6 @@ public class Cmd_EleHigh extends Command {
     protected void end() {
     }
     
-    protected void interrupted() {
-    }
+	protected void interrupted() {
+	}
 }

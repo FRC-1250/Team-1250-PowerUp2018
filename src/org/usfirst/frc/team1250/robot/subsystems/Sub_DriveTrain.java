@@ -5,14 +5,16 @@ import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import org.usfirst.frc.team1250.robot.drive.*;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.*;
-import org.usfirst.frc.team1250.robot.commands.*;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -22,85 +24,75 @@ import com.kauailabs.navx.frc.AHRS;
  */
 public class Sub_DriveTrain extends Subsystem {
 	
-	AHRS gyro = new AHRS(SPI.Port.kMXP);
-//	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-	WPI_TalonSRX fLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_FRONT);
-	WPI_TalonSRX bLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_BACK);
-	WPI_TalonSRX mLeftMotor = new WPI_TalonSRX( RobotMap.DRV_LEFT_MID);
-	WPI_TalonSRX bRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_BACK);
-	WPI_TalonSRX fRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_FRONT);
-	WPI_TalonSRX mRightMotor = new WPI_TalonSRX( RobotMap.DRV_RIGHT_MID);
+	// Motor Controllers
+	WPI_TalonSRX fLeftMotor = new WPI_TalonSRX(RobotMap.DRV_LEFT_FRONT);
+	WPI_VictorSPX bLeftMotor = new WPI_VictorSPX(RobotMap.DRV_LEFT_BACK);
+	WPI_VictorSPX mLeftMotor = new WPI_VictorSPX(RobotMap.DRV_LEFT_MID);
+	WPI_VictorSPX bRightMotor = new WPI_VictorSPX(RobotMap.DRV_RIGHT_BACK);
+	WPI_TalonSRX fRightMotor = new WPI_TalonSRX(RobotMap.DRV_RIGHT_FRONT);
+	WPI_VictorSPX mRightMotor = new WPI_VictorSPX(RobotMap.DRV_RIGHT_MID);
+
+	// Motor Control groups
+	private SpeedController gLeftMotor = new SpeedControllerGroup(fLeftMotor, bLeftMotor, mLeftMotor);
+	private SpeedController gRightMotor = new SpeedControllerGroup(fRightMotor, bRightMotor, mRightMotor);
+	private DifferentialDrive diffDriveGroup = new DifferentialDrive(gLeftMotor, gRightMotor);
+
+	// Shift variables
+	private final double THRESH_RPM_HI = 1500;
+	private final double THRESH_RPM_LO = 1000;
+	private final double SHIFTER_TIMEOUT = 1;
 	
-	private SpeedController gLeftMotor
-	= new SpeedControllerGroup(fLeftMotor, bLeftMotor, mLeftMotor);
-	
-	private SpeedController gRightMotor
-	= new SpeedControllerGroup(fRightMotor, bRightMotor, mRightMotor);
-	
-	private DifferentialDrive diffDriveGroup
-	= new DifferentialDrive(gLeftMotor, gRightMotor);
+	AHRS gyro = new AHRS(SPI.Port.kMXP);	
 	
 	public int driveSetpoint = 0;
-	
-	// High and Low RPM thresholds for shifting
-	private final double THRESH_RPM_HI= 2000;
-	private final double THRESH_RPM_LO = 1400;
 	private final double DRIVE_TICKS = 310.5;
-	private final double SHIFTER_TIMEOUT = 1;
 	double WHEELBASE_RADIUS = 23 / 2;
 
-	
 	public Sub_DriveTrain() {
-		// Sets Encoder values to 0
-		fRightMotor.setSelectedSensorPosition(0, 0, 10);
-		fLeftMotor.setSelectedSensorPosition(0, 0, 10);
+		fLeftMotor.setInverted(true);
+		fRightMotor.setInverted(true);
 	}
-	
-	// Initial Commands Loaded on Robot
+
 	public void initDefaultCommand() {
 		setDefaultCommand(new Cmd_ManualDrive());
-    }
-	
-   public void drive(double left, double right) {
-		diffDriveGroup.tankDrive(left, right);	
 	}
-   
-    public void drive(Joystick joy) {
+
+	public void drive(double left, double right) {
+		diffDriveGroup.tankDrive(left, right);
+	}
+
+	public void drive(Joystick joy) {
 		drive(-joy.getY(), -joy.getThrottle());
 	}
-    
-    public boolean getState(Joystick joy, boolean state) {
-    	
-    	double leftJoy = 0;
-    	double rightJoy = 0;
-    	
-    	
-    	// Button OverRide for shifting low
-    	if (Robot.m_oi.getButtonState(8)){
-    		return false;
-    	}
-    	
+
+	public boolean getState(Joystick joy, boolean state) {
+
+		double leftJoy = 0;
+		double rightJoy = 0;
+
+		// Button OverRide for shifting low
+		if (Robot.m_oi.getButtonState(8)) {
+			return false;
+		}
+
 		leftJoy = -joy.getY();
 		rightJoy = -joy.getThrottle();
-		
-		if (Robot.robotTimer.get() > SHIFTER_TIMEOUT && state == false) {
-			
-			if((int)Math.signum(leftJoy) != (int)Math.signum(rightJoy))
-				state= false;
-			else if (Math.abs(fLeftMotor.getSelectedSensorVelocity(0)) > THRESH_RPM_HI && Math.abs(fRightMotor.getSelectedSensorVelocity(0)) > THRESH_RPM_HI)
-				state =  true;
-			
-			Robot.robotTimer.reset();
-		}
-		else {
-			
-			if (Math.abs(fLeftMotor.getSelectedSensorVelocity(0)) < THRESH_RPM_LO || Math.abs(fRightMotor.getSelectedSensorVelocity(0)) < THRESH_RPM_LO )
-				state =  false;
 
+		if (Robot.robotTimer.get() > SHIFTER_TIMEOUT && state == false) {
+			if ((int) Math.signum(leftJoy) != (int) Math.signum(rightJoy)) {
+				state = false;
+			} else if (Math.abs(fLeftMotor.getSelectedSensorVelocity(0)) > THRESH_RPM_HI
+					&& Math.abs(fRightMotor.getSelectedSensorVelocity(0)) > THRESH_RPM_HI) {
+				state = true;
+			}
+			Robot.robotTimer.reset();
+		} else {
+			if (Math.abs(fLeftMotor.getSelectedSensorVelocity(0)) < THRESH_RPM_LO
+					|| Math.abs(fRightMotor.getSelectedSensorVelocity(0)) < THRESH_RPM_LO) {
+				state = false;
+			}
 		}
-		
-		return state;
-	
+		return state;	
     }
     
     public void pause() {
@@ -124,37 +116,11 @@ public class Sub_DriveTrain extends Subsystem {
     	driveSetpoint = (int)DRIVE_TICKS * distance;
     }
     
-    
-    public void driveToPos (int distance) {
-		//Need to set others as slaves
-		mRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
-		bRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
-		mLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
-		bLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
-    	//Distance in inches
-    	driveSetpoint = (int)DRIVE_TICKS * distance;
-    	//Negate one side
-		fRightMotor.set(ControlMode.Position, driveSetpoint);
-		fLeftMotor.set(ControlMode.Position, -driveSetpoint);		
-    }
-    
-
-    
     public void turn (double angle) {
-		//Need to set others as slaves
-    	mRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
-		bRightMotor.set(ControlMode.Follower, RobotMap.DRV_RIGHT_FRONT);
-		mLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
-		bLeftMotor.set(ControlMode.Follower, RobotMap.DRV_LEFT_FRONT);
-		
-//    	double currentAngle = getGyroAngle();
+    	double currentAngle = getGyroAngle();
     	
     	//Need to confirm that this works...
-//    	driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
-    	
-    	//No negate
-    	fRightMotor.set(ControlMode.Position, driveSetpoint);
-		fLeftMotor.set(ControlMode.Position, driveSetpoint);
+    	driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
     }
     
     public double getGyroAngle() {
@@ -189,6 +155,4 @@ public class Sub_DriveTrain extends Subsystem {
     public boolean isDoneDriving() {
     	return (Math.abs(Math.abs(getLeftSideSensorPosInTicks()) - driveSetpoint) < 250) || (Math.abs(Math.abs(getRightSideSensorPosInTicks()) - driveSetpoint) < 250);
     }
-    
-
 }

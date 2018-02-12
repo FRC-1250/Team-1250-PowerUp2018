@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1250.robot.commands;
+package org.usfirst.frc.team1250.robot.drive;
 
 import org.usfirst.frc.team1250.robot.Robot;
 
@@ -12,7 +12,7 @@ public class Cmd_AutoDrive extends Command {
 	int distance = 0;
 
     public Cmd_AutoDrive(int distance) {
-    	requires(Robot.s_drivtrain);
+    	requires(Robot.s_drivetrain);
     	this.distance = distance;
     }
     
@@ -20,13 +20,13 @@ public class Cmd_AutoDrive extends Command {
     {
     	distance = 24;
     	
-    	requires(Robot.s_drivtrain);
+    	requires(Robot.s_drivetrain);
     }
 
     protected void initialize() {
-    	Robot.s_drivtrain.resetSensorPos();
-    	Robot.s_drivtrain.resetGyro();
-    	Robot.s_drivtrain.setSetpointPos(distance);
+    	Robot.s_drivetrain.resetSensorPos();
+    	Robot.s_drivetrain.resetGyro();
+    	Robot.s_drivetrain.setSetpointPos(distance);
     	setTimeout(5);
     }
 

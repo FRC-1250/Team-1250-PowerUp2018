@@ -4,6 +4,8 @@ import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleErectTower;
+import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
+import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

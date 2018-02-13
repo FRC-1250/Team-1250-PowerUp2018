@@ -12,7 +12,7 @@ public class Cmd_AutoTurn extends Command {
 	double angle = 0;
 	
     public Cmd_AutoTurn(double angle) {
-    	requires(Robot.s_drivtrain);
+    	requires(Robot.s_drivetrain);
     	this.angle = angle;
     }
 
@@ -21,16 +21,16 @@ public class Cmd_AutoTurn extends Command {
     }
 
     protected void execute() {
-    	Robot.s_drivtrain.turn(angle);
+    	Robot.s_drivetrain.turn(angle);
     }
 
     protected boolean isFinished() {
     	//Check Gyro and Encorder distance or timeout
-    	return Robot.s_drivtrain.isDoneDriving() || isTimedOut();
+    	return Robot.s_drivetrain.isDoneDriving() || isTimedOut();
     }
 
     protected void end() {
-    	Robot.s_drivtrain.resetSensorPos();
+    	Robot.s_drivetrain.resetSensorPos();
     }
 
     protected void interrupted() {

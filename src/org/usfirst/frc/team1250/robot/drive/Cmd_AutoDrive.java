@@ -31,12 +31,12 @@ public class Cmd_AutoDrive extends Command {
     }
 
     protected void execute() {
-    	Robot.s_drivtrain.driveToPos();
+    	Robot.s_drivetrain.driveToPos();
     }
 
     protected boolean isFinished() {
     	//Check encoder distance or timeout
-    	return isTimedOut()|| Robot.s_drivtrain.isDoneDriving();
+    	return isTimedOut()|| Robot.s_drivetrain.isDoneDriving();
     }
 
     protected void end() {

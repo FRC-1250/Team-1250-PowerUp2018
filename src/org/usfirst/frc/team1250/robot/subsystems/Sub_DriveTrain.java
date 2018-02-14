@@ -42,7 +42,11 @@ public class Sub_DriveTrain extends Subsystem {
 	private final double THRESH_RPM_LO = 1000;
 	private final double SHIFTER_TIMEOUT = 1;
 	
+	//Constants
+	private final double AUTO_TURN_RATE = 0.5;
+	
 	AHRS gyro = new AHRS(SPI.Port.kMXP);	
+	
 	
 	public int driveSetpoint = 0;
 	private final double DRIVE_TICKS = 310.5;
@@ -117,18 +121,22 @@ public class Sub_DriveTrain extends Subsystem {
     }
     
     public void turn (double angle) {
-    	double currentAngle = getGyroAngle();
+    	double rotation = AUTO_TURN_RATE;
+    	rotation  = rotation * (int)Math.signum(angle);
+    	
+    	diffDriveGroup.arcadeDrive(0, rotation);
     	
     	//Need to confirm that this works...
-    	driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
+    	// This definitely won't work kiddo...
+    	// driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
     }
     
     public double getGyroAngle() {
-    	return gyro.getAngle();
+    	return gyro.getYaw();
     }
     
     public void resetGyro() {
-    	gyro.reset();
+    	gyro.zeroYaw();
     }
     
     public int getLeftSideSensorPosInTicks() {
@@ -154,5 +162,9 @@ public class Sub_DriveTrain extends Subsystem {
     
     public boolean isDoneDriving() {
     	return (Math.abs(Math.abs(getLeftSideSensorPosInTicks()) - driveSetpoint) < 250) || (Math.abs(Math.abs(getRightSideSensorPosInTicks()) - driveSetpoint) < 250);
+    }
+    
+    public boolean isDoneTurning(double angle) {
+    	return (Math.abs((int)angle - getGyroAngle()) < 5);
     }
 }

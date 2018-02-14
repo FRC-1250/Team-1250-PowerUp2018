@@ -3,7 +3,7 @@ package org.usfirst.frc.team1250.robot.drive;
 import org.usfirst.frc.team1250.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
@@ -14,6 +14,11 @@ public class Cmd_AutoTurn extends Command {
     public Cmd_AutoTurn(double angle) {
     	requires(Robot.s_drivetrain);
     	this.angle = angle;
+    }
+    
+    public Cmd_AutoTurn() {
+    	angle = SmartDashboard.getNumber("Input Angle", 0);
+    	requires(Robot.s_drivetrain);
     }
 
     protected void initialize() {

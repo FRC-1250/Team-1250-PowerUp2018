@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Auto_PosA", new Auto_PosA());
 		m_chooser.addObject("Auto_PosC", new Auto_PosC());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putNumber("Input Angle", 0);
 	}
 
 	/**
@@ -108,7 +109,8 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 
 		}
-
+		
+		s_drivetrain.resetGyro();
 	}
 
 	/**

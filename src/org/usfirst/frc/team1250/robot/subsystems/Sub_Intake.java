@@ -28,6 +28,10 @@ public Sub_Intake() {
 		RightClaw.set(-1);
 	}
 	public void dump() {
+		LeftClaw.set(1);
+		RightClaw.set(1);
+	}
+	public void dumpslow() {
 		LeftClaw.set(.5);
 		RightClaw.set(.5);
 	}

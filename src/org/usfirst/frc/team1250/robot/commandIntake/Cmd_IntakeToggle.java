@@ -17,10 +17,11 @@ public class Cmd_IntakeToggle extends InstantCommand {
 
     // Called once when the command executes
     protected void initialize() {
-    	if (!Robot.s_claw.CheckSoloClaw())
-    		Robot.s_claw.pinch();
-    	else
-    		Robot.s_claw.unpinch();
+    	Robot.s_elevator.soloLiftPinch();
+    	Robot.s_claw.dump();
+    	Robot.s_claw.pinch();
+    	
+    	
 
     }
 

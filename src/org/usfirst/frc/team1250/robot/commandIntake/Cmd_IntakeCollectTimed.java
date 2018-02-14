@@ -19,11 +19,17 @@ public class Cmd_IntakeCollectTimed extends TimedCommand {
 
     protected void execute() {
     	Robot.s_claw.collect();
+    	Robot.s_claw.unpinch();
+    	
+    	
     }
 
     // Called once after timeout
     protected void end() {
     	Robot.s_claw.stop();
+    	Robot.s_claw.pinch();
+
+    	
     }
 
 

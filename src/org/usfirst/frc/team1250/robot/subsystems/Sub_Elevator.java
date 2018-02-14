@@ -2,6 +2,9 @@ package org.usfirst.frc.team1250.robot.subsystems;
 
 import org.usfirst.frc.team1250.robot.RobotMap;
 import org.usfirst.frc.team1250.robot.commands.Cmd_EleManual;
+import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
+import org.usfirst.frc.team1250.robot.commands.Cmd_Unpinch;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -45,7 +48,7 @@ public class Sub_Elevator extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-        setDefaultCommand(new Cmd_EleManual());
+//        setDefaultCommand(new Cmd_Unpinch());
     }
     
     public void soloLiftPinch() {

@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team1250.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -107,6 +108,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		CameraServer.getInstance().startAutomaticCapture();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

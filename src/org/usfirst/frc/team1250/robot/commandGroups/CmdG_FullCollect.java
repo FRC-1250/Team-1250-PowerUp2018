@@ -2,8 +2,13 @@ package org.usfirst.frc.team1250.robot.commandGroups;
 
 import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_Intake;
+import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeCollectTimed;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeUnPinch;
 import org.usfirst.frc.team1250.robot.commands.Cmd_ElePinch;
+import org.usfirst.frc.team1250.robot.commands.Cmd_EleTimedPinch;
+import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
+import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinchTimed;
+import org.usfirst.frc.team1250.robot.commands.Cmd_IntantPinch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -16,10 +21,11 @@ public class CmdG_FullCollect extends CommandGroup {
     	requires(Robot.s_claw);
     	requires(Robot.s_elevator);
     	
-    	addSequential(new Cmd_IntakeUnPinch());
-    	addSequential(new Cmd_Intake());
-    	addSequential(new Cmd_ElePinch());
-    	addSequential(new Cmd_IntakeUnPinch());
+//    	addParallel(new Cmd_IntantPinch());
+    	addParallel(new Cmd_IntakeCollectTimed(1));
+    	addParallel(new Cmd_EleUnpinchTimed(.5));
+    	
+    	
 
     	
    
@@ -31,7 +37,7 @@ public class CmdG_FullCollect extends CommandGroup {
     	// e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
+        //      add(new Command2());
 
     }
 }

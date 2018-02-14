@@ -20,7 +20,7 @@ public class CmdG_TimedCollect extends CommandGroup {
     	requires(Robot.s_elevator);
     	
     	addSequential(new Cmd_IntakeUnPinch());
-    	addParallel(new Cmd_IntakeCollectTimed(2));
+    	addParallel(new Cmd_IntakeCollectTimed(1));
     	addSequential(new Cmd_EleTimedPinch(.5));
     	addSequential(new Cmd_IntakePinch());
     	

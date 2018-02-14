@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.buttons.*;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Herd;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_TimedCollect;
+import org.usfirst.frc.team1250.robot.commandIntake.ClawSpitFast;
+import org.usfirst.frc.team1250.robot.commandIntake.Cmd_ClawSpit;
+import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeCollectTimed;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakePinch;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeStop;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeTest;
@@ -63,14 +66,14 @@ public class OI {
 		
 		//OPs controller
 		
-//		btn11.whenInactive(new CmdG_TimedCollect());
-		btn10.whenInactive(new Cmd_ElePinch());
-		btn9.whenInactive(new Cmd_EleUnpinch());	
-//		btn8.whenInactive(new CmdG_Herd());
-		btn7.whenInactive(new Cmd_IntakeStop());	
-		btn6.whenInactive(new Cmd_IntakeTest());
-		btn3.whenInactive(new Cmd_IntakePinch());
-		btn4.whenInactive(new Cmd_IntakeUnPinch());
+		btn12.whenInactive(new Cmd_IntakeTest());
+		btn11.whenInactive(new CmdG_FullCollect());
+		btn10.whenInactive(new Cmd_ElePinch());	
+		btn9.whenInactive(new Cmd_ClawSpit(1));
+		btn8.whenInactive(new ClawSpitFast(1));
+		btn5.whenInactive(new Cmd_EleUnpinch());	
+
+
 
 
 	}

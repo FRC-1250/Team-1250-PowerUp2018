@@ -145,6 +145,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
+		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
 		
 	}
 	public Robot() {

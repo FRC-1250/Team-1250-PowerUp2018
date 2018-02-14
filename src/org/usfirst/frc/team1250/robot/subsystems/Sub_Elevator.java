@@ -24,24 +24,25 @@ public class Sub_Elevator extends Subsystem {
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
-	public final int SCALE_POS = 50;
+	public final int SCALE_POS = 81;
 	public final int SWITCH_POS = 19;
 	public final int HOME_POS = 15;
-	public final double ELE_TICKS = 1157.06 / 9;
+	public final double ELE_TICKS = 31;
+			
 	public static int eleSetpoint;
 	
 	public Sub_Elevator() {
 		eleSetpoint = (int)(ELE_TICKS * HOME_POS);
 		
-		eleMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		eleMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
 		eleMotor.configNominalOutputForward(0, 10);
 		eleMotor.configNominalOutputReverse(0, 10);
 		eleMotor.configPeakOutputForward(1, 10);
 		eleMotor.configPeakOutputReverse(-1, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);
-		eleMotor.config_kP(0, 0.15, 10);
-		eleMotor.config_kI(0, 0, 10);
+		eleMotor.config_kP(0, 0.6, 10);
+		eleMotor.config_kI(0, .006, 10);
 		eleMotor.config_kD(0, 0, 10);
 		eleMotor.set(ControlMode.Position,eleSetpoint);
 		eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);

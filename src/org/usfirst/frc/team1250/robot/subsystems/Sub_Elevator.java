@@ -24,9 +24,9 @@ public class Sub_Elevator extends Subsystem {
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
-	public final int SCALE_POS = 81;
-	public final int SWITCH_POS = 19;
-	public final int HOME_POS = 15;
+	public final int SCALE_POS = 72;
+	public final int SWITCH_POS = 23;
+	public final double HOME_POS = 4.25;
 	public final double ELE_TICKS = 31;
 			
 	public static int eleSetpoint;
@@ -41,15 +41,18 @@ public class Sub_Elevator extends Subsystem {
 		eleMotor.configPeakOutputReverse(-1, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);
-		eleMotor.config_kP(0, 0.6, 10);
-		eleMotor.config_kI(0, .006, 10);
+		eleMotor.config_kP(0, 0.5, 10);
+		eleMotor.config_kI(0, .0003, 10);
 		eleMotor.config_kD(0, 0, 10);
+		eleMotor.config_IntegralZone(0, 0, 10);
 		eleMotor.set(ControlMode.Position,eleSetpoint);
 		eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
+		eleMotor.configClosedloopRamp(0, 10);
+		eleMotor.configAllowableClosedloopError(0, 0, 10);
 	}
 	
     public void initDefaultCommand() {
-//        setDefaultCommand(new Cmd_Unpinch());
+        setDefaultCommand(new Cmd_EleManual());
     }
     
     public void soloLiftPinch() {
@@ -78,7 +81,7 @@ public class Sub_Elevator extends Subsystem {
 		eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
 	}
 	
-	public void setLiftPosition(int pos) {
+	public void setLiftPosition(double pos) {
 		eleSetpoint = (int)(ELE_TICKS * pos);
 		eleMotor.set(ControlMode.Position,eleSetpoint);
 	}	

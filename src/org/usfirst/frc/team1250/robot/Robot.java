@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
 	public static final Sub_Shifter s_shifter = new Sub_Shifter();
 	public static final Sub_Intake s_intake = new Sub_Intake();
 	public static final Sub_Elevator s_elevator = new Sub_Elevator();
+	public static final Sub_Climber s_climber = new Sub_Climber();
 	
 	//Controls
 	Joystick Arcadepad = new Joystick(1);

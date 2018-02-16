@@ -14,15 +14,22 @@ public class Cmd_AutoTurn extends Command {
     public Cmd_AutoTurn(double angle) {
     	requires(Robot.s_drivetrain);
     	this.angle = angle;
+    	Robot.s_drivetrain.resetGyro();
+    	Robot.s_drivetrain.accumError = 0;
     }
     
     public Cmd_AutoTurn() {
-    	angle = SmartDashboard.getNumber("Input Angle", 0);
+    	angle = 90;
+    	
     	requires(Robot.s_drivetrain);
+    	Robot.s_drivetrain.resetGyro();
+    	Robot.s_drivetrain.accumError = 0;
     }
 
     protected void initialize() {
-    	setTimeout(2);
+    	Robot.s_drivetrain.resetGyro();
+    	setTimeout(5);
+    	
     }
 
     protected void execute() {
@@ -31,7 +38,7 @@ public class Cmd_AutoTurn extends Command {
 
     protected boolean isFinished() {
     	//Check Gyro and Encorder distance or timeout
-    	return Robot.s_drivetrain.isDoneDriving() || isTimedOut();
+    	return Robot.s_drivetrain.isDoneTurning(angle) || isTimedOut();
     }
 
     protected void end() {

@@ -16,12 +16,6 @@ public class Cmd_AutoDrive extends Command {
     	this.distance = distance;
     }
     
-    public Cmd_AutoDrive()
-    {
-    	distance = 24;
-    	
-    	requires(Robot.s_drivetrain);
-    }
 
     protected void initialize() {
     	Robot.s_drivetrain.resetSensorPos();

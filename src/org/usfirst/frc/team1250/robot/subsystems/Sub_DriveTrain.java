@@ -41,9 +41,14 @@ public class Sub_DriveTrain extends Subsystem {
 	private final double THRESH_RPM_HI = 1500;
 	private final double THRESH_RPM_LO = 1000;
 	private final double SHIFTER_TIMEOUT = 1;
+
 	
-	//Constants
+	//Constants for Closed Loop Feedback
+	public static double accumError = 0;
 	private final double AUTO_TURN_RATE = 0.5;
+	private final double KP_SIMPLE_STRAIT = 0.01;
+	private final double KP_SIMPLE = 0.05;
+	private final double KI_SIMPLE = 0.03;
 	
 	AHRS gyro = new AHRS(SPI.Port.kMXP);	
 	
@@ -103,7 +108,7 @@ public class Sub_DriveTrain extends Subsystem {
     	drive(0,0);
     }
     
-    public double ticksToInches(int ticks) {
+ public double ticksToInches(int ticks) {
     	
     	return ticks/(double)DRIVE_TICKS;
     }
@@ -113,7 +118,10 @@ public class Sub_DriveTrain extends Subsystem {
     }
     
     public void driveToPos() {
-    	diffDriveGroup.arcadeDrive(-0.5, 0);
+    	
+    	double offset = getGainP(0,this.getGyroAngle(),KP_SIMPLE_STRAIT);
+    	
+    	diffDriveGroup.arcadeDrive(0.8, 0 + offset);
     }
     
     public void setSetpointPos(int distance) {
@@ -121,8 +129,8 @@ public class Sub_DriveTrain extends Subsystem {
     }
     
     public void turn (double angle) {
-    	double rotation = AUTO_TURN_RATE;
-    	rotation  = rotation * (int)Math.signum(angle);
+    	double rotation = AUTO_TURN_RATE * getGainPI(angle,this.getGyroAngle(),KP_SIMPLE, KI_SIMPLE);
+    	//rotation  = rotation * (int)Math.signum(angle);
     	
     	diffDriveGroup.arcadeDrive(0, rotation);
     	
@@ -161,10 +169,25 @@ public class Sub_DriveTrain extends Subsystem {
     }
     
     public boolean isDoneDriving() {
-    	return (Math.abs(Math.abs(getLeftSideSensorPosInTicks()) - driveSetpoint) < 250) || (Math.abs(Math.abs(getRightSideSensorPosInTicks()) - driveSetpoint) < 250);
+    	return (Math.abs(this.getRightSideSensorPosInTicks() - driveSetpoint) < 500);
+    }
+    	
+    public boolean isDoneTurning(double angle) {
+    	return (Math.abs(angle - this.getGyroAngle()) < 2);
     }
     
-    public boolean isDoneTurning(double angle) {
-    	return (Math.abs((int)angle - getGyroAngle()) < 5);
+    private double getGainP(double setpoint, double current, double kP) {
+    	
+    	double error = setpoint - current;  		
+    	return KP_SIMPLE * error;
+    }
+    
+    private double getGainPI(double setpoint, double current,double kP, double kI) {
+    	
+    	double error = setpoint - current; 
+    	double p = KP_SIMPLE * error;
+    	accumError = accumError + error;
+    	double i = KI_SIMPLE * error;
+    	return p + i;
     }
 }

@@ -121,7 +121,9 @@ public class Sub_DriveTrain extends Subsystem {
     	
     	double offset = getGainP(0,this.getGyroAngle(),KP_SIMPLE_STRAIT);
     	
-    	diffDriveGroup.arcadeDrive(0.8, 0 + offset);
+    	int sign = (int) Math.signum(driveSetpoint);
+    	
+    	diffDriveGroup.arcadeDrive(0.8 * sign, 0 + offset);
     }
     
     public void setSetpointPos(int distance) {

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
 import org.usfirst.frc.team1250.robot.drive.*;
+import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHome;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_ElePinch;
@@ -22,6 +23,7 @@ import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeStop;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeToggle;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeUnPinch;
 import org.usfirst.frc.team1250.robot.test.Cmd_IntakeTest;
+import org.usfirst.frc.team1250.robot.test.deletethis;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -58,12 +60,12 @@ public class OI {
 
 	public OI() {
 		// Drivers controller
-		x.whenPressed(new Cmd_ElePinch());
+		x.whenPressed(new deletethis());
 		a.whenPressed(new Cmd_EleHome());
 		b.whenPressed(new Cmd_EleSwitch());
 		y.whenPressed(new Cmd_EleHigh());
 		lb.whenPressed(new Cmd_EleUnpinch());
-		rb.whenPressed(new Cmd_AutoDrive());	
+		rb.whenPressed(new Cmd_AutoDrive(25));	
 
 		// OPs controller
 		// btn11.whenInactive(new CmdG_TimedCollect());

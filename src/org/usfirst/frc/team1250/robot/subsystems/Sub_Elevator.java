@@ -16,6 +16,7 @@ public class Sub_Elevator extends Subsystem {
 
 	public WPI_TalonSRX eleMotor = new WPI_TalonSRX(RobotMap.ELE_MOTOR);
 	private Solenoid eleSol = new Solenoid(RobotMap.ELE_PINCH_SOL);
+	private Solenoid elePop = new Solenoid(RobotMap.ELE_POP_SOL);
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
@@ -48,7 +49,9 @@ public class Sub_Elevator extends Subsystem {
 	public void soloLiftPinch() {
 		eleSol.set(true);
 	}
-
+	public void soloPop() {
+		elePop.set(true);
+	}
 	public void soloLiftUnPinch() {
 		eleSol.set(false);
 	}

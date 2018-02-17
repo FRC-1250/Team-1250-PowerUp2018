@@ -30,7 +30,7 @@ public class RobotMap {
 	public static final int INTAKE_LEFT        = 14;
 	
 	// Solenoids for Intake
-	public static final int INTAKE_PINCH_SOL   = 1;
+	public static final int INTAKE_PINCH_SOL   = 7;
 		
 	// Sensors for Intake
 	public static final int INTAKE_SENS_RIGHT  = 1;

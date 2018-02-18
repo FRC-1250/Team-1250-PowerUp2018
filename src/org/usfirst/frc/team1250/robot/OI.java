@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.buttons.*;
 
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Droper;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_FullCollect;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Herd;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_TimedCollect;
 import org.usfirst.frc.team1250.robot.commandIntake.ClawSpitFast;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_ClawSpit;

@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Cmd_EleManual extends Command {
 
-	int currentTicks;
-	int bumpVal;
-	int loop;
 
 	public Cmd_EleManual() {
 		// Use requires() here to declare subsystem dependencies
@@ -26,19 +23,14 @@ public class Cmd_EleManual extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		currentTicks = Robot.s_elevator.getLiftPosInTicks();
-		bumpVal = (int) Robot.m_oi.getArcadepad().getRawAxis(1);
-
-		if (loop > 10) {
-			System.out.println(bumpVal);
-			loop = 0;
-		}
-		if (bumpVal != 0)
-			Robot.s_elevator.setBump(bumpVal);
+		if ( (int)Robot.m_oi.getArcadepad().getRawAxis(1) < 0)
+			Robot.s_elevator.eleDown();
+		else if ( (int) Robot.m_oi.getArcadepad().getRawAxis(1) > 0)
+			Robot.s_elevator.eleUp();
 		else
-			Robot.s_elevator.setBump(0);
+			Robot.s_elevator.eleStop();
 
-		loop += 1;
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

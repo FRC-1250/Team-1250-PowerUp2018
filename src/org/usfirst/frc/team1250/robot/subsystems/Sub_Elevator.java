@@ -4,6 +4,7 @@ import org.usfirst.frc.team1250.robot.RobotMap;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleManual;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
 import org.usfirst.frc.team1250.robot.commands.Cmd_Unpinch;
+import org.usfirst.frc.team1250.robot.drive.Cmd_ManualDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -37,7 +38,7 @@ public class Sub_Elevator extends Subsystem {
 
 		eleMotor.configNominalOutputForward(0, 10);
 		eleMotor.configNominalOutputReverse(0, 10);
-		eleMotor.configPeakOutputForward(.5, 10);
+		eleMotor.configPeakOutputForward(.7, 10);
 		eleMotor.configPeakOutputReverse(-.3, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);
@@ -45,10 +46,10 @@ public class Sub_Elevator extends Subsystem {
 		eleMotor.config_kI(0, .0001, 10);
 		eleMotor.config_kD(0, 0, 10);
 		eleMotor.config_IntegralZone(0, 0, 10);
-		eleMotor.set(ControlMode.Position,eleSetpoint);
-		eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
-		eleMotor.configClosedloopRamp(0, 10);
-		eleMotor.configAllowableClosedloopError(0, 0, 10);
+		//eleMotor.set(ControlMode.Position,eleSetpoint);
+		//eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
+//		eleMotor.configClosedloopRamp(0, 10);
+//		eleMotor.configAllowableClosedloopError(0, 0, 10);
 	}
 
 	public void initDefaultCommand() {
@@ -60,6 +61,19 @@ public class Sub_Elevator extends Subsystem {
 	}
 	public void soloPop() {
 		popSol.set(true);
+	}
+	public void eleUp() {
+		eleMotor.set(ControlMode.PercentOutput,1);
+		//eleMotor.setSelectedSensorPosition(eleMotor.getSelectedSensorPosition(0), 0, 10);
+	}
+	public void eleDown() {
+		eleMotor.set(ControlMode.PercentOutput,-0.5);
+		//eleMotor.setSelectedSensorPosition(eleMotor.getSelectedSensorPosition(0), 0, 10);
+	}
+	public void eleStop() {
+		eleMotor.set(ControlMode.PercentOutput,0);
+//		eleMotor.set(ControlMode.Position, eleMotor.getSelectedSensorPosition(0));
+		//eleMotor.setSelectedSensorPosition(eleMotor.getSelectedSensorPosition(0), 0, 10);
 	}
 	public void soloLiftUnPinch() {
 		eleSol.set(false);

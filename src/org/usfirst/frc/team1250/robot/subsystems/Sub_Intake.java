@@ -18,8 +18,8 @@ public class Sub_Intake extends Subsystem {
 	private DigitalInput finalSens = new DigitalInput(RobotMap.INTAKE_SENS_FINAL);
 
 	public void collect() {
-		leftClaw.set(-1);
-		rightClaw.set(-1);
+		leftClaw.set(-.5);
+		rightClaw.set(-.5);
 	}
 
 	public void dump() {

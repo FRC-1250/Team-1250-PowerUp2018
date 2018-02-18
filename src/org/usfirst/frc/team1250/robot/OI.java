@@ -62,13 +62,13 @@ public class OI {
 	JoystickButton btn5 = new JoystickButton(Arcadepad, 5);
 	JoystickButton btn4 = new JoystickButton(Arcadepad, 4);
 	JoystickButton btn3 = new JoystickButton(Arcadepad, 3);
+	JoystickButton btn2 = new JoystickButton(Arcadepad, 2);
+
+	
 
 	public OI() {
 		// Drivers controller
-		x.whenPressed(new deletethis());
-		a.whenPressed(new Cmd_EleHome());
-		b.whenPressed(new Cmd_EleSwitch());
-		y.whenPressed(new Cmd_EleHigh());
+
 		//OPs controller
 		
 		btn12.whenInactive(new Cmd_IntakeTest());
@@ -79,6 +79,9 @@ public class OI {
 		btn7.whenInactive(new Cmd_Pancake(.1));
 		btn6.whenInactive(new Cmd_Popper(.1));
 		btn5.whenInactive(new Cmd_EleUnpinch());	
+		btn4.whenInactive(new Cmd_EleHigh());
+		btn3.whenInactive(new Cmd_EleSwitch());
+		btn2.whenInactive(new Cmd_EleHome());	
 
 
 

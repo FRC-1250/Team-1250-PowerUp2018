@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 /**
  *
  */
-public class Cmd_ClawSpit extends TimedCommand {
+public class Cmd_IntakeSpit extends TimedCommand {
 
-    public Cmd_ClawSpit(double timeout) {
+    public Cmd_IntakeSpit(double timeout) {
         super(timeout);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

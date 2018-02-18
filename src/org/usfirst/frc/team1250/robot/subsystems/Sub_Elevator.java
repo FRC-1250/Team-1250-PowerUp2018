@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class Sub_Elevator extends Subsystem {
 
 	public WPI_TalonSRX eleMotor = new WPI_TalonSRX(RobotMap.ELE_MOTOR);
-	private Solenoid eleSol = new Solenoid(RobotMap.CLW_LIFT_SOL);
+	private Solenoid eleSol = new Solenoid(RobotMap.ELE_CLAW_SOL);
 	private Solenoid panSol = new Solenoid(RobotMap.ELE_PAN_SOL);
 	private Solenoid popSol = new Solenoid(RobotMap.ELE_POP_SOL);
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);

@@ -38,14 +38,14 @@ public class RobotMap {
 	public static final int SOL_SHIFTER		=  0;
 	
 	// Solenoids for Claw
-	public static final int CLW_PINCH_SOL   = 7;
+	public static final int INTAKE_PINCH_SOL   = 7;
 
-	public static final int CLW_LIFT_SOL    = 5;
+	public static final int ELE_CLAW_SOL    = 5;
 	
 	// Sensors for Claw
-	public static final int CLW_SENS_RIGHT  = 1;
-	public static final int CLW_SENS_LEFT   = 0;
-	public static final int CLW_SENS_FINAL  = 3;
+	public static final int INTAKE_SENS_RIGHT  = 1;
+	public static final int INTAKE_SENS_LEFT   = 0;
+	public static final int INTAKE_SENS_FINAL  = 3;
 	
 	// Elevator stuff
 	public static final int ELE_MOTOR 		= 20;

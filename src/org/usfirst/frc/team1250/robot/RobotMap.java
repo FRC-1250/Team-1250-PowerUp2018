@@ -14,8 +14,6 @@ package org.usfirst.frc.team1250.robot;
  * floating around.
  */
 public class RobotMap {
-
-	
 	// Drive Train Motor Control IDs
 	public static final int DRV_LEFT_FRONT  = 10;
 	public static final int DRV_LEFT_MID    = 11;
@@ -46,12 +44,13 @@ public class RobotMap {
 	public static final int INTAKE_SENS_RIGHT  = 1;
 	public static final int INTAKE_SENS_LEFT   = 0;
 	public static final int INTAKE_SENS_FINAL  = 3;
+
 	
-	// Elevator stuff
+	//Elevator Motor Control IDs
 	public static final int ELE_MOTOR 		= 20;
+
 	public static final int ELE_LIMIT_SW    = 2;
 	public static final int ELE_POP_SOL 	= 4;
 	public static final int ELE_PAN_SOL 	= 6;
-	
 	
 }

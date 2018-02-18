@@ -8,6 +8,7 @@
 package org.usfirst.frc.team1250.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -15,9 +16,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team1250.robot.subsystems.*;
-//import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 
+import org.usfirst.frc.team1250.robot.groups.Auto_PosA;
+import org.usfirst.frc.team1250.robot.groups.Auto_PosB;
+import org.usfirst.frc.team1250.robot.groups.Auto_PosC;
+import org.usfirst.frc.team1250.robot.subsystems.*;
+import edu.wpi.first.wpilibj.SPI;
+//import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,73 +32,63 @@ import org.usfirst.frc.team1250.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-
+	
+	//Subsystems
+	public static final Sub_DriveTrain s_drivetrain = new Sub_DriveTrain();
+	public static final Sub_Shifter s_shifter = new Sub_Shifter();
+	public static final Sub_Intake s_intake = new Sub_Intake();
+	public static final Sub_Elevator s_elevator = new Sub_Elevator();
+	
+	//Controls
 	Joystick Arcadepad = new Joystick(1);
-	public static final Sub_DriveTrain s_drivtrain 
-			= new Sub_DriveTrain();
-	public static final Sub_Shifter s_shifter
-			= new Sub_Shifter();
-	public static final Sub_Intake s_claw
-			= new Sub_Intake();
-	public static final Sub_Elevator s_elevator
-			= new Sub_Elevator();
 	public static OI m_oi;
 	
+	static DriverStation driverStation;
+	
+	//Robot wide variable
 	public static boolean shiftState = false;
-	public static Timer robotTimer= new Timer();
+	public static Timer robotTimer = new Timer();
+	
+	//Auto
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * This function is run when the robot is first started up and should be used
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
+		m_chooser.addDefault("Auto_PosB", new Auto_PosB());
+		m_chooser.addObject("Auto_PosA", new Auto_PosA());
+		m_chooser.addObject("Auto_PosC", new Auto_PosC());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putNumber("Input Angle", 0);
 	}
 
 	/**
-	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
+	 * This function is called once each time the robot enters Disabled mode. You
+	 * can use it to reset any subsystem information you want to clear when the
+	 * robot is disabled.
 	 */
 	@Override
 	public void disabledInit() {
 		s_elevator.setTicksToHome();
+
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		//Scheduler.getInstance().run();
+		// Scheduler.getInstance().run();
 		this.log();
 	}
-
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
+	
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
-	//	s_elevator.solPop();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+		m_autonomousCommand = (Command) m_chooser.getSelected();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -121,9 +116,8 @@ public class Robot extends TimedRobot {
 
 		}
 		
-		
-		}
-	
+		s_drivetrain.resetGyro();
+	}
 
 	/**
 	 * This function is called periodically during operator control.
@@ -141,7 +135,7 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		this.log();
 	}
-	
+
 	public void log() {
 		SmartDashboard.putBoolean("Is Limit Seen???????", s_elevator.getEleSensor());
 		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
@@ -149,16 +143,29 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
 		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
-		
+		SmartDashboard.putNumber("Gyro POS", s_drivetrain.getGyroAngle());
+		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
+		SmartDashboard.putNumber("Left Encoder Ticks", s_drivetrain.getLeftSideSensorPosInTicks());
+		SmartDashboard.putNumber("Right Encoder Inches", s_drivetrain.getRightSideSensorPosInInches());
+		SmartDashboard.putNumber("Left Encoder Inches", s_drivetrain.getLeftSideSensorPosInInches());
+		SmartDashboard.putNumber("Setpoint", s_drivetrain.driveSetpoint);
+		SmartDashboard.putNumber("Joystick Left", m_oi.Gamepad.getY());
+		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
 	}
+	
+	public static String getAutoMessage() {
+		return DriverStation.getInstance().getGameSpecificMessage().substring(0, 1); 
+	}
+
 	public Robot() {
-//		double yStick = Arcadepad.getY();
-//		SmartDashboard.putNumber("yin", yStick);
-//		if (yStick > 0){
-//	    	Robot.s_elevator.bumpUp();
-//		}
-//		if (yStick < 0){
-//	    	Robot.s_elevator.bumpDown();
-//		}
+		// double yStick = Arcadepad.getY();
+		// SmartDashboard.putNumber("yin", yStick);
+		// if (yStick > 0){
+		// Robot.s_elevator.bumpUp();
+		// }
+		// if (yStick < 0){
+		// Robot.s_elevator.bumpDown();
+		// }
 	}
+	
 }

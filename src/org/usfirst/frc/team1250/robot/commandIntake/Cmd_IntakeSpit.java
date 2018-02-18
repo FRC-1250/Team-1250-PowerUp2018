@@ -22,15 +22,15 @@ public class Cmd_IntakeSpit extends TimedCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.s_elevator.soloLiftUnPinch();
-    	Robot.s_claw.dumpslow();
-    	Robot.s_claw.pinch();
+    	Robot.s_intake.dumpslow();
+    	Robot.s_intake.pinch();
     }
 
     // Called once after timeout
     protected void end() {
     	Robot.s_elevator.soloLiftPinch();
-    	Robot.s_claw.stop();
-    	Robot.s_claw.unpinch();
+    	Robot.s_intake.stop();
+    	Robot.s_intake.unpinch();
     }
 
     // Called when another command which requires one or more of the same

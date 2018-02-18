@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1250.robot.commandIntake;
+package org.usfirst.frc.team1250.robot.test;
 
 import org.usfirst.frc.team1250.robot.Robot;
 
@@ -11,15 +11,15 @@ public class Cmd_IntakeTest extends InstantCommand {
 
     public Cmd_IntakeTest() {
         super();
-    	requires(Robot.s_claw);
+    	requires(Robot.s_intake);
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.s_claw.collect();
-    	Robot.s_claw.pinch();
+    	Robot.s_intake.collect();
+    	Robot.s_intake.pinch();
     	Robot.s_elevator.soloLiftPinch();
-    	
+
     }
 
 }

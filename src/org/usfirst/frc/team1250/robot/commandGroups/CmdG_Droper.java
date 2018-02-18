@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1250.robot.commandGroups;
 
 import org.usfirst.frc.team1250.robot.commands.Cmd_DoNothing;
-import org.usfirst.frc.team1250.robot.commands.Cmd_ElePinch;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
+import org.usfirst.frc.team1250.robot.elevator.Cmd_ElePinch;
+import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
 import org.usfirst.frc.team1250.robot.commands.Cmd_Pancake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1250.robot.subsystems;
 
 import org.usfirst.frc.team1250.robot.RobotMap;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleManual;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinch;
+import org.usfirst.frc.team1250.robot.elevator.Cmd_EleManual;
+import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
 import org.usfirst.frc.team1250.robot.commands.Cmd_Unpinch;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -14,15 +14,13 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-/**
- *
- */
 public class Sub_Elevator extends Subsystem {
 
 	public WPI_TalonSRX eleMotor = new WPI_TalonSRX(RobotMap.ELE_MOTOR);
 	private Solenoid eleSol = new Solenoid(RobotMap.ELE_CLAW_SOL);
 	private Solenoid panSol = new Solenoid(RobotMap.ELE_PAN_SOL);
 	private Solenoid popSol = new Solenoid(RobotMap.ELE_POP_SOL);
+
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
@@ -32,11 +30,11 @@ public class Sub_Elevator extends Subsystem {
 	public final double ELE_TICKS = 31;
 			
 	public static int eleSetpoint;
-	
+
 	public Sub_Elevator() {
 		eleSetpoint = (int)(ELE_TICKS * HOME_POS);
-		
 		eleMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
+
 		eleMotor.configNominalOutputForward(0, 10);
 		eleMotor.configNominalOutputReverse(0, 10);
 		eleMotor.configPeakOutputForward(.5, 10);
@@ -52,27 +50,29 @@ public class Sub_Elevator extends Subsystem {
 		eleMotor.configClosedloopRamp(0, 10);
 		eleMotor.configAllowableClosedloopError(0, 0, 10);
 	}
-	
-    public void initDefaultCommand() {
-        setDefaultCommand(new Cmd_EleManual());
-    }
-    
-    public void soloLiftPinch() {
+
+	public void initDefaultCommand() {
+		setDefaultCommand(new Cmd_EleManual());
+	}
+
+	public void soloLiftPinch() {
 		eleSol.set(true);
 	}
-    
+	public void soloPop() {
+		popSol.set(true);
+	}
 	public void soloLiftUnPinch() {
 		eleSol.set(false);
 	}
-	
+
 	public boolean checkSoloLift() {
 		return eleSol.get();
 	}
-	
+
 	public boolean getEleSensor() {
 		return eleLowSensor.get();
 	}
-	
+
 	public int getLiftPosInTicks() {
 		return eleMotor.getSelectedSensorPosition(0);
 	}
@@ -90,9 +90,10 @@ public class Sub_Elevator extends Subsystem {
 			popSol.set(false);
 		}
 
+
 	public void setTicksToHome() {
-		//Default Lift position is home
-		eleSetpoint = (int)(HOME_POS * ELE_TICKS);
+		// Default Lift position is home
+		eleSetpoint = (int) (HOME_POS * ELE_TICKS);
 		eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
 	}
 	
@@ -103,7 +104,7 @@ public class Sub_Elevator extends Subsystem {
 	
 	public void setBump(int val) {
 		eleSetpoint = (int)(val * 24 * ELE_TICKS + (getLiftPosInTicks()));
+
 		eleMotor.set(ControlMode.Position, eleSetpoint);
 	}
 }
-

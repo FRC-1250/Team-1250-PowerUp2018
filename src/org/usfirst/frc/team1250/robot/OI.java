@@ -18,7 +18,6 @@ import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeCollectTimed;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakePinch;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeStop;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeTest;
-import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeToggle;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeUnPinch;
 import org.usfirst.frc.team1250.robot.commands.*;
 

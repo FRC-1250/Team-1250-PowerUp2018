@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.*;
-import edu.wpi.first.wpilibj.AnalogGyro;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -51,8 +50,8 @@ public class Sub_DriveTrain extends Subsystem {
 	private final double KP_SIMPLE = 0.05;
 	private final double KI_SIMPLE = 0.03;
 	
-	//AHRS gyro = new AHRS(SPI.Port.kMXP);	
-	private AnalogGyro gyro = new AnalogGyro(0);
+	AHRS gyro = new AHRS(SPI.Port.kMXP);	
+	
 	
 	public int driveSetpoint = 0;
 	private final double DRIVE_TICKS = 310.5;
@@ -143,13 +142,11 @@ public class Sub_DriveTrain extends Subsystem {
     }
     
     public double getGyroAngle() {
-    	//return gyro.getYaw();
-    	return gyro.getAngle();
+    	return gyro.getYaw();
     }
     
     public void resetGyro() {
-    	//gyro.zeroYaw();
-    	gyro.reset();
+    	gyro.zeroYaw();
     }
     
     public int getLeftSideSensorPosInTicks() {

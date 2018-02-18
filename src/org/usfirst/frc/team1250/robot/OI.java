@@ -9,6 +9,7 @@ package org.usfirst.frc.team1250.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
+import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Droper;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Herd;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_TimedCollect;
@@ -68,13 +69,16 @@ public class OI {
 		
 		btn12.whenInactive(new Cmd_IntakeTest());
 		btn11.whenInactive(new CmdG_FullCollect());
-		btn10.whenInactive(new Cmd_ElePinch());	
+		btn10.whenInactive(new CmdG_Droper());	
 		btn9.whenInactive(new Cmd_ClawSpit(1));
 		btn8.whenInactive(new ClawSpitFast(1));
+		btn7.whenInactive(new Cmd_Pancake(.1));
+		btn6.whenInactive(new Cmd_Popper(.1));
 		btn5.whenInactive(new Cmd_EleUnpinch());	
 
 
 
+		
 
 	}
 	

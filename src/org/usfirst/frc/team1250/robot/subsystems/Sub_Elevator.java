@@ -21,6 +21,8 @@ public class Sub_Elevator extends Subsystem {
 
 	public WPI_TalonSRX eleMotor = new WPI_TalonSRX(RobotMap.ELE_MOTOR);
 	private Solenoid eleSol = new Solenoid(RobotMap.CLW_LIFT_SOL);
+	private Solenoid panSol = new Solenoid(RobotMap.ELE_PAN_SOL);
+	private Solenoid popSol = new Solenoid(RobotMap.ELE_POP_SOL);
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
@@ -37,12 +39,12 @@ public class Sub_Elevator extends Subsystem {
 		eleMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
 		eleMotor.configNominalOutputForward(0, 10);
 		eleMotor.configNominalOutputReverse(0, 10);
-		eleMotor.configPeakOutputForward(1, 10);
-		eleMotor.configPeakOutputReverse(-1, 10);
+		eleMotor.configPeakOutputForward(.5, 10);
+		eleMotor.configPeakOutputReverse(-.3, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);
-		eleMotor.config_kP(0, 0.5, 10);
-		eleMotor.config_kI(0, .0003, 10);
+		eleMotor.config_kP(0, 1, 10);
+		eleMotor.config_kI(0, .0001, 10);
 		eleMotor.config_kD(0, 0, 10);
 		eleMotor.config_IntegralZone(0, 0, 10);
 		eleMotor.set(ControlMode.Position,eleSetpoint);
@@ -74,7 +76,20 @@ public class Sub_Elevator extends Subsystem {
 	public int getLiftPosInTicks() {
 		return eleMotor.getSelectedSensorPosition(0);
 	}
+	 public void soloPancakePop() {
+			panSol.set(true);
+		}
 	
+	 public void soloPancakeUnPop() {
+			panSol.set(false);
+		}
+	 public void solPop() {
+			popSol.set(true);
+		}
+	 public void solUnPop() {
+			popSol.set(false);
+		}
+
 	public void setTicksToHome() {
 		//Default Lift position is home
 		eleSetpoint = (int)(HOME_POS * ELE_TICKS);
@@ -87,7 +102,7 @@ public class Sub_Elevator extends Subsystem {
 	}	
 	
 	public void setBump(int val) {
-		eleSetpoint = (int)(val * 12 * ELE_TICKS + (getLiftPosInTicks()));
+		eleSetpoint = (int)(val * 24 * ELE_TICKS + (getLiftPosInTicks()));
 		eleMotor.set(ControlMode.Position, eleSetpoint);
 	}
 }

@@ -16,23 +16,23 @@ public class Auto_PosC extends CommandGroup {
 
     public Auto_PosC() {
     	addSequential(new Cmd_EleErectTower());
- 		addSequential(new Cmd_AutoDrive(45));
+// 		addSequential(new Cmd_AutoDrive(45));
     	
     	String autoMessage = Robot.getAutoMessage();
     	
      	if(autoMessage == "LR" || autoMessage =="RR")
     	{
     		//Left Scale case
-     		addParallel(new Cmd_AutoDrive(45));
+//     		addParallel(new Cmd_AutoDrive(45));
      		addParallel(new Cmd_EleHigh());
-     		addSequential(new Cmd_AutoTurn(90));
+//     		addSequential(new Cmd_AutoTurn(90));
     	}
     	else if(autoMessage == "RL")
     	{
     		//Left Switch case
-    		addParallel(new Cmd_AutoDrive(45));
+//    		addParallel(new Cmd_AutoDrive(45));
      		addParallel(new Cmd_EleSwitch());
-     		addSequential(new Cmd_AutoTurn(90));
+//     		addSequential(new Cmd_AutoTurn(90));
     	}
     	else
     	{

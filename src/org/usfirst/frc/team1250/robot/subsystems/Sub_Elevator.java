@@ -38,7 +38,7 @@ public class Sub_Elevator extends Subsystem {
 
 		eleMotor.configNominalOutputForward(0, 10);
 		eleMotor.configNominalOutputReverse(0, 10);
-		eleMotor.configPeakOutputForward(.7, 10);
+		eleMotor.configPeakOutputForward(.8, 10);
 		eleMotor.configPeakOutputReverse(-.3, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);

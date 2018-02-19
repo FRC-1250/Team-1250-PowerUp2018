@@ -141,24 +141,24 @@ public class Sub_DriveTrain extends Subsystem {
 //    		diffDriveGroup.arcadeDrive(0.8 * sign, 0);
 ////    	diffDriveGroup.arcadeDrive(0.8 * sign, 0 + offset);
 //    }
- public void driveToPos() {
+ public void driveToPos( double upperSpeed, double lowerSpeed) {
     	
     	
 		
     	
     	double offset = getGainP(0,this.getGyroAngle(),KP_SIMPLE_STRAIT);
     	
-    	int sign = (int) Math.signum(driveSetpoint);
+    	double sign = Math.signum(driveSetpoint);
     	
-    	diffDriveGroup.arcadeDrive(linearRamp() * sign , 0 + offset);
+    	diffDriveGroup.arcadeDrive(linearRamp(upperSpeed,lowerSpeed) * sign, 0 + offset);
     	
     }
     
-    private double linearRamp() {
+    private double linearRamp( double upperSpeed, double lowerSpeed) {
     	double diff = (driveSetpoint - (double)Math.abs(getRightSideSensorPosInTicks()));
-    	double corrected = .00005 * diff;
-    	double upperBound = Math.min(1 , corrected);
-    	double lowerBound = Math.max(.6 , upperBound);
+    	double corrected = .005 * diff;
+    	double upperBound = Math.min(upperSpeed , corrected);
+    	double lowerBound = Math.max(lowerSpeed , upperBound);
     	
     	SmartDashboard.putNumber("correctedoutput", corrected);
     	return lowerBound;
@@ -176,35 +176,30 @@ public class Sub_DriveTrain extends Subsystem {
     	driveSetpoint = (int)DRIVE_TICKS * distance;
     }
     
-    public void turn (double angle) {
+    public void turn (double angle, double upperSpeed, double lowerSpeed) {
 //    	double rotation = AUTO_TURN_RATE * getGainPI(angle,this.getGyroAngle(),KP_SIMPLE, KI_SIMPLE);
     	//rotation  = rotation * (int)Math.signum(angle);
     	double corrected;
-		double upperBound; 
-		double lowerBound;
+		//double upperBound; 
+		// double lowerBound;
     	
 		double rotation = angle - getGyroAngle();
-    	int sign = (int)Math.signum(getGyroAngle());
+//    	int sign = (int)Math.signum(getGyroAngle());
+    	double sign = Math.signum(rotation);
     	
+		corrected = 0.005 * rotation;
     	
     	if (sign > 0){
-    		 corrected = 0.05 * rotation;
-    		 upperBound = Math.min(0.7 * sign, corrected);
-    		 lowerBound = Math.max(0.4 * sign, upperBound);
+    		 corrected = Math.min(upperSpeed * sign, corrected);
+    		 corrected = Math.max(lowerSpeed * sign, corrected);
     	}
     		
     	else {
-    		 corrected = 0.05 * rotation;
-			 upperBound = Math.max(0.7 * sign, corrected);
-			 lowerBound = Math.min(0.4 * sign, upperBound);
-    		
-    		
+    		 corrected = Math.max(upperSpeed * sign, corrected);
+			 corrected = Math.min(lowerSpeed * sign, corrected);    	    		
     	}
 
-    		
-    	
-    	
-    	diffDriveGroup.arcadeDrive(0, lowerBound);
+    	diffDriveGroup.arcadeDrive(0, corrected);
     }
     
     public double getGyroAngle() {

@@ -10,6 +10,7 @@ package org.usfirst.frc.team1250.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
+import org.usfirst.frc.team1250.robot.commandGroups.CmdG_AutoLeft;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Droper;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_TimedCollect;
@@ -91,7 +92,7 @@ public class OI {
 
 
 // Auto Buttons for Testing
-//		lb.whenPressed(new Cmd_EleUnpinch());
+		x.whenPressed(new CmdG_AutoLeft());
 //		rb.whenPressed(new Cmd_AutoDrive(25));	
 //
 //		// OPs controller

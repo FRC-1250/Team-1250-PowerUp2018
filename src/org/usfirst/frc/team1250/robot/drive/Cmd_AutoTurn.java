@@ -28,7 +28,7 @@ public class Cmd_AutoTurn extends Command {
 
     protected void initialize() {
     	Robot.s_drivetrain.resetGyro();
-    	setTimeout(5);
+    	setTimeout(2);
     	
     }
 

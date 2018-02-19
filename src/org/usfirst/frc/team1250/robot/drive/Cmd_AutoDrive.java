@@ -30,7 +30,8 @@ public class Cmd_AutoDrive extends Command {
 
     protected boolean isFinished() {
     	//Check encoder distance or timeout
-    	return isTimedOut()|| Robot.s_drivetrain.isDoneDriving();
+    	return Robot.s_drivetrain.isDoneDriving();
+//    	return isTimedOut()|| Robot.s_drivetrain.isDoneDriving();
     }
 
     protected void end() {

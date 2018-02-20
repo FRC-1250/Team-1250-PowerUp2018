@@ -14,7 +14,7 @@ public class Cmd_EleHigh extends Command {
     }
 
     protected void initialize() {
-    	setTimeout(2);
+    	setTimeout(1);
     }
 
     protected void execute() {
@@ -29,5 +29,6 @@ public class Cmd_EleHigh extends Command {
     }
     
 	protected void interrupted() {
+		
 	}
 }

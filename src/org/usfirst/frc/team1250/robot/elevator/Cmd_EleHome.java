@@ -15,7 +15,7 @@ public class Cmd_EleHome extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		setTimeout(2);
+		setTimeout(3);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

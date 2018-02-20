@@ -34,7 +34,7 @@ public class Auto_LeftPos extends CommandGroup {
     	{
     		//Left Switch case
 //    		addParallel(new Cmd_AutoDrive(45));
-     		addParallel(new CmdG_ScaleWhip(1));
+     		addSequential(new CmdG_ScaleWhip(1));
 //     		addSequential(new Cmd_AutoTurn(90));
     	}
     	else

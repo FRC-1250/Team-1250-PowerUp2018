@@ -157,7 +157,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
-		//SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
 		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Gyro POS", s_drivetrain.getGyroAngle());
 		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
@@ -169,6 +168,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
 		SmartDashboard.putNumber("LeftSpeed", s_drivetrain.leftVelocity());
 		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
+		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
 		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
 		SmartDashboard.putBoolean("Cubes?", doubleCube);
 		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
@@ -177,7 +177,7 @@ public class Robot extends TimedRobot {
 	
 	public static String getAutoMessage() {
 		if(DriverStation.getInstance().getGameSpecificMessage() != null)
-			return DriverStation.getInstance().getGameSpecificMessage().substring(0, 1); 
+			return DriverStation.getInstance().getGameSpecificMessage().substring(0, 2); 
 		else
 			return "";
 	}

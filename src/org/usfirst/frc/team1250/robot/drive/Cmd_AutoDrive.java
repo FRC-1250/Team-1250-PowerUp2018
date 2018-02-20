@@ -10,10 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Cmd_AutoDrive extends Command {
 	
 	int distance = 0;
+	double upperSpeed;
+	double lowerSpeed;
 
-    public Cmd_AutoDrive(int distance) {
+    public Cmd_AutoDrive(int distance, double upperSpeed, double lowerSpeed) {
     	requires(Robot.s_drivetrain);
     	this.distance = distance;
+    	this.upperSpeed = upperSpeed;
+    	this.lowerSpeed = upperSpeed;
     }
     
 
@@ -25,12 +29,13 @@ public class Cmd_AutoDrive extends Command {
     }
 
     protected void execute() {
-    	Robot.s_drivetrain.driveToPos();
+    	Robot.s_drivetrain.driveToPos(upperSpeed, lowerSpeed);
     }
 
     protected boolean isFinished() {
     	//Check encoder distance or timeout
-    	return isTimedOut()|| Robot.s_drivetrain.isDoneDriving();
+    	return Robot.s_drivetrain.isDoneDriving();
+//    	return isTimedOut()|| Robot.s_drivetrain.isDoneDriving();
     }
 
     protected void end() {

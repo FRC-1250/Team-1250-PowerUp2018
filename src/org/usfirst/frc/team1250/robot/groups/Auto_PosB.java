@@ -19,14 +19,14 @@ public class Auto_PosB extends CommandGroup {
      	if(autoMessage == "LR" || autoMessage =="LL")
     	{
     		//Right Switch case
-     		addSequential(new Cmd_AutoDrive(60));
+//     		addSequential(new Cmd_AutoDrive(60));
      		//addSequential(new Cmd_AutoTurn(30));
      		//addSequential(new Cmd_AutoDrive(45));
     	}
     	else if(autoMessage == "RL" || autoMessage == "RR")
     	{
     		//Left Switch case
-    		addSequential(new Cmd_AutoDrive(60));
+//    		addSequential(new Cmd_AutoDrive(60));
      		//addSequential(new Cmd_AutoTurn(-30));
      		//addSequential(new Cmd_AutoDrive(45));
     	}

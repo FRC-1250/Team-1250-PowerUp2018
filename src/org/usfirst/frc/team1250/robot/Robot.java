@@ -65,6 +65,8 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Auto_PosC", new Auto_PosC());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SmartDashboard.putNumber("Input Angle", 0);
+		
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -104,7 +106,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		CameraServer.getInstance().startAutomaticCapture();
+		
 		s_elevator.setTicksToHome();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -151,10 +153,14 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Setpoint", s_drivetrain.driveSetpoint);
 		SmartDashboard.putNumber("Joystick Left", m_oi.Gamepad.getY());
 		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
+		
 	}
 	
 	public static String getAutoMessage() {
-		return DriverStation.getInstance().getGameSpecificMessage().substring(0, 1); 
+		if(DriverStation.getInstance().getGameSpecificMessage() != null)
+			return DriverStation.getInstance().getGameSpecificMessage().substring(0, 1); 
+		else
+			return "";
 	}
 
 	public Robot() {

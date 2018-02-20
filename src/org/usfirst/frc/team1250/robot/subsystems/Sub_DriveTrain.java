@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.AnalogGyro;
+
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -31,11 +34,14 @@ public class Sub_DriveTrain extends Subsystem {
 	WPI_VictorSPX bRightMotor = new WPI_VictorSPX(RobotMap.DRV_RIGHT_BACK);
 	WPI_TalonSRX fRightMotor = new WPI_TalonSRX(RobotMap.DRV_RIGHT_FRONT);
 	WPI_VictorSPX mRightMotor = new WPI_VictorSPX(RobotMap.DRV_RIGHT_MID);
+	
 
 	// Motor Control groups
 	private SpeedController gLeftMotor = new SpeedControllerGroup(fLeftMotor, bLeftMotor, mLeftMotor);
 	private SpeedController gRightMotor = new SpeedControllerGroup(fRightMotor, bRightMotor, mRightMotor);
 	private DifferentialDrive diffDriveGroup = new DifferentialDrive(gLeftMotor, gRightMotor);
+
+
 
 	// Shift variables
 	private final double THRESH_RPM_HI = 1500;
@@ -45,21 +51,27 @@ public class Sub_DriveTrain extends Subsystem {
 	
 	//Constants for Closed Loop Feedback
 	public static double accumError = 0;
-	private final double AUTO_TURN_RATE = 0.5;
+	private final double AUTO_TURN_RATE = 0.3;
 	private final double KP_SIMPLE_STRAIT = 0.01;
 	private final double KP_SIMPLE = 0.05;
 	private final double KI_SIMPLE = 0.03;
 	
-	AHRS gyro = new AHRS(SPI.Port.kMXP);	
-	
+//	AHRS gyro = new AHRS(SPI.Port.kMXP);	
+	AnalogGyro gyro = new AnalogGyro(RobotMap.GYRO);
 	
 	public int driveSetpoint = 0;
-	private final double DRIVE_TICKS = 310.5;
+	private final double DRIVE_TICKS = 325.94;
 	double WHEELBASE_RADIUS = 23 / 2;
 
 	public Sub_DriveTrain() {
 		fLeftMotor.setInverted(true);
 		fRightMotor.setInverted(true);
+		fLeftMotor.configOpenloopRamp(0.1, 10);
+		mLeftMotor.configOpenloopRamp(0.1, 10);
+		bLeftMotor.configOpenloopRamp(0.1, 10);
+		fRightMotor.configOpenloopRamp(0.1, 10);
+		mRightMotor.configOpenloopRamp(0.1, 10);
+		bRightMotor.configOpenloopRamp(0.1, 10);
 	}
 
 	public void initDefaultCommand() {
@@ -117,36 +129,86 @@ public class Sub_DriveTrain extends Subsystem {
     	return (int)(inches*DRIVE_TICKS);
     }
     
-    public void driveToPos() {
+//    public void driveToPos() {
+//    	
+//    	double offset = getGainP(0,this.getGyroAngle(),KP_SIMPLE_STRAIT);
+//    	
+//    	int sign = (int) Math.signum(driveSetpoint);
+//    	
+//    	if((Math.abs(driveSetpoint) - Math.abs(getRightSideSensorPosInTicks())) / Math.abs(driveSetpoint) < 0.25)
+//    		diffDriveGroup.arcadeDrive(0.2 * sign, 0);
+//    	else
+//    		diffDriveGroup.arcadeDrive(0.8 * sign, 0);
+////    	diffDriveGroup.arcadeDrive(0.8 * sign, 0 + offset);
+//    }
+ public void driveToPos( double upperSpeed, double lowerSpeed) {
+    	
+    	
+		
     	
     	double offset = getGainP(0,this.getGyroAngle(),KP_SIMPLE_STRAIT);
     	
-    	int sign = (int) Math.signum(driveSetpoint);
+    	double sign = Math.signum(driveSetpoint);
     	
-    	diffDriveGroup.arcadeDrive(0.8 * sign, 0 + offset);
+    	diffDriveGroup.arcadeDrive(linearRamp(upperSpeed,lowerSpeed) * sign, 0 + offset);
+    	
+    }
+    
+    private double linearRamp( double upperSpeed, double lowerSpeed) {
+    	double diff = (driveSetpoint - (double)Math.abs(getRightSideSensorPosInTicks()));
+    	double corrected = .05 * diff;
+    	double upperBound = Math.min(upperSpeed , corrected);
+    	double lowerBound = Math.max(lowerSpeed , upperBound);
+    	
+    	SmartDashboard.putNumber("correctedoutput", corrected);
+    	return lowerBound;
+    	
+    			
+//    	if (percentDiff > .2) {
+//    		return .9;
+//    	}
+//    	else if ();
+//    		return .5;
+//    	else
     }
     
     public void setSetpointPos(int distance) {
     	driveSetpoint = (int)DRIVE_TICKS * distance;
     }
     
-    public void turn (double angle) {
-    	double rotation = AUTO_TURN_RATE * getGainPI(angle,this.getGyroAngle(),KP_SIMPLE, KI_SIMPLE);
+    public void turn (double angle, double upperSpeed, double lowerSpeed) {
+//    	double rotation = AUTO_TURN_RATE * getGainPI(angle,this.getGyroAngle(),KP_SIMPLE, KI_SIMPLE);
     	//rotation  = rotation * (int)Math.signum(angle);
+    	double corrected;
+		//double upperBound; 
+		// double lowerBound;
     	
-    	diffDriveGroup.arcadeDrive(0, rotation);
+		double rotation = angle - getGyroAngle();
+//    	int sign = (int)Math.signum(getGyroAngle());
+    	double sign = Math.signum(rotation);
     	
-    	//Need to confirm that this works...
-    	// This definitely won't work kiddo...
-    	// driveSetpoint = (int)((((currentAngle - angle) * Math.PI * WHEELBASE_RADIUS) / 180) * DRIVE_TICKS);
+		corrected = 0.005 * rotation;
+    	
+    	if (sign > 0){
+    		 corrected = Math.min(upperSpeed * sign, corrected);
+    		 corrected = Math.max(lowerSpeed * sign, corrected);
+    	}
+    		
+    	else {
+    		 corrected = Math.max(upperSpeed * sign, corrected);
+			 corrected = Math.min(lowerSpeed * sign, corrected);    	    		
+    	}
+
+    	diffDriveGroup.arcadeDrive(0, corrected);
     }
     
     public double getGyroAngle() {
-    	return gyro.getYaw();
+    	return gyro.getAngle();
     }
     
+    
     public void resetGyro() {
-    	gyro.zeroYaw();
+    	gyro.reset();
     }
     
     public int getLeftSideSensorPosInTicks() {
@@ -171,7 +233,7 @@ public class Sub_DriveTrain extends Subsystem {
     }
     
     public boolean isDoneDriving() {
-    	return (Math.abs(this.getRightSideSensorPosInTicks() - driveSetpoint) < 500);
+    	return ((Math.abs(this.getRightSideSensorPosInTicks()) - driveSetpoint) >= 0);
     }
     	
     public boolean isDoneTurning(double angle) {

@@ -17,8 +17,7 @@ public class CmdG_Droper extends CommandGroup {
     	 addSequential(new Cmd_ElePinch());
     	 addSequential(new Cmd_DoNothing(.1));
          addSequential(new Cmd_Pancake(.1));
-         addSequential(new Cmd_DoNothing(1));
-         addSequential(new Cmd_EleUnpinch());
+ 
       
     }
 }

@@ -52,5 +52,6 @@ public class RobotMap {
 	public static final int ELE_LIMIT_SW    = 2;
 	public static final int ELE_POP_SOL 	= 4;
 	public static final int ELE_PAN_SOL 	= 6;
+	public static final int GYRO			= 0;
 	
 }

@@ -16,7 +16,7 @@ public class Cmd_IntakeTest extends InstantCommand {
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.s_intake.collect();
+    	Robot.s_intake.collect(-0.5);
     	Robot.s_intake.pinch();
     	Robot.s_elevator.soloLiftPinch();
 

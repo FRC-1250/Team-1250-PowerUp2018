@@ -17,7 +17,7 @@ public class Cmd_IntakeCollect extends Command {
     }
 
     protected void execute() {
-		Robot.s_intake.collect();
+		Robot.s_intake.collect(-1);
     }
 
     protected boolean isFinished() {

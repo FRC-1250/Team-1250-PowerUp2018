@@ -101,8 +101,9 @@ public class Sub_DriveTrain extends Subsystem {
 		return fRightMotor.getSelectedSensorVelocity(0);
 	}
 	
-	public void driveStraight(Joystick joy) {
+	public void driveArcade(Joystick joy) {
 		
+		diffDriveGroup.arcadeDrive(-joy.getThrottle(),joy.getZ());
 	}
 	
 	public boolean getState(Joystick joy, boolean state) {
@@ -111,7 +112,7 @@ public class Sub_DriveTrain extends Subsystem {
 		double rightJoy = 0;
 
 		// Button OverRide for shifting high
-		if (Robot.m_oi.getButtonState(8)) {
+		if (Robot.m_oi.getButtonState(7)) {
 			return true;
 		}
 

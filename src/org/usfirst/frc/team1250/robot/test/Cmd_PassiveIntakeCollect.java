@@ -21,7 +21,7 @@ public class Cmd_PassiveIntakeCollect extends Command {
 //	}
 //		else Robot.s_claw.stoprightCollect();
 	if (!Robot.s_intake.isSeenRight() & !Robot.s_intake.isSeenLeft()){
-		Robot.s_intake.collect();
+		Robot.s_intake.collect(-1);
 		Robot.s_intake.pinch();
 	}
 	if (Robot.s_intake.isIn()){

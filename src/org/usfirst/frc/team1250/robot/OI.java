@@ -52,10 +52,11 @@ public class OI {
 	JoystickButton a = new JoystickButton(Gamepad, 2);
 	JoystickButton b = new JoystickButton(Gamepad, 3);
 	JoystickButton y = new JoystickButton(Gamepad, 4);
-	JoystickButton lt = new JoystickButton(Gamepad, 6);
-	JoystickButton rt = new JoystickButton(Gamepad, 5);
-	JoystickButton lb = new JoystickButton(Gamepad, 7);
-	JoystickButton rb = new JoystickButton(Gamepad, 8);
+
+	JoystickButton lb = new JoystickButton(Gamepad, 5);
+	JoystickButton rb = new JoystickButton(Gamepad, 6);
+	JoystickButton lt = new JoystickButton(Gamepad, 7);
+	JoystickButton rt = new JoystickButton(Gamepad, 8);
 
 	JoystickButton btn12 = new JoystickButton(Arcadepad, 12);
 	JoystickButton btn11 = new JoystickButton(Arcadepad, 11);
@@ -96,8 +97,9 @@ public class OI {
 
 
 // Auto Buttons for Testing
-		a.whenPressed(new CmdG_Droper());
-//		x.whenPressed(new CmdG_StriaghtScale());
+		lb.whenPressed(new CmdG_Droper());
+		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
+		x.whenPressed(new CmdG_StriaghtScale());
 //		b.whenPressed(new CmdG_LeftSwitch());
 //		a.whenPressed(new Cmd_AutoTurn(-45 , .5,.3));
 //		y.whenPressed(new CmdG_ScaleWhip());

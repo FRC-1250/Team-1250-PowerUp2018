@@ -18,7 +18,7 @@ public class Cmd_IntakeCollectTimed extends TimedCommand {
     }
 
     protected void execute() {
-    	Robot.s_intake.collect();
+    	Robot.s_intake.collect(-1);
     	Robot.s_intake.unpinch();
     	
     	

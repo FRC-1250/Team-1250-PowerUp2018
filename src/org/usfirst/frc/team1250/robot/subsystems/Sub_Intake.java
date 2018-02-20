@@ -17,9 +17,9 @@ public class Sub_Intake extends Subsystem {
 	private DigitalInput lightSensTwo = new DigitalInput(RobotMap.INTAKE_SENS_LEFT);
 	private DigitalInput finalSens = new DigitalInput(RobotMap.INTAKE_SENS_FINAL);
 
-	public void collect() {
-		leftClaw.set(-.5);
-		rightClaw.set(-.5);
+	public void collect(double speed) {
+		leftClaw.set(speed);
+		rightClaw.set(speed);
 	}
 
 	public void dump() {

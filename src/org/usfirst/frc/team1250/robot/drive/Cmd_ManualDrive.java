@@ -26,8 +26,11 @@ public class Cmd_ManualDrive extends Command {
 	// Checks clutch state by running shiftState Method
 	protected void execute() {
 		this.prevClutchState = Robot.shiftState;
-
-		Robot.s_drivetrain.drive(Robot.m_oi.getGamepad());
+		
+		if (Robot.m_oi.getButtonState(8))
+			Robot.s_drivetrain.driveArcade(Robot.m_oi.getGamepad());
+		else
+			Robot.s_drivetrain.drive(Robot.m_oi.getGamepad());
 
 		Robot.shiftState = Robot.s_drivetrain.getState(Robot.m_oi.getGamepad(), Robot.shiftState);
 

@@ -25,7 +25,7 @@ public class Sub_Elevator extends Subsystem {
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
-	public final int SCALE_POS = 75;
+	public final int SCALE_POS = 79;
 	public final int SWITCH_POS = 23;
 	public final double HOME_POS = 4.25;
 	public final double ELE_TICKS = 31;

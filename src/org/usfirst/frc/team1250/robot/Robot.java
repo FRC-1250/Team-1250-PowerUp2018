@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1250.robot.groups.Auto_PosA;
-import org.usfirst.frc.team1250.robot.groups.Auto_PosB;
-import org.usfirst.frc.team1250.robot.groups.Auto_PosC;
+import org.usfirst.frc.team1250.robot.groups.Auto_LeftPos;
+import org.usfirst.frc.team1250.robot.groups.Auto_CenterPos;
+import org.usfirst.frc.team1250.robot.groups.Auto_RightPos;
 import org.usfirst.frc.team1250.robot.subsystems.*;
 import edu.wpi.first.wpilibj.SPI;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
@@ -63,9 +63,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_fieldPosition.addDefault("Auto_PosB", new Auto_PosB());
-		m_fieldPosition.addObject("Auto_PosA", new Auto_PosA());
-		m_fieldPosition.addObject("Auto_PosC", new Auto_PosC());
+		m_fieldPosition.addDefault("Auto_Center", new Auto_CenterPos());
+		m_fieldPosition.addObject("Auto_Left", new Auto_LeftPos());
+		m_fieldPosition.addObject("Auto_Right", new Auto_RightPos());
 		
 		SmartDashboard.putData("Auto mode", m_fieldPosition);
 		SmartDashboard.putBoolean("Two Cubes?", doubleCube);

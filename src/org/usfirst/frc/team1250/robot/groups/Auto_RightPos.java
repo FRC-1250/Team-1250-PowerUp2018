@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class Auto_PosC extends CommandGroup {
+public class Auto_RightPos extends CommandGroup {
 
-    public Auto_PosC() {
+    public Auto_RightPos() {
     	addSequential(new Cmd_EleErectTower());
 // 		addSequential(new Cmd_AutoDrive(45));
     	

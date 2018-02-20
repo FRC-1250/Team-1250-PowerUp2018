@@ -2,42 +2,39 @@ package org.usfirst.frc.team1250.robot.groups;
 
 import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleErectTower;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class Auto_PosA extends CommandGroup {
+public class Auto_CenterPos extends CommandGroup {
 
-    public Auto_PosA() {
-    	addSequential(new Cmd_EleErectTower());
-// 		addSequential(new Cmd_AutoDrive(45));
+    public Auto_CenterPos() {    	
+ 		addSequential(new Cmd_EleErectTower());
     	
     	String autoMessage = Robot.getAutoMessage();
-    	
-    	if(autoMessage == "RL" || autoMessage =="LL")
+    	    	
+     	if(autoMessage == "LR" || autoMessage =="LL")
     	{
-    		//Left Scale case
-//     		addParallel(new Cmd_AutoDrive(45));
-     		addParallel(new Cmd_EleHigh());
-//     		addSequential(new Cmd_AutoTurn(90));
+    		//Right Switch case
+//     		addSequential(new Cmd_AutoDrive(60));
+     		//addSequential(new Cmd_AutoTurn(30));
+     		//addSequential(new Cmd_AutoDrive(45));
     	}
-    	else if(autoMessage == "LR")
+    	else if(autoMessage == "RL" || autoMessage == "RR")
     	{
     		//Left Switch case
-//    		addParallel(new Cmd_AutoDrive(45));
-     		addParallel(new Cmd_EleSwitch());
-//     		addSequential(new Cmd_AutoTurn(90));
+//    		addSequential(new Cmd_AutoDrive(60));
+     		//addSequential(new Cmd_AutoTurn(-30));
+     		//addSequential(new Cmd_AutoDrive(45));
     	}
     	else
     	{
-    		//RR - Do nothing else
+    		//Do nothing else
     	}
-
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

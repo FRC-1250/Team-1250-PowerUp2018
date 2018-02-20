@@ -48,10 +48,13 @@ public class Robot extends TimedRobot {
 	//Robot wide variable
 	public static boolean shiftState = false;
 	public static Timer robotTimer = new Timer();
+	public static char switchPos = '\0';
+	public static char scalePos = '\0';
 	
 	//Auto
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Command> m_fieldPosition = new SendableChooser<>();
+	public static boolean doubleCube = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -60,11 +63,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_chooser.addDefault("Auto_PosB", new Auto_PosB());
-		m_chooser.addObject("Auto_PosA", new Auto_PosA());
-		m_chooser.addObject("Auto_PosC", new Auto_PosC());
-		SmartDashboard.putData("Auto mode", m_chooser);
-		SmartDashboard.putNumber("Input Angle", 0);
+		m_fieldPosition.addDefault("Auto_PosB", new Auto_PosB());
+		m_fieldPosition.addObject("Auto_PosA", new Auto_PosA());
+		m_fieldPosition.addObject("Auto_PosC", new Auto_PosC());
+		
+		SmartDashboard.putData("Auto mode", m_fieldPosition);
+		SmartDashboard.putBoolean("Two Cubes?", doubleCube);
 		
 		CameraServer.getInstance().startAutomaticCapture();
 	}
@@ -83,14 +87,21 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		// Scheduler.getInstance().run();
+		String GameData = getAutoMessage();
+		if (GameData.length() > 0) {
+			switchPos = GameData.charAt(0);
+			scalePos = GameData.charAt(1);
+			
+		}
+		
 		this.log();
 	}
 	
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		m_autonomousCommand = m_fieldPosition.getSelected();
 
-		m_autonomousCommand = (Command) m_chooser.getSelected();
+		m_autonomousCommand = (Command) m_fieldPosition.getSelected();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -158,6 +169,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
 		SmartDashboard.putNumber("LeftSpeed", s_drivetrain.leftVelocity());
 		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
+		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
+		SmartDashboard.putBoolean("Cubes?", doubleCube);
 		
 	}
 	

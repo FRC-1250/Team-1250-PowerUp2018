@@ -9,6 +9,7 @@ import org.usfirst.frc.team1250.robot.drive.*;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -17,6 +18,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogGyro;
+
 
 
 import com.kauailabs.navx.frc.AHRS;
@@ -72,6 +74,9 @@ public class Sub_DriveTrain extends Subsystem {
 		fRightMotor.configOpenloopRamp(0.1, 10);
 		mRightMotor.configOpenloopRamp(0.1, 10);
 		bRightMotor.configOpenloopRamp(0.1, 10);
+		
+		fLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		fRightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 	}
 
 	public void initDefaultCommand() {
@@ -86,14 +91,23 @@ public class Sub_DriveTrain extends Subsystem {
 		drive(-joy.getY(), -joy.getThrottle());
 	}
 
+	
+	public int leftVelocity() {
+		return fLeftMotor.getSelectedSensorVelocity(0);
+	}
+	
+	public int rightVelocity() {
+		return fRightMotor.getSelectedSensorVelocity(0);
+	}
+	
 	public boolean getState(Joystick joy, boolean state) {
 
 		double leftJoy = 0;
 		double rightJoy = 0;
 
-		// Button OverRide for shifting low
+		// Button OverRide for shifting high
 		if (Robot.m_oi.getButtonState(8)) {
-			return false;
+			return true;
 		}
 
 		leftJoy = -joy.getY();

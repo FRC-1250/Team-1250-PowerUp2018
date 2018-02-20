@@ -153,6 +153,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Setpoint", s_drivetrain.driveSetpoint);
 		SmartDashboard.putNumber("Joystick Left", m_oi.Gamepad.getY());
 		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
+		SmartDashboard.putNumber("LeftSpeed", s_drivetrain.leftVelocity());
+		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
 		
 	}
 	

@@ -78,7 +78,7 @@ public class OI {
 		
 		btn12.whenInactive(new Cmd_IntakeTest());
 		btn11.whenInactive(new CmdG_FullCollect());
-		btn10.whenInactive(new CmdG_Droper());	
+		//btn10.whenInactive(new CmdG_Droper());	
 		btn9.whenInactive(new Cmd_IntakeSpit(1));
 		btn8.whenInactive(new Cmd_IntakeSpitFast(1));
 		btn7.whenInactive(new Cmd_IntakeUnPinch());
@@ -96,10 +96,11 @@ public class OI {
 
 
 // Auto Buttons for Testing
-		x.whenPressed(new CmdG_StriaghtScale());
-		b.whenPressed(new CmdG_LeftSwitch());
-		a.whenPressed(new Cmd_AutoTurn(-45 , .5,.3));
-		y.whenPressed(new CmdG_ScaleWhip());
+		a.whenPressed(new CmdG_Droper());
+//		x.whenPressed(new CmdG_StriaghtScale());
+//		b.whenPressed(new CmdG_LeftSwitch());
+//		a.whenPressed(new Cmd_AutoTurn(-45 , .5,.3));
+//		y.whenPressed(new CmdG_ScaleWhip());
 //		rb.whenPressed(new Cmd_AutoDrive(25));	
 //
 //		// OPs controller

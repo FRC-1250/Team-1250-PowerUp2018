@@ -10,6 +10,7 @@ import org.usfirst.frc.team1250.robot.drive.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -98,6 +99,10 @@ public class Sub_DriveTrain extends Subsystem {
 	
 	public int rightVelocity() {
 		return fRightMotor.getSelectedSensorVelocity(0);
+	}
+	
+	public void driveStraight(Joystick joy) {
+		
 	}
 	
 	public boolean getState(Joystick joy, boolean state) {
@@ -267,5 +272,23 @@ public class Sub_DriveTrain extends Subsystem {
     	accumError = accumError + error;
     	double i = KI_SIMPLE * error;
     	return p + i;
+    }
+    
+    public void setToBrake() {
+		fLeftMotor.setNeutralMode(NeutralMode.Brake);
+		mLeftMotor.setNeutralMode(NeutralMode.Brake);
+		bLeftMotor.setNeutralMode(NeutralMode.Brake);
+		fRightMotor.setNeutralMode(NeutralMode.Brake);
+		mRightMotor.setNeutralMode(NeutralMode.Brake);
+		bRightMotor.setNeutralMode(NeutralMode.Brake);
+    }
+    
+    public void setToCoast() {
+		fLeftMotor.setNeutralMode(NeutralMode.Coast);
+		mLeftMotor.setNeutralMode(NeutralMode.Coast);
+		bLeftMotor.setNeutralMode(NeutralMode.Coast);
+		fRightMotor.setNeutralMode(NeutralMode.Coast);
+		mRightMotor.setNeutralMode(NeutralMode.Coast);
+		bRightMotor.setNeutralMode(NeutralMode.Coast);
     }
 }

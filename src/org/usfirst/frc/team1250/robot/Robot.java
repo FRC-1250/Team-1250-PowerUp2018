@@ -94,6 +94,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
+		
+		s_drivetrain.setToBrake();
 	}
 
 	/**
@@ -119,6 +121,7 @@ public class Robot extends TimedRobot {
 		}
 		
 		s_drivetrain.resetGyro();
+		s_drivetrain.setToCoast();
 	}
 
 	/**

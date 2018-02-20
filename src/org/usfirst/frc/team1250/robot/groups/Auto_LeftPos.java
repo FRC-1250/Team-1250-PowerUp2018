@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1250.robot.groups;
 
 import org.usfirst.frc.team1250.robot.Robot;
+import org.usfirst.frc.team1250.robot.commandGroups.CmdG_ScaleWhip;
+import org.usfirst.frc.team1250.robot.commandGroups.CmdG_StriaghtScale;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleErectTower;
@@ -23,14 +25,16 @@ public class Auto_LeftPos extends CommandGroup {
     	{
     		//Left Scale case
 //     		addParallel(new Cmd_AutoDrive(45));
-     		addParallel(new Cmd_EleHigh());
+//     		addParallel(new Cmd_EleHigh());
 //     		addSequential(new Cmd_AutoTurn(90));
+    		addSequential(new CmdG_StriaghtScale(1));
+    		
     	}
-    	else if(autoMessage == "LR")
+    	else if(autoMessage == "LR" || autoMessage == "RR")
     	{
     		//Left Switch case
 //    		addParallel(new Cmd_AutoDrive(45));
-     		addParallel(new Cmd_EleSwitch());
+     		addParallel(new CmdG_ScaleWhip(1));
 //     		addSequential(new Cmd_AutoTurn(90));
     	}
     	else

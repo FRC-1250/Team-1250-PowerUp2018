@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class CmdG_ScaleWhip extends CommandGroup {
 
-    public CmdG_ScaleWhip() {
+    public CmdG_ScaleWhip(int dir) {
     	 addSequential(new Cmd_Reset());
     	 addParallel(new Cmd_EleHigh());
     	 addSequential(new Cmd_AutoDrive(220, 1 , .3));

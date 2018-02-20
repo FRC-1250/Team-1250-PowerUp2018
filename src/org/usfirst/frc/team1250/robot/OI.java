@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.buttons.*;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_AutoLeft;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Droper;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_FullCollect;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_LeftSwitch;
+import org.usfirst.frc.team1250.robot.commandGroups.CmdG_AutonSwitch;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_ScaleWhip;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_StriaghtScale;
 import org.usfirst.frc.team1250.robot.commandGroups.CmdG_TimedCollect;
@@ -99,7 +99,7 @@ public class OI {
 // Auto Buttons for Testing
 		lb.whenPressed(new CmdG_Droper());
 		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
-		x.whenPressed(new CmdG_StriaghtScale());
+		x.whenPressed(new CmdG_StriaghtScale(1));
 //		b.whenPressed(new CmdG_LeftSwitch());
 //		a.whenPressed(new Cmd_AutoTurn(-45 , .5,.3));
 //		y.whenPressed(new CmdG_ScaleWhip());

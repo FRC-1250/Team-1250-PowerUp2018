@@ -171,6 +171,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
 		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
 		SmartDashboard.putBoolean("Cubes?", doubleCube);
+		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
 		
 	}
 	

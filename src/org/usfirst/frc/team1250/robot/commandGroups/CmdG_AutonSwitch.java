@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CmdG_LeftSwitch extends CommandGroup {
+public class CmdG_AutonSwitch extends CommandGroup {
 
-    public CmdG_LeftSwitch() {
+    public CmdG_AutonSwitch() {
     	 addSequential(new Cmd_Reset());
     	 addParallel(new Cmd_EleSwitch());
     	 addSequential(new Cmd_AutoDrive(48, .6 , .3));

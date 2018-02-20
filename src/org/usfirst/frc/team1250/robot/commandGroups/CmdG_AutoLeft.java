@@ -19,9 +19,9 @@ public class CmdG_AutoLeft extends CommandGroup {
     	 addSequential(new Cmd_AutoDrive(264, 1, .6));
     	 addSequential(new Cmd_DoNothing(.1));
     	 addSequential(new Cmd_Reset());
-    	 addSequential(new Cmd_AutoTurn(35 , .8 , .6));
+    	 addSequential(new Cmd_AutoTurn(45 , .8 , .6));
     	 addSequential(new Cmd_Reset());
-    	 addSequential(new Cmd_AutoDrive(32, 1 , .6));
+    	 addSequential(new Cmd_AutoDrive(28, 1 , .6));
     	 addSequential(new Cmd_Reset());
     	 addSequential(new CmdG_Droper());
     	 addSequential(new Cmd_Reset());

@@ -156,7 +156,7 @@ public class Sub_DriveTrain extends Subsystem {
     
     private double linearRamp( double upperSpeed, double lowerSpeed) {
     	double diff = (driveSetpoint - (double)Math.abs(getRightSideSensorPosInTicks()));
-    	double corrected = .005 * diff;
+    	double corrected = .05 * diff;
     	double upperBound = Math.min(upperSpeed , corrected);
     	double lowerBound = Math.max(lowerSpeed , upperBound);
     	

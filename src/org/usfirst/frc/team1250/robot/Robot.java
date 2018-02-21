@@ -81,6 +81,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		s_elevator.setTicksToHome();
+		s_drivetrain.setToCoast();
 
 	}
 
@@ -157,10 +158,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
+//		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Gyro POS", s_drivetrain.getGyroAngle());
-		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
-		SmartDashboard.putNumber("Left Encoder Ticks", s_drivetrain.getLeftSideSensorPosInTicks());
+//		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
+//		SmartDashboard.putNumber("Left Encoder Ticks", s_drivetrain.getLeftSideSensorPosInTicks());
 		SmartDashboard.putNumber("Right Encoder Inches", s_drivetrain.getRightSideSensorPosInInches());
 		SmartDashboard.putNumber("Left Encoder Inches", s_drivetrain.getLeftSideSensorPosInInches());
 		SmartDashboard.putNumber("Setpoint", s_drivetrain.driveSetpoint);
@@ -168,9 +169,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
 		SmartDashboard.putNumber("LeftSpeed", s_drivetrain.leftVelocity());
 		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
-		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
-		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
-		SmartDashboard.putBoolean("Cubes?", doubleCube);
+//		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
+//		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
+//		SmartDashboard.putBoolean("Cubes?", doubleCube);
 		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
 		
 	}

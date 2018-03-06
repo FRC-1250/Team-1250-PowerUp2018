@@ -20,20 +20,23 @@ public class Auto_CenterPos extends CommandGroup {
      	if(autoMessage == "LR" || autoMessage =="LL")
     	{
     		//Left Switch case
-    		addSequential(new CmdG_AutonSwitch(-1));
+    		//addSequential(new CmdG_AutonSwitch(-1));
+    		System.out.println("Left");
      		//addSequential(new Cmd_AutoTurn(30));
      		//addSequential(new Cmd_AutoDrive(45));
     	}
     	else if(autoMessage == "RL" || autoMessage == "RR")
     	{
     		//Right Switch case
-   		addSequential(new CmdG_AutonSwitch(1));
+   		//addSequential(new CmdG_AutonSwitch(1));
+   		System.out.println("Right");
      		//addSequential(new Cmd_AutoTurn(-30));
      		//addSequential(new Cmd_AutoDrive(45));
     	}
     	else
     	{
     		//Do nothing else
+    		System.out.println("******************");
     	}
     	
 

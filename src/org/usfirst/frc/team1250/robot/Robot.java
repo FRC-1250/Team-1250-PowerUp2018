@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team1250.robot;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
 	public static final Sub_Shifter s_shifter = new Sub_Shifter();
 	public static final Sub_Intake s_intake = new Sub_Intake();
 	public static final Sub_Elevator s_elevator = new Sub_Elevator();
+	public static final Sub_LimeLight s_limelight = new Sub_LimeLight();
 	
 	//Controls
 	Joystick Arcadepad = new Joystick(1);
@@ -71,6 +73,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Two Cubes?", doubleCube);
 		
 		CameraServer.getInstance().startAutomaticCapture();
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
 	}
 
 	/**
@@ -82,7 +85,7 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		s_elevator.setTicksToHome();
 		s_drivetrain.setToCoast();
-
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 	}
 
 	@Override
@@ -173,6 +176,8 @@ public class Robot extends TimedRobot {
 //		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
 //		SmartDashboard.putBoolean("Cubes?", doubleCube);
 		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
+//		SmartDashboard.putNumber("Cube X", s_limelight.getCubeX());
+//		SmartDashboard.putNumber("Cube Area", s_limelight.getCubeArea());
 		
 	}
 	

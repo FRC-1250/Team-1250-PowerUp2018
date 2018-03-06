@@ -74,8 +74,10 @@ public class OI {
 
 	public OI() {
 		// Drivers controller
-
+		lb.whenPressed(new CmdG_Droper());
+		 
 		//OPs controller
+		
 		
 		btn12.whenInactive(new Cmd_IntakeTest());
 		btn11.whenInactive(new CmdG_FullCollect());
@@ -97,7 +99,7 @@ public class OI {
 
 
 // Auto Buttons for Testing
-		lb.whenPressed(new CmdG_Droper());
+		
 		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
 		x.whenPressed(new CmdG_StriaghtScale(1));
 //		b.whenPressed(new CmdG_LeftSwitch());

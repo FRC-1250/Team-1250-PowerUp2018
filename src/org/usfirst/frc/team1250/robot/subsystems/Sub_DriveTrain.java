@@ -65,6 +65,8 @@ public class Sub_DriveTrain extends Subsystem {
 	public int driveSetpoint = 0;
 	private final double DRIVE_TICKS = 325.94;
 	double WHEELBASE_RADIUS = 23 / 2;
+	
+	private double CUBE_AREA_SETPOINT= 0;
 
 	public Sub_DriveTrain() {
 		fLeftMotor.setInverted(true);
@@ -259,6 +261,24 @@ public class Sub_DriveTrain extends Subsystem {
     public boolean isDoneTurning(double angle) {
     	return (Math.abs(angle - this.getGyroAngle()) < 2);
     }
+    
+    public void setpointCube(double areaSetpoint) {
+    	CUBE_AREA_SETPOINT = areaSetpoint;
+    }
+    
+	public void trackCube(double xOffset, double areaOffset) {
+		
+		double xDiff = 0 - xOffset *-1;
+		double aDiff = 5 - areaOffset;
+		double xCorrect = 0.05 * xDiff;
+		double aCorrect = 0.4 * aDiff;
+		
+		
+		diffDriveGroup.arcadeDrive(aCorrect, xCorrect);
+		
+		
+	}
+    
     
     private double getGainP(double setpoint, double current, double kP) {
     	

@@ -18,9 +18,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1250.robot.groups.Auto_LeftPos;
-import org.usfirst.frc.team1250.robot.groups.Auto_CenterPos;
-import org.usfirst.frc.team1250.robot.groups.Auto_RightPos;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auto_CenterPos;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auto_Fallback;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auto_LeftPos;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auto_RightPos;
 import org.usfirst.frc.team1250.robot.subsystems.*;
 import edu.wpi.first.wpilibj.SPI;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
@@ -68,6 +69,7 @@ public class Robot extends TimedRobot {
 		m_fieldPosition.addDefault("Auto_Center", new Auto_CenterPos());
 		m_fieldPosition.addObject("Auto_Left", new Auto_LeftPos());
 		m_fieldPosition.addObject("Auto_Right", new Auto_RightPos());
+		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());
 		
 		SmartDashboard.putData("Auto mode", m_fieldPosition);
 		SmartDashboard.putBoolean("Two Cubes?", doubleCube);

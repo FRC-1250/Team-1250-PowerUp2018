@@ -1,4 +1,4 @@
-	package org.usfirst.frc.team1250.robot.commandGroups;
+	package org.usfirst.frc.team1250.robot.AutoCommands;
 
 import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.commands.Cmd_DoNothing;

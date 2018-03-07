@@ -191,7 +191,7 @@ public class Robot extends TimedRobot {
 	}
 
 	public Robot() {
-		// double yStick = Arcadepad.getY();
+		// double yStick = A	rcadepad.getY();
 		// SmartDashboard.putNumber("yin", yStick);
 		// if (yStick > 0){
 		// Robot.s_elevator.bumpUp();

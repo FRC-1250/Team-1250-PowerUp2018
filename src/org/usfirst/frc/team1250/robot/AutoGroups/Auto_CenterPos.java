@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1250.robot.AutoGroups;
 
 import org.usfirst.frc.team1250.robot.Robot;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_AutonSwitch;
+import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_AutonSwitch;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleErectTower;
 

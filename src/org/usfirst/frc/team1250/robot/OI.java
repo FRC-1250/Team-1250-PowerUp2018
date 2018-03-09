@@ -82,7 +82,7 @@ public class OI {
 		btn12.whenInactive(new Cmd_IntakeTest());
 		btn11.whenInactive(new CmdG_FullCollect());
 		//btn10.whenInactive(new CmdG_Droper());	
-		btn9.whenInactive(new Cmd_IntakeSpit(1));
+		//btn9.whenInactive(new Cmd_IntakeSpit(1));
 		btn8.whenInactive(new Cmd_IntakeSpitFast(1));
 		btn7.whenInactive(new Cmd_IntakeUnPinch());
 		btn6.whenInactive(new Cmd_IntakePinch());
@@ -91,7 +91,7 @@ public class OI {
 		btn3.whenInactive(new Cmd_EleHigh());
 //		btn4.whenInactive(new Cmd_EleHigh());
 //		btn3.whenInactive(new Cmd_EleSwitch());
-		btn2.whenInactive(new Cmd_EleHome());	
+		//btn2.whenInactive(new Cmd_EleHome());	
 
 
 

@@ -57,6 +57,7 @@ public class Robot extends TimedRobot {
 	//Auto
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_fieldPosition = new SendableChooser<>();
+	
 	public static boolean doubleCube = false;
 
 	/**
@@ -71,14 +72,17 @@ public class Robot extends TimedRobot {
 		m_fieldPosition.addObject("Auto_Right", new Auto_RightPos());
 		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());
 		
+		
 		SmartDashboard.putData("Auto mode", m_fieldPosition);
 		SmartDashboard.putBoolean("Two Cubes?", doubleCube);
-		
+		SmartDashboard.putString("GameSpecific Message", "UNINIT");
+
 		CameraServer.getInstance().startAutomaticCapture();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
 	}
 
 	/**
+	 * 
 	 * This function is called once each time the robot enters Disabled mode. You
 	 * can use it to reset any subsystem information you want to clear when the
 	 * robot is disabled.
@@ -93,18 +97,13 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		// Scheduler.getInstance().run();
-		String GameData = getAutoMessage();
-		if (GameData.length() > 0) {
-			switchPos = GameData.charAt(0);
-			scalePos = GameData.charAt(1);
-			
-		}
-		
 		this.log();
 	}
 	
 	@Override
 	public void autonomousInit() {
+		
+		
 		m_autonomousCommand = m_fieldPosition.getSelected();
 
 		m_autonomousCommand = (Command) m_fieldPosition.getSelected();
@@ -120,7 +119,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		
+			Scheduler.getInstance().run();
 	}
 
 	@Override
@@ -177,14 +177,18 @@ public class Robot extends TimedRobot {
 //		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
 //		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
 //		SmartDashboard.putBoolean("Cubes?", doubleCube);
-		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
 //		SmartDashboard.putNumber("Cube X", s_limelight.getCubeX());
 //		SmartDashboard.putNumber("Cube Area", s_limelight.getCubeArea());
 		
 	}
 	
 	public static String getAutoMessage() {
-		if(DriverStation.getInstance().getGameSpecificMessage() != null)
+		
+		String DS_Message = DriverStation.getInstance().getGameSpecificMessage();
+		
+		SmartDashboard.putString("GameSpecific Message", DS_Message);
+		
+		if(DS_Message != null && DS_Message.length() >= 2)
 			return DriverStation.getInstance().getGameSpecificMessage().substring(0, 2); 
 		else
 			return "";

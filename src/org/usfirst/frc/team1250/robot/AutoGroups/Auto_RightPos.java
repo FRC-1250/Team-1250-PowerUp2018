@@ -10,6 +10,7 @@ import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -21,14 +22,16 @@ public class Auto_RightPos extends CommandGroup {
 // 		addSequential(new Cmd_AutoDrive(45));
     	
     	String autoMessage = Robot.getAutoMessage();
+    	
+    	SmartDashboard.putString("input String", autoMessage);
 
     	if(autoMessage.equals("LR") || autoMessage.equals("RR"))
     	{
-    		//Left Scale case
-//     		addParallel(new Cmd_AutoDrive(45));
-//     		addParallel(new Cmd_EleHigh());
-//     		addSequential(new Cmd_AutoTurn(90));
+    		SmartDashboard.putString("Auto Message", "Passed 1");
+    		
     		addSequential(new CmdG_StriaghtScale(-1));
+    		
+    		SmartDashboard.putString("Auto Message", "Passed 2");
     		
     	}
     	else if(autoMessage.equals("RL") || autoMessage.equals("LL"))

@@ -31,6 +31,8 @@ public class RobotMap {
 	// Climber Motor Control IDs
 	public static final int CLB_RIGHT		= 22;
 	public static final int CLB_LEFT		= 13;
+	public static final int SRV_RIGHT		=  0;
+	public static final int SRV_LEFT		=  1;
 	
 	//Pneumatic Shifter Solenoid
 	public static final int SOL_SHIFTER		=  0;

@@ -18,7 +18,6 @@ import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_ScaleWhip;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_StriaghtScale;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_TimedCollect;
-import org.usfirst.frc.team1250.robot.AutoGroups.CmdG_AutonScheduler;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpit;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeCollectTimed;
 import org.usfirst.frc.team1250.robot.commands.*;
@@ -70,8 +69,7 @@ public class OI {
 	JoystickButton btn4 = new JoystickButton(Arcadepad, 4);
 	JoystickButton btn3 = new JoystickButton(Arcadepad, 3);
 	JoystickButton btn2 = new JoystickButton(Arcadepad, 2);
-	
-	JoystickButton Auton = new JoystickButton(Arcadepad, 15);
+
 	
 
 	public OI() {
@@ -97,7 +95,7 @@ public class OI {
 
 
 
-		//Auton.whenPressed(new CmdG_AutonScheduler());
+		
 
 
 // Auto Buttons for Testing

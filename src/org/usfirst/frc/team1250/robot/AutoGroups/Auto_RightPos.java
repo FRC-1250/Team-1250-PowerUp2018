@@ -18,15 +18,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Auto_RightPos extends CommandGroup {
 
     public Auto_RightPos() {
+    	addSequential(new Cmd_Popper(1));
+// 		addSequential(new Cmd_AutoDrive(45));
     	
-    	String autoMessage = Robot.DS_Msg;
+    	String autoMessage = Robot.getAutoMessage();
     	
     	SmartDashboard.putString("input String", autoMessage);
 
     	if(autoMessage.equals("LR") || autoMessage.equals("RR"))
     	{
-     		
+    		SmartDashboard.putString("Auto Message", "Passed 1");
+    		
     		addSequential(new CmdG_StriaghtScale(-1));
+    		
+    		SmartDashboard.putString("Auto Message", "Passed 2");
     		
     	}
     	else if(autoMessage.equals("RL") || autoMessage.equals("LL"))

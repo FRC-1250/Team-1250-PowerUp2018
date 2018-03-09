@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Auto_CenterPos extends CommandGroup {
 
     public Auto_CenterPos() {    	
-    	String autoMessage = Robot.DS_Msg;
+    	addSequential(new Cmd_Popper(1));
+    	
+    	String autoMessage = Robot.getAutoMessage();
     	
     	SmartDashboard.putString("Auto Message", autoMessage);
     	 

@@ -20,18 +20,16 @@ import edu.wpi.first.wpilibj.Servo;
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class Sub_Climber extends Subsystem {
+public class Sub_ClimberRight extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	
 	WPI_VictorSPX climberMotorRight = new WPI_VictorSPX(RobotMap.CLB_RIGHT);
-	WPI_VictorSPX climberMotorLeft = new WPI_VictorSPX(RobotMap.CLB_LEFT);
 	Servo climberServoRight = new Servo(RobotMap.SRV_RIGHT);
-	Servo climberServoLeft = new Servo(RobotMap.SRV_LEFT);
 	
-	public Sub_Climber() {
+	public Sub_ClimberRight() {
 		climberMotorRight.setNeutralMode(NeutralMode.Brake);
-		climberMotorLeft.setNeutralMode(NeutralMode.Brake);
+		
 	}
 	
 	public void initDefaultCommand() {

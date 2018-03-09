@@ -1,13 +1,7 @@
 package org.usfirst.frc.team1250.robot.AutoGroups;
 
 import org.usfirst.frc.team1250.robot.Robot;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_ScaleWhip;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_StriaghtScale;
 import org.usfirst.frc.team1250.robot.commands.Cmd_Popper;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,32 +9,30 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class Auto_RightPos extends CommandGroup {
+public class CmdG_AutonScheduler extends CommandGroup {
 
-    public Auto_RightPos() {
+    public CmdG_AutonScheduler() {
     	
-    	String autoMessage = Robot.DS_Msg;
     	
-    	SmartDashboard.putString("input String", autoMessage);
-
-    	if(autoMessage.equals("LR") || autoMessage.equals("RR"))
-    	{
-     		
-    		addSequential(new CmdG_StriaghtScale(-1));
+    	addSequential(new Cmd_Popper(1));
+    	
+    	SmartDashboard.putString("Robot Position Message", Robot.StartPos);
+    	
+    	if (Robot.StartPos.equals("Center")) {
+    			
+    		addSequential(new Auto_CenterPos());
     		
+    	}else if (Robot.StartPos.equals("Left")) {
+    		
+    		addSequential(new Auto_LeftPos());
+    		
+    	} else if((Robot.StartPos.equals("Right"))){
+    		addSequential(new Auto_RightPos());
+    	} else {
+    		SmartDashboard.putString("Robot Position Message", "Nothing Loaded");
+    		addSequential(new Auto_Fallback());
     	}
-    	else if(autoMessage.equals("RL") || autoMessage.equals("LL"))
-    	{
-    		//Left Switch case
-//    		addParallel(new Cmd_AutoDrive(45));
-     		addSequential(new CmdG_ScaleWhip(-1));
-//     		addSequential(new Cmd_AutoTurn(90));
-    	}
-    	else
-    	{
-    		//RR - Do nothing else
-    	}
-
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

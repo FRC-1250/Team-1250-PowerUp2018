@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1250.robot.AutoGroups.Auto_Fallback;
+import org.usfirst.frc.team1250.robot.AutoGroups.CmdG_AutonScheduler;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendCenterPos;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendLeftPos;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendRightPos;
@@ -53,9 +54,11 @@ public class Robot extends TimedRobot {
 	public static boolean shiftState = false;
 	public static Timer robotTimer = new Timer();
 	public static String StartPos= "None";
+	public static String DS_Msg;
 	
 	//Auto
 	Command m_autonomousCommand;
+	Command m_autonomousScheduler;
 	SendableChooser<Command> m_fieldPosition = new SendableChooser<>();
 	
 	public static boolean doubleCube = false;
@@ -73,10 +76,13 @@ public class Robot extends TimedRobot {
 		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());
 		
 		
+		m_autonomousScheduler = new CmdG_AutonScheduler();
+		
 		SmartDashboard.putData("Auto mode", m_fieldPosition);
-		SmartDashboard.putBoolean("Two Cubes?", doubleCube);
 		SmartDashboard.putString("GameSpecific Message", "UNINIT");
-
+		
+		SmartDashboard.putString("Robot Position Message", "UN_INIT");
+		
 		CameraServer.getInstance().startAutomaticCapture();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
 	}
@@ -92,24 +98,34 @@ public class Robot extends TimedRobot {
 		s_elevator.setTicksToHome();
 		s_drivetrain.setToCoast();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+		DS_Msg = getAutoMessage();
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		// Scheduler.getInstance().run();
+		DS_Msg = getAutoMessage();
 		this.log();
 	}
 	
 	@Override
 	public void autonomousInit() {
 		
+		SmartDashboard.putString("Robot Position Message", "AUTO_INIT");
 		
-		m_autonomousCommand = m_fieldPosition.getSelected();
+		while(DS_Msg.length() < 2) {
+			DS_Msg = getAutoMessage();
+		}
 
 		m_autonomousCommand = (Command) m_fieldPosition.getSelected();
+		
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
+			m_autonomousScheduler.start();
 		}
+		
+		
 		
 		s_drivetrain.setToBrake();
 	}

@@ -17,10 +17,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Auto_LeftPos extends CommandGroup {
 
     public Auto_LeftPos() {
-    	addSequential(new Cmd_Popper(1));
 
     	
-    	String autoMessage = Robot.getAutoMessage();
+    	String autoMessage = Robot.DS_Msg;
     	
     	if(autoMessage.equals("RL") || autoMessage.equals("LL"))
     	{

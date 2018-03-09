@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1250.robot.groups;
+package org.usfirst.frc.team1250.robot.AutoGroups;
 
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHome;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_ElePinch;

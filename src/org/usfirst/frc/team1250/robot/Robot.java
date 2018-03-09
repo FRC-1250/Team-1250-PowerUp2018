@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team1250.robot;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
@@ -17,9 +18,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1250.robot.groups.Auto_PosA;
-import org.usfirst.frc.team1250.robot.groups.Auto_PosB;
-import org.usfirst.frc.team1250.robot.groups.Auto_PosC;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auto_CenterPos;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auto_Fallback;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auto_LeftPos;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auto_RightPos;
 import org.usfirst.frc.team1250.robot.subsystems.*;
 import edu.wpi.first.wpilibj.SPI;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
@@ -38,6 +40,7 @@ public class Robot extends TimedRobot {
 	public static final Sub_Shifter s_shifter = new Sub_Shifter();
 	public static final Sub_Intake s_intake = new Sub_Intake();
 	public static final Sub_Elevator s_elevator = new Sub_Elevator();
+	public static final Sub_LimeLight s_limelight = new Sub_LimeLight();
 	
 	//Controls
 	Joystick Arcadepad = new Joystick(1);
@@ -54,6 +57,7 @@ public class Robot extends TimedRobot {
 	//Auto
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_fieldPosition = new SendableChooser<>();
+	
 	public static boolean doubleCube = false;
 
 	/**
@@ -63,17 +67,22 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_fieldPosition.addDefault("Auto_PosB", new Auto_PosB());
-		m_fieldPosition.addObject("Auto_PosA", new Auto_PosA());
-		m_fieldPosition.addObject("Auto_PosC", new Auto_PosC());
+		m_fieldPosition.addDefault("Auto_Center", new Auto_CenterPos());
+		m_fieldPosition.addObject("Auto_Left", new Auto_LeftPos());
+		m_fieldPosition.addObject("Auto_Right", new Auto_RightPos());
+		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());
+		
 		
 		SmartDashboard.putData("Auto mode", m_fieldPosition);
 		SmartDashboard.putBoolean("Two Cubes?", doubleCube);
-		
+		SmartDashboard.putString("GameSpecific Message", "UNINIT");
+
 		CameraServer.getInstance().startAutomaticCapture();
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
 	}
 
 	/**
+	 * 
 	 * This function is called once each time the robot enters Disabled mode. You
 	 * can use it to reset any subsystem information you want to clear when the
 	 * robot is disabled.
@@ -81,24 +90,20 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		s_elevator.setTicksToHome();
-
+		s_drivetrain.setToCoast();
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		// Scheduler.getInstance().run();
-		String GameData = getAutoMessage();
-		if (GameData.length() > 0) {
-			switchPos = GameData.charAt(0);
-			scalePos = GameData.charAt(1);
-			
-		}
-		
 		this.log();
 	}
 	
 	@Override
 	public void autonomousInit() {
+		
+		
 		m_autonomousCommand = m_fieldPosition.getSelected();
 
 		m_autonomousCommand = (Command) m_fieldPosition.getSelected();
@@ -114,7 +119,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		
+			Scheduler.getInstance().run();
 	}
 
 	@Override
@@ -154,35 +160,42 @@ public class Robot extends TimedRobot {
 
 	public void log() {
 		SmartDashboard.putBoolean("Is Limit Seen???????", s_elevator.getEleSensor());
-		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
+//		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
-		//SmartDashboard.putNumber("error", s_elevator.eleMotor.getClosedLoopError(0));
-		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
+//		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Gyro POS", s_drivetrain.getGyroAngle());
-		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
-		SmartDashboard.putNumber("Left Encoder Ticks", s_drivetrain.getLeftSideSensorPosInTicks());
-		SmartDashboard.putNumber("Right Encoder Inches", s_drivetrain.getRightSideSensorPosInInches());
-		SmartDashboard.putNumber("Left Encoder Inches", s_drivetrain.getLeftSideSensorPosInInches());
-		SmartDashboard.putNumber("Setpoint", s_drivetrain.driveSetpoint);
-		SmartDashboard.putNumber("Joystick Left", m_oi.Gamepad.getY());
-		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
-		SmartDashboard.putNumber("LeftSpeed", s_drivetrain.leftVelocity());
-		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
-		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
-		SmartDashboard.putBoolean("Cubes?", doubleCube);
+//		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
+//		SmartDashboard.putNumber("Left Encoder Ticks", s_drivetrain.getLeftSideSensorPosInTicks());
+//		SmartDashboard.putNumber("Right Encoder Inches", s_drivetrain.getRightSideSensorPosInInches());
+//		SmartDashboard.putNumber("Left Encoder Inches", s_drivetrain.getLeftSideSensorPosInInches());
+//		SmartDashboard.putNumber("Setpoint", s_drivetrain.driveSetpoint);
+//		SmartDashboard.putNumber("Joystick Left", m_oi.Gamepad.getY());
+//		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
+//		SmartDashboard.putNumber("LeftSpeed", s_drivetrain.leftVelocity());
+//		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
+//		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
+//		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
+//		SmartDashboard.putBoolean("Cubes?", doubleCube);
+//		SmartDashboard.putNumber("Cube X", s_limelight.getCubeX());
+//		SmartDashboard.putNumber("Cube Area", s_limelight.getCubeArea());
 		
 	}
 	
 	public static String getAutoMessage() {
-		if(DriverStation.getInstance().getGameSpecificMessage() != null)
-			return DriverStation.getInstance().getGameSpecificMessage().substring(0, 1); 
+		
+		String DS_Message = DriverStation.getInstance().getGameSpecificMessage();
+		
+		SmartDashboard.putString("GameSpecific Message", DS_Message);
+		
+		if(DS_Message != null && DS_Message.length() >= 2)
+			return DriverStation.getInstance().getGameSpecificMessage().substring(0, 2); 
 		else
 			return "";
 	}
 
 	public Robot() {
-		// double yStick = Arcadepad.getY();
+		// double yStick = A	rcadepad.getY();
 		// SmartDashboard.putNumber("yin", yStick);
 		// if (yStick > 0){
 		// Robot.s_elevator.bumpUp();

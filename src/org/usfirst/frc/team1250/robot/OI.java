@@ -10,14 +10,14 @@ package org.usfirst.frc.team1250.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_AutoLeft;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_Droper;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_FullCollect;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_LeftSwitch;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_ScaleWhip;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_StriaghtScale;
-import org.usfirst.frc.team1250.robot.commandGroups.CmdG_TimedCollect;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpitFast;
+import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_AutoLeft;
+import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_AutonSwitch;
+import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_Droper;
+import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_FullCollect;
+import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_ScaleWhip;
+import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_StriaghtScale;
+import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_TimedCollect;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpit;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeCollectTimed;
 import org.usfirst.frc.team1250.robot.commands.*;
@@ -74,13 +74,15 @@ public class OI {
 
 	public OI() {
 		// Drivers controller
-
+		lb.whenPressed(new CmdG_Droper());
+		 
 		//OPs controller
+		
 		
 		btn12.whenInactive(new Cmd_IntakeTest());
 		btn11.whenInactive(new CmdG_FullCollect());
 		//btn10.whenInactive(new CmdG_Droper());	
-		btn9.whenInactive(new Cmd_IntakeSpit(1));
+		//btn9.whenInactive(new Cmd_IntakeSpit(1));
 		btn8.whenInactive(new Cmd_IntakeSpitFast(1));
 		btn7.whenInactive(new Cmd_IntakeUnPinch());
 		btn6.whenInactive(new Cmd_IntakePinch());
@@ -89,7 +91,7 @@ public class OI {
 		btn3.whenInactive(new Cmd_EleHigh());
 //		btn4.whenInactive(new Cmd_EleHigh());
 //		btn3.whenInactive(new Cmd_EleSwitch());
-		btn2.whenInactive(new Cmd_EleHome());	
+		//btn2.whenInactive(new Cmd_EleHome());	
 
 
 
@@ -97,9 +99,9 @@ public class OI {
 
 
 // Auto Buttons for Testing
-		lb.whenPressed(new CmdG_Droper());
+		
 		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
-		x.whenPressed(new CmdG_StriaghtScale());
+		x.whenPressed(new CmdG_StriaghtScale(1));
 //		b.whenPressed(new CmdG_LeftSwitch());
 //		a.whenPressed(new Cmd_AutoTurn(-45 , .5,.3));
 //		y.whenPressed(new CmdG_ScaleWhip());

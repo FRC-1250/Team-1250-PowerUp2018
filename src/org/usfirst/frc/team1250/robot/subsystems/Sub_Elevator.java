@@ -6,9 +6,12 @@ import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
 import org.usfirst.frc.team1250.robot.commands.Cmd_Unpinch;
 import org.usfirst.frc.team1250.robot.drive.Cmd_ManualDrive;
 
+import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.Faults;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StickyFaults;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -25,9 +28,9 @@ public class Sub_Elevator extends Subsystem {
 	private DigitalInput eleLowSensor = new DigitalInput(RobotMap.ELE_LIMIT_SW);
 
 	// In inches from ground
-	public final int SCALE_POS = 74;
+	public final int SCALE_POS = 70;
 	public final int SWITCH_POS = 23;
-	public final double HOME_POS = 0;
+	public final double HOME_POS = 2;
 	public final double ELE_TICKS = 31;
 			
 	public static int eleSetpoint;
@@ -38,11 +41,11 @@ public class Sub_Elevator extends Subsystem {
 
 		eleMotor.configNominalOutputForward(0, 10);
 		eleMotor.configNominalOutputReverse(0, 10);
-		eleMotor.configPeakOutputForward(.8, 10);
-		eleMotor.configPeakOutputReverse(-.5, 10);
+		eleMotor.configPeakOutputForward(.6, 10);
+		eleMotor.configPeakOutputReverse(-.6, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);
-		eleMotor.config_kP(0, 1.1, 10);
+		eleMotor.config_kP(0, 1, 10);
 		eleMotor.config_kI(0, .0001, 10);
 		eleMotor.config_kD(0, 0, 10);
 		eleMotor.config_IntegralZone(0, 0, 10);
@@ -50,6 +53,10 @@ public class Sub_Elevator extends Subsystem {
 		//eleMotor.setSelectedSensorPosition(eleSetpoint, 0, 10);
 //		eleMotor.configClosedloopRamp(0, 10);
 //		eleMotor.configAllowableClosedloopError(0, 0, 10);
+	}
+	
+	public ErrorCode getErrorCode() {
+		return eleMotor.getLastError();
 	}
 
 	public void initDefaultCommand() {
@@ -120,5 +127,9 @@ public class Sub_Elevator extends Subsystem {
 		eleSetpoint = (int)(val * 24 * ELE_TICKS + (getLiftPosInTicks()));
 
 		eleMotor.set(ControlMode.Position, eleSetpoint);
+	}
+	
+	public void setTickSensorTickPos(int pos ) {
+		eleMotor.setSelectedSensorPosition(pos, 0, 10);
 	}
 }

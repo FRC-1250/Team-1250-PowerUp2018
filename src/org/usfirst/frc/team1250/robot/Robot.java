@@ -18,12 +18,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1250.robot.AutoGroups.Auto_CenterPos;
 import org.usfirst.frc.team1250.robot.AutoGroups.Auto_Fallback;
-import org.usfirst.frc.team1250.robot.AutoGroups.Auto_LeftPos;
-import org.usfirst.frc.team1250.robot.AutoGroups.Auto_RightPos;
+import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendCenterPos;
+import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendLeftPos;
+import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendRightPos;
 import org.usfirst.frc.team1250.robot.subsystems.*;
-import edu.wpi.first.wpilibj.SPI;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 
 /**
@@ -42,6 +41,8 @@ public class Robot extends TimedRobot {
 	public static final Sub_Elevator s_elevator = new Sub_Elevator();
 	public static final Sub_LimeLight s_limelight = new Sub_LimeLight();
 	
+	
+	
 	//Controls
 	Joystick Arcadepad = new Joystick(1);
 	public static OI m_oi;
@@ -51,8 +52,7 @@ public class Robot extends TimedRobot {
 	//Robot wide variable
 	public static boolean shiftState = false;
 	public static Timer robotTimer = new Timer();
-	public static char switchPos = '\0';
-	public static char scalePos = '\0';
+	public static String StartPos= "None";
 	
 	//Auto
 	Command m_autonomousCommand;
@@ -67,9 +67,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_fieldPosition.addDefault("Auto_Center", new Auto_CenterPos());
-		m_fieldPosition.addObject("Auto_Left", new Auto_LeftPos());
-		m_fieldPosition.addObject("Auto_Right", new Auto_RightPos());
+		m_fieldPosition.addDefault("Auto_Center", new Cmd_SendCenterPos());
+		m_fieldPosition.addObject("Auto_Left", new Cmd_SendLeftPos());
+		m_fieldPosition.addObject("Auto_Right", new Cmd_SendRightPos());
 		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());
 		
 		

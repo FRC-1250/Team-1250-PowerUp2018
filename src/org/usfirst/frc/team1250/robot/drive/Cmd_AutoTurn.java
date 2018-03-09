@@ -32,7 +32,7 @@ public class Cmd_AutoTurn extends Command {
 
     protected void initialize() {
     	Robot.s_drivetrain.resetGyro();
-    	setTimeout(2);
+    	setTimeout(5);
     	
     }
 
@@ -42,7 +42,7 @@ public class Cmd_AutoTurn extends Command {
 
     protected boolean isFinished() {
     	//Check Gyro and Encorder distance or timeout
-    	return Robot.s_drivetrain.isDoneTurning(angle);// || isTimedOut();
+    	return Robot.s_drivetrain.isDoneTurning(angle) || isTimedOut();
     	// return Robot.s_drivetrain.isDoneTurning(angle) || isTimedOut();
     }
 

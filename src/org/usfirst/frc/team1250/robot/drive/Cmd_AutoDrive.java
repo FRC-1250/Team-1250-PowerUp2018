@@ -25,7 +25,7 @@ public class Cmd_AutoDrive extends Command {
     	Robot.s_drivetrain.resetSensorPos();
     	Robot.s_drivetrain.resetGyro();
     	Robot.s_drivetrain.setSetpointPos(distance);
-    	setTimeout(5);
+    	setTimeout(15);
     }
 
     protected void execute() {
@@ -34,7 +34,7 @@ public class Cmd_AutoDrive extends Command {
 
     protected boolean isFinished() {
     	//Check encoder distance or timeout
-    	return Robot.s_drivetrain.isDoneDriving();
+    	return Robot.s_drivetrain.isDoneDriving() || isTimedOut();
 //    	return isTimedOut()|| Robot.s_drivetrain.isDoneDriving();
     }
 

@@ -113,6 +113,7 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void autonomousInit() {
+		s_elevator.soloPop();
 		
 		DS_Msg = getAutoMessage();
 		SmartDashboard.putString("Robot Position Message", "AUTO_INIT");
@@ -174,7 +175,7 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void teleopInit() {
-		
+		s_elevator.solUnPop();
 		s_elevator.setTicksToHome();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to

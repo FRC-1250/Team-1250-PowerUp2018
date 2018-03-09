@@ -14,7 +14,7 @@ public class Auton_Scheduler extends CommandGroup {
     public Auton_Scheduler(String Pos) {
     	
     	
-    	addSequential(new Cmd_Popper(1));
+    	//addSequential(new Cmd_Popper(0.5));
     	
     	SmartDashboard.putString("Auton Position Message", Pos);
     	

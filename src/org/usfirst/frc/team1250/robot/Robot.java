@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1250.robot.AutoGroups.Auto_Fallback;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auton_Scheduler;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendCenterPos;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendLeftPos;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendRightPos;
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
 	public static final Sub_Shifter s_shifter = new Sub_Shifter();
 	public static final Sub_Intake s_intake = new Sub_Intake();
 	public static final Sub_Elevator s_elevator = new Sub_Elevator();
+	//public static final Sub_Climber s_climber = new Sub_Climber();
 	public static final Sub_LimeLight s_limelight = new Sub_LimeLight();
 	
 	
@@ -53,9 +55,11 @@ public class Robot extends TimedRobot {
 	public static boolean shiftState = false;
 	public static Timer robotTimer = new Timer();
 	public static String StartPos= "None";
+	public static String DS_Msg;
 	
 	//Auto
 	Command m_autonomousCommand;
+	Command m_autonomousScheduler;
 	SendableChooser<Command> m_fieldPosition = new SendableChooser<>();
 	
 	public static boolean doubleCube = false;
@@ -73,10 +77,13 @@ public class Robot extends TimedRobot {
 		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());
 		
 		
+		SmartDashboard.putString("Command Selected", Robot.StartPos);
+		
 		SmartDashboard.putData("Auto mode", m_fieldPosition);
-		SmartDashboard.putBoolean("Two Cubes?", doubleCube);
 		SmartDashboard.putString("GameSpecific Message", "UNINIT");
-
+		
+		SmartDashboard.putString("Robot Position Message", "UN_INIT");
+		
 		CameraServer.getInstance().startAutomaticCapture();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
 	}
@@ -92,24 +99,65 @@ public class Robot extends TimedRobot {
 		s_elevator.setTicksToHome();
 		s_drivetrain.setToCoast();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+		SmartDashboard.putNumber("DS_Message length", -1);
+		//DS_Msg = getAutoMessage();
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		// Scheduler.getInstance().run();
+		DS_Msg = getAutoMessage();
+		SmartDashboard.putString("Command Selected", Robot.StartPos);
 		this.log();
 	}
 	
 	@Override
 	public void autonomousInit() {
 		
-		
-		m_autonomousCommand = m_fieldPosition.getSelected();
-
-		m_autonomousCommand = (Command) m_fieldPosition.getSelected();
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
+		DS_Msg = getAutoMessage();
+		SmartDashboard.putString("Robot Position Message", "AUTO_INIT");
+		SmartDashboard.putNumber("DS_Message length", DS_Msg.length());
+		while(DS_Msg.length() < 2) {
+			DS_Msg = getAutoMessage();
+			SmartDashboard.putNumber("DS_Message length", DS_Msg.length());
 		}
+		SmartDashboard.putNumber("DS_Message length", DS_Msg.length());
+		
+		SmartDashboard.putString("DS_Message", DS_Msg);
+		SmartDashboard.putString("Robot Position Message", "AFTER_WHILE");
+		
+		m_autonomousCommand = (Command) m_fieldPosition.getSelected();
+
+		SmartDashboard.putString("m_autonomousCommand.toString()", m_autonomousCommand.toString());
+		
+		String Cmd_Selected = m_autonomousCommand.toString();
+			
+		if (Cmd_Selected.equals("Cmd_SendRightPos")) {
+			StartPos = "Right";
+		} else if (Cmd_Selected.equals("Cmd_SendCenterPos")) {
+			StartPos = "Center";
+		} else if (Cmd_Selected.equals("Cmd_SendLeftPos")) {
+			StartPos = "Left";
+		}
+		
+			
+		
+		
+		
+		if (m_autonomousCommand != null) {
+			SmartDashboard.putString("Robot Position Message", "Selector");
+			m_autonomousCommand.start();
+			
+			
+			SmartDashboard.putString("Command Selected", StartPos);
+			
+			SmartDashboard.putString("Robot Position Message", "Scheduler Start");
+			m_autonomousScheduler = new Auton_Scheduler(StartPos);
+			m_autonomousScheduler.start();
+			//SmartDashboard.putString("Robot Position Message", "Scheduler");
+		}
+		
+		
 		
 		s_drivetrain.setToBrake();
 	}
@@ -123,6 +171,7 @@ public class Robot extends TimedRobot {
 			Scheduler.getInstance().run();
 	}
 
+	
 	@Override
 	public void teleopInit() {
 		
@@ -189,7 +238,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("GameSpecific Message", DS_Message);
 		
 		if(DS_Message != null && DS_Message.length() >= 2)
-			return DriverStation.getInstance().getGameSpecificMessage().substring(0, 2); 
+			return DS_Message.substring(0, 2); 
 		else
 			return "";
 	}
@@ -205,4 +254,5 @@ public class Robot extends TimedRobot {
 		// }
 	}
 	
+
 }

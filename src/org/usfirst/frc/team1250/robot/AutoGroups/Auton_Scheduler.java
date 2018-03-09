@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1250.robot.AutoGroups;
 
+import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.commands.Cmd_Popper;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,16 +9,34 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class Auto_Fallback extends CommandGroup {
+public class Auton_Scheduler extends CommandGroup {
 
-    public Auto_Fallback() {
+    public Auton_Scheduler(String Pos) {
     	
-    	//addSequential(new Cmd_Popper(0.5));
-    	SmartDashboard.putString("Robot Position Message", "fALLBACK 1");
-    	addSequential(new Cmd_AutoDrive(237, 1 , .3));
+    	
+    	addSequential(new Cmd_Popper(1));
+    	
+    	SmartDashboard.putString("Auton Position Message", Pos);
+    	
+    	if (Robot.StartPos.equals("Center")) {
+    			
+    		addSequential(new Auto_CenterPos());
+    		
+    	}else if (Robot.StartPos.equals("Left")) {
+    		
+    		addSequential(new Auto_LeftPos());
+    		
+    	} else if((Robot.StartPos.equals("Right"))){
+    		addSequential(new Auto_RightPos());
+    	} else {
+    		SmartDashboard.putString("Robot Position Message", "fALLBACK");
+    		addSequential(new Auto_Fallback());
+    	}
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
+    	
         // these will run in order.
 
         // To run multiple commands at the same time,

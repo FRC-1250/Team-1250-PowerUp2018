@@ -18,6 +18,7 @@ import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_ScaleWhip;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_StriaghtScale;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_TimedCollect;
+import org.usfirst.frc.team1250.robot.AutoGroups.Auton_Scheduler;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpit;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeCollectTimed;
 import org.usfirst.frc.team1250.robot.commands.*;
@@ -58,6 +59,7 @@ public class OI {
 	JoystickButton lt = new JoystickButton(Gamepad, 7);
 	JoystickButton rt = new JoystickButton(Gamepad, 8);
 
+	JoystickButton AutonBtn = new JoystickButton(Arcadepad, 50);
 	JoystickButton btn12 = new JoystickButton(Arcadepad, 12);
 	JoystickButton btn11 = new JoystickButton(Arcadepad, 11);
 	JoystickButton btn10 = new JoystickButton(Arcadepad, 10);
@@ -89,6 +91,7 @@ public class OI {
 		btn5.whenInactive(new Cmd_EleUnpinch());	
 		btn4.whenInactive(new Cmd_Popper(.5));
 		btn3.whenInactive(new Cmd_EleHigh());
+		//AutonBtn.whenInactive(new Auton_Scheduler(Robot.StartPos));
 //		btn4.whenInactive(new Cmd_EleHigh());
 //		btn3.whenInactive(new Cmd_EleSwitch());
 		//btn2.whenInactive(new Cmd_EleHome());	

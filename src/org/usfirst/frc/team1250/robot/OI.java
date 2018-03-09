@@ -122,10 +122,6 @@ public class OI {
 	public boolean getButtonState(int btn) {
 		return Gamepad.getRawButton(btn);
 	}
-	
-	public boolean getArcadePadButton(int btn) {
-		return Arcadepad.getRawButton(btn);
-	}
 
 	public Joystick getGamepad() {
 		return Gamepad;

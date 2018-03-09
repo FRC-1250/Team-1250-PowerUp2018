@@ -17,16 +17,16 @@ public class CmdG_ScaleWhip extends CommandGroup {
     public CmdG_ScaleWhip(int dir) {
     	 addSequential(new Cmd_Reset());
     	 addParallel(new Cmd_EleHigh());
-    	 addSequential(new Cmd_AutoDrive(220, 1 , .3));
+    	 addSequential(new Cmd_AutoDrive(210, 1 , .3));
     	 addSequential(new Cmd_DoNothing(.1));
     	 addSequential(new Cmd_Reset());
     	 addSequential(new Cmd_AutoTurn(80 * dir , 1 , .8));
     	 addSequential(new Cmd_Reset());
-    	 addSequential(new Cmd_AutoDrive(209, 1 , .3));
+    	 addSequential(new Cmd_AutoDrive(175, 1 , .3));
     	 addSequential(new Cmd_Reset());
     	 addSequential(new Cmd_AutoTurn(-90 * dir , 1 , .8));
     	 addSequential(new Cmd_Reset());
-    	 addSequential(new Cmd_AutoDrive(56, 1 , .3));
+    	 addSequential(new Cmd_AutoDrive(30, 1 , .3));
     	 addSequential(new Cmd_Reset());
     	 addSequential(new CmdG_Droper());
     }

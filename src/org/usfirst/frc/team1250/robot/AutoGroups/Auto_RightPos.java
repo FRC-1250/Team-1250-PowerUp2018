@@ -18,10 +18,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Auto_RightPos extends CommandGroup {
 
     public Auto_RightPos() {
-    	addSequential(new Cmd_Popper(1));
+    	//addSequential(new Cmd_Popper(1));
 // 		addSequential(new Cmd_AutoDrive(45));
     	
     	String autoMessage = Robot.getAutoMessage();
+    	
+    	boolean getCross = Robot.CrossMid;
+    	
+    	SmartDashboard.putBoolean("Are We Crossing", getCross);
     	
     	SmartDashboard.putString("input String", autoMessage);
 
@@ -38,7 +42,13 @@ public class Auto_RightPos extends CommandGroup {
     	{
     		//Left Switch case
 //    		addParallel(new Cmd_AutoDrive(45));
-     		addSequential(new CmdG_ScaleWhip(-1));
+     		
+    		if (getCross) 
+    			addSequential(new CmdG_ScaleWhip(-1));
+    		else 
+    			addSequential(new Auto_Fallback() ); 
+    		
+     		
 //     		addSequential(new Cmd_AutoTurn(90));
     	}
     	else
@@ -46,21 +56,5 @@ public class Auto_RightPos extends CommandGroup {
     		//RR - Do nothing else
     	}
 
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
     }
 }

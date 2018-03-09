@@ -23,6 +23,8 @@ import org.usfirst.frc.team1250.robot.AutoGroups.Auton_Scheduler;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendCenterPos;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendLeftPos;
 import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendRightPos;
+import org.usfirst.frc.team1250.robot.commands.Cmd_CrossMidFalse;
+import org.usfirst.frc.team1250.robot.commands.Cmd_CrossMidTrue;
 import org.usfirst.frc.team1250.robot.subsystems.*;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 
@@ -56,11 +58,14 @@ public class Robot extends TimedRobot {
 	public static Timer robotTimer = new Timer();
 	public static String StartPos= "None";
 	public static String DS_Msg;
+	public static boolean CrossMid = false;
 	
 	//Auto
 	Command m_autonomousCommand;
 	Command m_autonomousScheduler;
+	Command m_crosspick;
 	SendableChooser<Command> m_fieldPosition = new SendableChooser<>();
+	SendableChooser<Command> m_crossmid = new SendableChooser<>();
 	
 	public static boolean doubleCube = false;
 
@@ -76,12 +81,16 @@ public class Robot extends TimedRobot {
 		m_fieldPosition.addObject("Auto_Right", new Cmd_SendRightPos());
 		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());
 		
+		m_crossmid.addDefault("Cross_Mid_True", new Cmd_CrossMidTrue());
+		m_crossmid.addObject("Cross_Mid_False", new Cmd_CrossMidFalse());
+		
 		
 		SmartDashboard.putString("Command Selected", Robot.StartPos);
 		
 		SmartDashboard.putData("Auto mode", m_fieldPosition);
 		SmartDashboard.putString("GameSpecific Message", "UNINIT");
-		
+		SmartDashboard.putBoolean("Are We Crossing", false);
+		SmartDashboard.putBoolean("Cross Toggle", CrossMid);
 		SmartDashboard.putString("Robot Position Message", "UN_INIT");
 		
 		CameraServer.getInstance().startAutomaticCapture();
@@ -108,12 +117,24 @@ public class Robot extends TimedRobot {
 		// Scheduler.getInstance().run();
 		DS_Msg = getAutoMessage();
 		SmartDashboard.putString("Command Selected", Robot.StartPos);
+		m_crosspick = (Command) m_crossmid.getSelected();
+		String select_cross = m_crosspick.toString();
+		
+		if (select_cross.equals("Cmd_CrossMidTrue")) {
+			CrossMid = true;
+		}
+		else {
+			CrossMid = false;
+		}
+		
+		
+		
 		this.log();
 	}
 	
 	@Override
 	public void autonomousInit() {
-		s_elevator.soloPop();
+		//s_elevator.soloPop();
 		
 		DS_Msg = getAutoMessage();
 		SmartDashboard.putString("Robot Position Message", "AUTO_INIT");

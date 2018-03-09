@@ -14,21 +14,23 @@ public class Auton_Scheduler extends CommandGroup {
     public Auton_Scheduler(String Pos) {
     	
     	
-    	//addSequential(new Cmd_Popper(0.5));
+    	
     	
     	SmartDashboard.putString("Auton Position Message", Pos);
     	
     	if (Robot.StartPos.equals("Center")) {
-    			
+    		addSequential(new Cmd_Popper(1));	
     		addSequential(new Auto_CenterPos());
     		
     	}else if (Robot.StartPos.equals("Left")) {
-    		
+    		addSequential(new Cmd_Popper(1));
     		addSequential(new Auto_LeftPos());
     		
     	} else if((Robot.StartPos.equals("Right"))){
+    		addSequential(new Cmd_Popper(1));
     		addSequential(new Auto_RightPos());
     	} else {
+    		addSequential(new Cmd_Popper(1));
     		SmartDashboard.putString("Robot Position Message", "fALLBACK");
     		addSequential(new Auto_Fallback());
     	}

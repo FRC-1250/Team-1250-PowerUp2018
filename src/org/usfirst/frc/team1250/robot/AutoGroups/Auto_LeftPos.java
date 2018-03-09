@@ -10,6 +10,7 @@ import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,10 +18,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Auto_LeftPos extends CommandGroup {
 
     public Auto_LeftPos() {
-    	addSequential(new Cmd_Popper(1));
+    	//addSequential(new Cmd_Popper(1));
 
     	
     	String autoMessage = Robot.getAutoMessage();
+    	
+    	
+    	boolean getCross = Robot.CrossMid;
+    	SmartDashboard.putBoolean("Are We Crossing", getCross);
     	
     	if(autoMessage.equals("RL") || autoMessage.equals("LL"))
     	{
@@ -34,9 +39,10 @@ public class Auto_LeftPos extends CommandGroup {
     	else if(autoMessage.equals("LR")|| autoMessage.equals("RR"))
     	{
     		//Left Switch case
-//    		addParallel(new Cmd_AutoDrive(45));
-     		addSequential(new CmdG_ScaleWhip(1));
-//     		addSequential(new Cmd_AutoTurn(90));
+    		if (getCross) 
+    			addSequential(new CmdG_ScaleWhip(1));
+    		else 
+    			addSequential(new Auto_Fallback() );
     	}
     	else
     	{

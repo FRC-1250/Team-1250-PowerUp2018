@@ -26,8 +26,8 @@ public class RobotMap {
 	// Claw Motor Control IDs
 	public static final int CLW_RIGHT       = 21;
 	public static final int CLW_LEFT        = 14;
-	public static final int SRV_RIGHT		=  1;
-	public static final int SRV_LEFT		=  2;
+	public static final int SRV_RIGHT		=  0;
+	public static final int SRV_LEFT		=  1;
 	
 	
 	

@@ -133,5 +133,10 @@ public class OI {
 	public Joystick getArcadepad() {
 		return Arcadepad;
 	}
-
+	
+	
+	public boolean getArcadePadButton(int btn) {
+		return Arcadepad.getRawButton(btn);
+	}
+	
 }

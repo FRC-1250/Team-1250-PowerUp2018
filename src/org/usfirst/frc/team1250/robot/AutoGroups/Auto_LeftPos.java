@@ -3,9 +3,10 @@ package org.usfirst.frc.team1250.robot.AutoGroups;
 import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_ScaleWhip;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_StriaghtScale;
+import org.usfirst.frc.team1250.robot.commands.Cmd_Popper;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleErectTower;
+
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -16,12 +17,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Auto_LeftPos extends CommandGroup {
 
     public Auto_LeftPos() {
-    	addSequential(new Cmd_EleErectTower());
-// 		addSequential(new Cmd_AutoDrive(45));
+    	addSequential(new Cmd_Popper(1));
+
     	
     	String autoMessage = Robot.getAutoMessage();
     	
-    	if(autoMessage == "RL" || autoMessage =="LL")
+    	if(autoMessage.equals("RL") || autoMessage.equals("LL"))
     	{
     		//Left Scale case
 //     		addParallel(new Cmd_AutoDrive(45));
@@ -30,7 +31,7 @@ public class Auto_LeftPos extends CommandGroup {
     		addSequential(new CmdG_StriaghtScale(1));
     		
     	}
-    	else if(autoMessage == "LR" || autoMessage == "RR")
+    	else if(autoMessage.equals("LR")|| autoMessage.equals("RR"))
     	{
     		//Left Switch case
 //    		addParallel(new Cmd_AutoDrive(45));

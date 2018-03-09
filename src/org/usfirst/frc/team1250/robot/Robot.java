@@ -160,20 +160,20 @@ public class Robot extends TimedRobot {
 
 	public void log() {
 		SmartDashboard.putBoolean("Is Limit Seen???????", s_elevator.getEleSensor());
-		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
+//		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 //		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Gyro POS", s_drivetrain.getGyroAngle());
 //		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
 //		SmartDashboard.putNumber("Left Encoder Ticks", s_drivetrain.getLeftSideSensorPosInTicks());
-		SmartDashboard.putNumber("Right Encoder Inches", s_drivetrain.getRightSideSensorPosInInches());
-		SmartDashboard.putNumber("Left Encoder Inches", s_drivetrain.getLeftSideSensorPosInInches());
-		SmartDashboard.putNumber("Setpoint", s_drivetrain.driveSetpoint);
-		SmartDashboard.putNumber("Joystick Left", m_oi.Gamepad.getY());
-		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
-		SmartDashboard.putNumber("LeftSpeed", s_drivetrain.leftVelocity());
-		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
+//		SmartDashboard.putNumber("Right Encoder Inches", s_drivetrain.getRightSideSensorPosInInches());
+//		SmartDashboard.putNumber("Left Encoder Inches", s_drivetrain.getLeftSideSensorPosInInches());
+//		SmartDashboard.putNumber("Setpoint", s_drivetrain.driveSetpoint);
+//		SmartDashboard.putNumber("Joystick Left", m_oi.Gamepad.getY());
+//		SmartDashboard.putNumber("Joystick Right", m_oi.Gamepad.getThrottle());
+//		SmartDashboard.putNumber("LeftSpeed", s_drivetrain.leftVelocity());
+//		SmartDashboard.putNumber("RightSpeed", s_drivetrain.rightVelocity());
 //		SmartDashboard.putString("GameSpecific Message", getAutoMessage());
 //		doubleCube = SmartDashboard.getBoolean("Two Cubes?", false);
 //		SmartDashboard.putBoolean("Cubes?", doubleCube);

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1250.robot.AutoGroups;
 
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleErectTower;
+import org.usfirst.frc.team1250.robot.commands.Cmd_Popper;
+import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,7 +12,8 @@ public class Auto_Fallback extends CommandGroup {
 
     public Auto_Fallback() {
     	
-    	addSequential(new Cmd_EleErectTower());
+    	addSequential(new Cmd_Popper(0.5));
+    	addSequential(new Cmd_AutoDrive(50,0.8,0.6));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

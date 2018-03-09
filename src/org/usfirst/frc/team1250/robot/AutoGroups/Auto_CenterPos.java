@@ -2,10 +2,11 @@ package org.usfirst.frc.team1250.robot.AutoGroups;
 
 import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_AutonSwitch;
+import org.usfirst.frc.team1250.robot.commands.Cmd_Popper;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleErectTower;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -13,25 +14,29 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Auto_CenterPos extends CommandGroup {
 
     public Auto_CenterPos() {    	
- 		addSequential(new Cmd_EleErectTower());
+    	addSequential(new Cmd_Popper(1));
     	
     	String autoMessage = Robot.getAutoMessage();
-    	    	
-     	if(autoMessage == "LR" || autoMessage =="LL")
+    	
+    	SmartDashboard.putString("Auto Message", autoMessage);
+    	 
+    	//addSequential(new Cmd_AutoDrive(48, .6 , .3));
+    	
+     	if(autoMessage.equals("LR") || autoMessage.equals("LL"))
     	{
     		//Left Switch case
-    		//addSequential(new CmdG_AutonSwitch(-1));
-    		System.out.println("Left");
+    		addSequential(new CmdG_AutonSwitch(-1));;
      		//addSequential(new Cmd_AutoTurn(30));
-     		//addSequential(new Cmd_AutoDrive(45));
+    		//addSequential(new Cmd_AutoDrive(48, .6 , .3));
     	}
-    	else if(autoMessage == "RL" || autoMessage == "RR")
+    	else if(autoMessage.equals("RL") || autoMessage.equals("RR"))
     	{
     		//Right Switch case
-   		//addSequential(new CmdG_AutonSwitch(1));
+    		addSequential(new CmdG_AutonSwitch(1));
    		System.out.println("Right");
      		//addSequential(new Cmd_AutoTurn(-30));
      		//addSequential(new Cmd_AutoDrive(45));
+   			//addSequential(new Cmd_AutoDrive(48, .6 , .3));
     	}
     	else
     	{

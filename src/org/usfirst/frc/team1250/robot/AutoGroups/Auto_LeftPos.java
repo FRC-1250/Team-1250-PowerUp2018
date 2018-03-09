@@ -39,10 +39,10 @@ public class Auto_LeftPos extends CommandGroup {
     	else if(autoMessage.equals("LR")|| autoMessage.equals("RR"))
     	{
     		//Left Switch case
-    		if (getCross) 
+//    		if (getCross) 
     			addSequential(new CmdG_ScaleWhip(1));
-    		else 
-    			addSequential(new Auto_Fallback() );
+//    		else 
+//    			addSequential(new Auto_Fallback() );
     	}
     	else
     	{

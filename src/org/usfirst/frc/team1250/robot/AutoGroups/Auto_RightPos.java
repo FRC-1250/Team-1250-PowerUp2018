@@ -43,10 +43,10 @@ public class Auto_RightPos extends CommandGroup {
     		//Left Switch case
 //    		addParallel(new Cmd_AutoDrive(45));
      		
-    		if (getCross) 
+//    		if (getCross) 
     			addSequential(new CmdG_ScaleWhip(-1));
-    		else 
-    			addSequential(new Auto_Fallback() ); 
+//    		else 
+//    			addSequential(new Auto_Fallback() ); 
     		
      		
 //     		addSequential(new Cmd_AutoTurn(90));

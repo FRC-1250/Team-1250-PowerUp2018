@@ -8,40 +8,16 @@
 package org.usfirst.frc.team1250.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.*;
-
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpitFast;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_AutoLeft;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_AutonSwitch;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_Droper;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_FullCollect;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_ScaleWhip;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_StriaghtScale;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_TimedCollect;
-import org.usfirst.frc.team1250.robot.AutoGroups.Auton_Scheduler;
-import org.usfirst.frc.team1250.robot.climber.Cmd_RetractLeftMotor;
-import org.usfirst.frc.team1250.robot.climber.Cmd_RetractRightMotor;
-import org.usfirst.frc.team1250.robot.climber.Cmd_ToggleRightServo;
-import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpit;
-import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeCollectTimed;
 import org.usfirst.frc.team1250.robot.commands.*;
 import org.usfirst.frc.team1250.robot.drive.*;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHome;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_ElePinch;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakePinch;
-import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeStop;
-import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeToggle;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeUnPinch;
 import org.usfirst.frc.team1250.robot.test.Cmd_IntakeTest;
-import org.usfirst.frc.team1250.robot.test.deletethis;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.XboxController;;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -80,7 +56,6 @@ public class OI {
 	public OI() {
 		// Drivers controller
 		lb.whenPressed(new CmdG_Droper());	
-		rb.whenPressed(new Cmd_RetractRightMotor());
 		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
 
 		 
@@ -98,7 +73,6 @@ public class OI {
 		btn4.whenInactive(new Cmd_Popper(.5));
 //		btn3.whenInactive(new Cmd_EleHigh());
 //		btn4.whenInactive(new Cmd_EleHigh());
-		btn3.whenInactive(new Cmd_ToggleRightServo());
 		//btn2.whenInactive(new Cmd_ToggleLeftServo());	
 
 

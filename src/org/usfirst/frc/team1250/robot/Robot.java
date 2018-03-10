@@ -42,14 +42,11 @@ public class Robot extends TimedRobot {
 	public static final Sub_Shifter s_shifter = new Sub_Shifter();
 	public static final Sub_Intake s_intake = new Sub_Intake();
 	public static final Sub_Elevator s_elevator = new Sub_Elevator();
-	public static final Sub_ClimberRight s_climberright = new Sub_ClimberRight();
-	public static final Sub_ClimberLeft s_climberleft = new Sub_ClimberLeft();
 	public static final Sub_LimeLight s_limelight = new Sub_LimeLight();
 	
 	
 	
 	//Controls
-	Joystick Arcadepad = new Joystick(1);
 	public static OI m_oi;
 	
 	static DriverStation driverStation;
@@ -58,18 +55,14 @@ public class Robot extends TimedRobot {
 	public static boolean shiftState = false;
 	public static Timer robotTimer = new Timer();
 	public static String StartPos= "None";
-	public static String DS_Msg;
-	public static boolean CrossMid = false;
+
 	
 	//Auto
 	Command m_autonomousCommand;
 	Command m_autonomousScheduler;
-	Command m_crosspick;
-	SendableChooser<Command> m_fieldPosition = new SendableChooser<>();
-	SendableChooser<Command> m_crossmid = new SendableChooser<>();
-	
-	public static boolean doubleCube = false;
 
+	SendableChooser<Command> m_fieldPosition = new SendableChooser<>();
+	
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -80,24 +73,16 @@ public class Robot extends TimedRobot {
 		m_fieldPosition.addDefault("Auto_Center", new Cmd_SendCenterPos());
 		m_fieldPosition.addObject("Auto_Left", new Cmd_SendLeftPos());
 		m_fieldPosition.addObject("Auto_Right", new Cmd_SendRightPos());
-		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());
-		
-		m_crossmid.addDefault("Cross_Mid_True", new Cmd_CrossMidTrue());
-		m_crossmid.addObject("Cross_Mid_False", new Cmd_CrossMidFalse());
-		
-		
+		m_fieldPosition.addObject("Drive Forward", new Auto_Fallback());		
 		SmartDashboard.putString("Command Selected", Robot.StartPos);
 		
 		SmartDashboard.putData("Auto mode", m_fieldPosition);
 		SmartDashboard.putString("GameSpecific Message", "UNINIT");
-		SmartDashboard.putBoolean("Are We Crossing", false);
-		SmartDashboard.putBoolean("Cross Toggle", CrossMid);
 		SmartDashboard.putString("Robot Position Message", "UN_INIT");
 		
 		CameraServer.getInstance().startAutomaticCapture();
 		CameraServer.getInstance().startAutomaticCapture(1);
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
-		s_climberright.resetServo();
 	}
 
 	/**+
@@ -113,29 +98,12 @@ public class Robot extends TimedRobot {
 		s_drivetrain.setToCoast();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 		SmartDashboard.putNumber("DS_Message length", -1);
-		s_climberright.resetServo();
-		//DS_Msg = getAutoMessage();
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		// Scheduler.getInstance().run();
-		DS_Msg = getAutoMessage();
-		SmartDashboard.putString("Command Selected", Robot.StartPos);
-		m_crosspick = (Command) m_crossmid.getSelected();
-		String select_cross = m_crosspick.toString();
 		
-//		if (select_cross.equals("Cmd_CrossMidTrue")) {
-//			CrossMid = true;
-//		}
-//		else {
-//			CrossMid = false;
-//		}
-		
-		s_climberright.resetServo();
-		
-		
-		
+			
 		this.log();
 	}
 	
@@ -143,21 +111,14 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		//s_elevator.soloPop();
 		
-		DS_Msg = getAutoMessage();
-		SmartDashboard.putString("Robot Position Message", "AUTO_INIT");
-		SmartDashboard.putNumber("DS_Message length", DS_Msg.length());
+		String DS_Msg = getAutoMessage();
+		
 		while(DS_Msg.length() < 2) {
 			DS_Msg = getAutoMessage();
-			SmartDashboard.putNumber("DS_Message length", DS_Msg.length());
-		}
-		SmartDashboard.putNumber("DS_Message length", DS_Msg.length());
-		
-		SmartDashboard.putString("DS_Message", DS_Msg);
-		SmartDashboard.putString("Robot Position Message", "AFTER_WHILE");
-		
-		m_autonomousCommand = (Command) m_fieldPosition.getSelected();
 
-		SmartDashboard.putString("m_autonomousCommand.toString()", m_autonomousCommand.toString());
+		}
+
+		m_autonomousCommand = (Command) m_fieldPosition.getSelected();
 		
 		String Cmd_Selected = m_autonomousCommand.toString();
 			
@@ -169,24 +130,11 @@ public class Robot extends TimedRobot {
 			StartPos = "Left";
 		}
 		
-			
-		
-		
-		
 		if (m_autonomousCommand != null) {
-			SmartDashboard.putString("Robot Position Message", "Selector");
 			m_autonomousCommand.start();
-			
-			
-			SmartDashboard.putString("Command Selected", StartPos);
-			
-			SmartDashboard.putString("Robot Position Message", "Scheduler Start");
 			m_autonomousScheduler = new Auton_Scheduler(StartPos);
 			m_autonomousScheduler.start();
-			//SmartDashboard.putString("Robot Position Message", "Scheduler");
 		}
-		
-		
 		
 		s_drivetrain.setToBrake();
 	}
@@ -205,10 +153,7 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		s_elevator.solUnPop();
 		s_elevator.setTicksToHome();
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 			
@@ -217,7 +162,6 @@ public class Robot extends TimedRobot {
 		
 		s_drivetrain.resetGyro();
 		s_drivetrain.setToCoast();
-		s_climberright.resetServo();
 	}
 
 	/**
@@ -238,13 +182,13 @@ public class Robot extends TimedRobot {
 	}
 
 	public void log() {
+		SmartDashboard.putString("Command Selected", Robot.StartPos);
 		SmartDashboard.putBoolean("Is Limit Seen???????", s_elevator.getEleSensor());
 //		SmartDashboard.putNumber("test", s_elevator.getLiftPosInTicks());
 		SmartDashboard.putNumber("Joystick Val", m_oi.getArcadepad().getRawAxis(1));
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 //		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Gyro POS", s_drivetrain.getGyroAngle());
-		SmartDashboard.putBoolean("Ready To Climb?", !s_climberright.getServoStatus());
 //		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
 //		SmartDashboard.putNumber("Left Encoder Ticks", s_drivetrain.getLeftSideSensorPosInTicks());
 //		SmartDashboard.putNumber("Right Encoder Inches", s_drivetrain.getRightSideSensorPosInInches());
@@ -274,16 +218,6 @@ public class Robot extends TimedRobot {
 			return "";
 	}
 
-	public Robot() {
-		// double yStick = A	rcadepad.getY();
-		// SmartDashboard.putNumber("yin", yStick);
-		// if (yStick > 0){
-		// Robot.s_elevator.bumpUp();
-		// }
-		// if (yStick < 0){
-		// Robot.s_elevator.bumpDown();
-		// }
-	}
 	
 
 }

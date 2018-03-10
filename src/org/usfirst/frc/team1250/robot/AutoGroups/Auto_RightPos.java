@@ -23,11 +23,6 @@ public class Auto_RightPos extends CommandGroup {
     	
     	String autoMessage = Robot.getAutoMessage();
     	
-    	boolean getCross = Robot.CrossMid;
-    	
-    	SmartDashboard.putBoolean("Are We Crossing", getCross);
-    	
-    	SmartDashboard.putString("input String", autoMessage);
 
     	if(autoMessage.equals("LR") || autoMessage.equals("RR"))
     	{

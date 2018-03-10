@@ -62,7 +62,7 @@ public class OI {
 	JoystickButton lt = new JoystickButton(Gamepad, 7);
 	JoystickButton rt = new JoystickButton(Gamepad, 8);
 
-	JoystickButton AutonBtn = new JoystickButton(Arcadepad, 50);
+
 	JoystickButton btn12 = new JoystickButton(Arcadepad, 12);
 	JoystickButton btn11 = new JoystickButton(Arcadepad, 11);
 	JoystickButton btn10 = new JoystickButton(Arcadepad, 10);
@@ -79,7 +79,10 @@ public class OI {
 
 	public OI() {
 		// Drivers controller
-		lb.whenPressed(new CmdG_Droper());
+		lb.whenPressed(new CmdG_Droper());	
+		rb.whenPressed(new Cmd_RetractRightMotor());
+		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
+
 		 
 		//OPs controller
 		
@@ -94,35 +97,23 @@ public class OI {
 		btn5.whenInactive(new Cmd_EleUnpinch());	
 		btn4.whenInactive(new Cmd_Popper(.5));
 //		btn3.whenInactive(new Cmd_EleHigh());
-		//AutonBtn.whenInactive(new Auton_Scheduler(Robot.StartPos));
 //		btn4.whenInactive(new Cmd_EleHigh());
 		btn3.whenInactive(new Cmd_ToggleRightServo());
 		//btn2.whenInactive(new Cmd_ToggleLeftServo());	
 
 
 
-		
 
 
 // Auto Buttons for Testing
 		
-		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
-		x.whenPressed(new CmdG_StriaghtScale(1));
-		rb.whenPressed(new Cmd_RetractRightMotor());
+		
 //		b.whenPressed(new CmdG_LeftSwitch());
 //		a.whenPressed(new Cmd_AutoTurn(-45 , .5,.3));
+		//x.whenPressed(new CmdG_StriaghtScale(1));
 //		y.whenPressed(new CmdG_ScaleWhip());
 //		rb.whenPressed(new Cmd_AutoDrive(25));	
-//
-//		// OPs controller
-//		// btn11.whenInactive(new CmdG_TimedCollect());
-//		btn10.whenInactive(new Cmd_ElePinch());
-//		btn9.whenInactive(new Cmd_EleUnpinch());
-//		// btn8.whenInactive(new CmdG_Herd());
-//		btn7.whenInactive(new Cmd_IntakeStop());
-//		btn6.whenInactive(new Cmd_IntakeTest());
-//		btn3.whenInactive(new Cmd_IntakePinch());
-//		btn4.whenInactive(new Cmd_IntakeUnPinch());
+
 
 	}
 

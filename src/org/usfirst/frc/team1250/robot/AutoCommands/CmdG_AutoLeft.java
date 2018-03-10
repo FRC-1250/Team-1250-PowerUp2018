@@ -25,9 +25,6 @@ public class CmdG_AutoLeft extends CommandGroup {
     	 addSequential(new Cmd_Reset());
     	 addSequential(new CmdG_Droper());
     	 addSequential(new Cmd_Reset());
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
        
     }
 }

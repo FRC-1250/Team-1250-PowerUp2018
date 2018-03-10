@@ -24,9 +24,6 @@ public class Auto_LeftPos extends CommandGroup {
     	String autoMessage = Robot.getAutoMessage();
     	
     	
-    	boolean getCross = Robot.CrossMid;
-    	SmartDashboard.putBoolean("Are We Crossing", getCross);
-    	
     	if(autoMessage.equals("RL") || autoMessage.equals("LL"))
     	{
     		//Left Scale case

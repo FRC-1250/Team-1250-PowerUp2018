@@ -28,7 +28,7 @@ public class Cmd_RetractRightMotor extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return Robot.m_oi.getArcadePadButton(10);
+		return !Robot.m_oi.getButtonState(6);
 	}
 
 	// Called once after isFinished returns true
@@ -41,5 +41,6 @@ public class Cmd_RetractRightMotor extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		Robot.s_climberright.stopMotor();
 	}
 }

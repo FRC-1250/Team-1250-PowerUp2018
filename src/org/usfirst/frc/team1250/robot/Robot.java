@@ -96,9 +96,11 @@ public class Robot extends TimedRobot {
 		
 		CameraServer.getInstance().startAutomaticCapture();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
+		s_climberright.midPoint();
 	}
 
-	/**
+	/**+
+	 * 
 	 * 
 	 * This function is called once each time the robot enters Disabled mode. You
 	 * can use it to reset any subsystem information you want to clear when the
@@ -110,6 +112,7 @@ public class Robot extends TimedRobot {
 		s_drivetrain.setToCoast();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 		SmartDashboard.putNumber("DS_Message length", -1);
+		s_climberright.midPoint();
 		//DS_Msg = getAutoMessage();
 	}
 
@@ -121,12 +124,14 @@ public class Robot extends TimedRobot {
 		m_crosspick = (Command) m_crossmid.getSelected();
 		String select_cross = m_crosspick.toString();
 		
-		if (select_cross.equals("Cmd_CrossMidTrue")) {
-			CrossMid = true;
-		}
-		else {
-			CrossMid = false;
-		}
+//		if (select_cross.equals("Cmd_CrossMidTrue")) {
+//			CrossMid = true;
+//		}
+//		else {
+//			CrossMid = false;
+//		}
+		
+		s_climberright.midPoint();
 		
 		
 		

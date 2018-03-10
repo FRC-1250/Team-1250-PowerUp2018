@@ -19,6 +19,9 @@ import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_ScaleWhip;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_StriaghtScale;
 import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_TimedCollect;
 import org.usfirst.frc.team1250.robot.AutoGroups.Auton_Scheduler;
+import org.usfirst.frc.team1250.robot.climber.Cmd_RetractLeftMotor;
+import org.usfirst.frc.team1250.robot.climber.Cmd_RetractRightMotor;
+import org.usfirst.frc.team1250.robot.climber.Cmd_ToggleRightServo;
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpit;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeCollectTimed;
 import org.usfirst.frc.team1250.robot.commands.*;
@@ -90,10 +93,10 @@ public class OI {
 		btn6.whenInactive(new Cmd_IntakePinch());
 		btn5.whenInactive(new Cmd_EleUnpinch());	
 		btn4.whenInactive(new Cmd_Popper(.5));
-		btn3.whenInactive(new Cmd_EleHigh());
+//		btn3.whenInactive(new Cmd_EleHigh());
 		//AutonBtn.whenInactive(new Auton_Scheduler(Robot.StartPos));
 //		btn4.whenInactive(new Cmd_EleHigh());
-//		btn3.whenInactive(new Cmd_ToggleRightServo());
+		btn3.whenInactive(new Cmd_ToggleRightServo());
 		//btn2.whenInactive(new Cmd_ToggleLeftServo());	
 
 
@@ -105,6 +108,7 @@ public class OI {
 		
 		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
 		x.whenPressed(new CmdG_StriaghtScale(1));
+		rb.whenPressed(new Cmd_RetractRightMotor());
 //		b.whenPressed(new CmdG_LeftSwitch());
 //		a.whenPressed(new Cmd_AutoTurn(-45 , .5,.3));
 //		y.whenPressed(new CmdG_ScaleWhip());

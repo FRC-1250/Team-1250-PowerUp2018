@@ -28,7 +28,7 @@ public class Sub_ClimberRight extends Subsystem {
 	Servo climberServoRight = new Servo(RobotMap.SRV_RIGHT);
 	
 	public Sub_ClimberRight() {
-		climberMotorRight.setNeutralMode(NeutralMode.Brake);
+		climberMotorRight.setNeutralMode(NeutralMode.Coast);
 		
 	}
 	
@@ -47,6 +47,11 @@ public class Sub_ClimberRight extends Subsystem {
 		else
 			climberServoRight.set(0.9);
 	}
+	
+	public void midPoint() {
+		climberServoRight.set(0.5);
+	}
+	
 	public void runMotorOut() {
 		climberMotorRight.set(0.5);
 	}

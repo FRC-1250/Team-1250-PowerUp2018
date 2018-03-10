@@ -10,7 +10,6 @@ package org.usfirst.frc.team1250.robot;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,13 +17,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1250.robot.AutoGroups.Auto_Fallback;
-import org.usfirst.frc.team1250.robot.AutoGroups.Auton_Scheduler;
-import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendCenterPos;
-import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendLeftPos;
-import org.usfirst.frc.team1250.robot.AutoGroups.Cmd_SendRightPos;
-import org.usfirst.frc.team1250.robot.commands.Cmd_CrossMidFalse;
-import org.usfirst.frc.team1250.robot.commands.Cmd_CrossMidTrue;
+import org.usfirst.frc.team1250.robot.AutoScheduler.Auto_Fallback;
+import org.usfirst.frc.team1250.robot.AutoScheduler.Auton_Scheduler;
+import org.usfirst.frc.team1250.robot.AutoScheduler.Cmd_SendCenterPos;
+import org.usfirst.frc.team1250.robot.AutoScheduler.Cmd_SendLeftPos;
+import org.usfirst.frc.team1250.robot.AutoScheduler.Cmd_SendRightPos;
 import org.usfirst.frc.team1250.robot.subsystems.*;
 //import org.usfirst.frc.team1250.robot.commands.ExampleCommand;
 

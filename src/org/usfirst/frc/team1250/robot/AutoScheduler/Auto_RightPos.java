@@ -1,14 +1,8 @@
-package org.usfirst.frc.team1250.robot.AutoGroups;
+package org.usfirst.frc.team1250.robot.AutoScheduler;
 
 import org.usfirst.frc.team1250.robot.Robot;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_ScaleWhip;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_StriaghtScale;
-import org.usfirst.frc.team1250.robot.commands.Cmd_Popper;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
-
+import org.usfirst.frc.team1250.robot.AutoActions.CmdG_ScaleWhip;
+import org.usfirst.frc.team1250.robot.AutoActions.CmdG_StriaghtScale;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

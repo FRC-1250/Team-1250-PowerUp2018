@@ -1,16 +1,10 @@
-	package org.usfirst.frc.team1250.robot.AutoCommands;
+	package org.usfirst.frc.team1250.robot.AutoActions;
 
 import org.usfirst.frc.team1250.robot.Robot;
-import org.usfirst.frc.team1250.robot.commands.Cmd_DoNothing;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleDownSensor;
 import org.usfirst.frc.team1250.robot.commands.Cmd_Reset;
-import org.usfirst.frc.team1250.robot.commands.Cmd_TimedEleDown;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
+import org.usfirst.frc.team1250.robot.elevator.CmdG_Dropper;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHome;
-import org.usfirst.frc.team1250.robot.test.Cmd_IntakeTest;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -25,7 +19,7 @@ public class CmdG_StriaghtScale extends CommandGroup {
     	 //addSequential(new Cmd_AutoDrive(100, .8 , .3));
     	 addSequential(new Cmd_AutoDrive(237, 1 , .3));
     	 addSequential(new Cmd_Reset());
-    	 addSequential(new CmdG_Droper());
+    	 addSequential(new CmdG_Dropper());
 //    	 addSequential(new Cmd_DoNothing(1));
 ////    	 addParallel(new Cmd_EleDownSensor());
 //    	 addSequential(new Cmd_AutoDrive(-30, .8 , .3));

@@ -8,12 +8,13 @@
 package org.usfirst.frc.team1250.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+
 import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpitFast;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_Droper;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.commands.*;
 import org.usfirst.frc.team1250.robot.drive.*;
+import org.usfirst.frc.team1250.robot.elevator.CmdG_Dropper;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
+import org.usfirst.frc.team1250.robot.intake.CmdG_FullCollect;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakePinch;
 import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeUnPinch;
 import org.usfirst.frc.team1250.robot.test.Cmd_IntakeTest;
@@ -55,7 +56,7 @@ public class OI {
 
 	public OI() {
 		// Drivers controller
-		lb.whenPressed(new CmdG_Droper());	
+		lb.whenPressed(new CmdG_Dropper());	
 		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
 
 		 

@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1250.robot.Robot;
 import org.usfirst.frc.team1250.robot.RobotMap;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import org.usfirst.frc.team1250.robot.drive.*;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -15,14 +14,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogGyro;
-
-
-
-import com.kauailabs.navx.frc.AHRS;
 
 
 /**

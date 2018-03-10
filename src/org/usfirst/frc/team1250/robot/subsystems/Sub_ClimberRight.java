@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1250.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Servo;

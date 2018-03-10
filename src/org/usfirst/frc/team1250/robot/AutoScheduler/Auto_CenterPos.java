@@ -1,10 +1,7 @@
-package org.usfirst.frc.team1250.robot.AutoGroups;
+package org.usfirst.frc.team1250.robot.AutoScheduler;
 
 import org.usfirst.frc.team1250.robot.Robot;
-import org.usfirst.frc.team1250.robot.AutoCommands.CmdG_AutonSwitch;
-import org.usfirst.frc.team1250.robot.commands.Cmd_Popper;
-import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
-
+import org.usfirst.frc.team1250.robot.AutoActions.CmdG_AutonSwitch;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

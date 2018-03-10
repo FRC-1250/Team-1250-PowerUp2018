@@ -2,8 +2,6 @@ package org.usfirst.frc.team1250.robot.elevator;
 
 import org.usfirst.frc.team1250.robot.Robot;
 
-import com.ctre.phoenix.ErrorCode;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

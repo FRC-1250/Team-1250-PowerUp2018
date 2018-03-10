@@ -1,10 +1,10 @@
-package org.usfirst.frc.team1250.robot.AutoCommands;
+package org.usfirst.frc.team1250.robot.AutoActions;
 
 import org.usfirst.frc.team1250.robot.commands.Cmd_DoNothing;
 import org.usfirst.frc.team1250.robot.commands.Cmd_Reset;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoTurn;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
+import org.usfirst.frc.team1250.robot.elevator.CmdG_Dropper;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleSwitch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -32,6 +32,6 @@ public class CmdG_AutonSwitch extends CommandGroup {
     	 addSequential(new Cmd_Reset());
     	 addSequential(new Cmd_AutoDrive(8, .8 , .4));
     	 addSequential(new Cmd_Reset());
-    	 addSequential(new CmdG_Droper());
+    	 addSequential(new CmdG_Dropper());
     	 }
 }

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1250.robot.AutoGroups;
+package org.usfirst.frc.team1250.robot.AutoScheduler;
 
 import org.usfirst.frc.team1250.robot.Robot;
 

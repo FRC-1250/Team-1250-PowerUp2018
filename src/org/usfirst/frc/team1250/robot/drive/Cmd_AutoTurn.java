@@ -3,7 +3,6 @@ package org.usfirst.frc.team1250.robot.drive;
 import org.usfirst.frc.team1250.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */

@@ -2,16 +2,10 @@ package org.usfirst.frc.team1250.robot.subsystems;
 
 import org.usfirst.frc.team1250.robot.RobotMap;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleManual;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
-import org.usfirst.frc.team1250.robot.commands.Cmd_Unpinch;
-import org.usfirst.frc.team1250.robot.drive.Cmd_ManualDrive;
-
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.Faults;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.StickyFaults;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;

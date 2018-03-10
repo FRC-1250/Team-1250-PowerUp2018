@@ -1,6 +1,5 @@
-package org.usfirst.frc.team1250.robot.AutoGroups;
+package org.usfirst.frc.team1250.robot.AutoScheduler;
 
-import org.usfirst.frc.team1250.robot.commands.Cmd_Popper;
 import org.usfirst.frc.team1250.robot.drive.Cmd_AutoDrive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

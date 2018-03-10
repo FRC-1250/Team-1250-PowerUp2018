@@ -1,14 +1,7 @@
-package org.usfirst.frc.team1250.robot.AutoCommands;
+package org.usfirst.frc.team1250.robot.intake;
 
 import org.usfirst.frc.team1250.robot.Robot;
-import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeCollectTimed;
-import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeUnPinch;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_ElePinch;
-import org.usfirst.frc.team1250.robot.commands.Cmd_EleTimedPinch;
-import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
 import org.usfirst.frc.team1250.robot.commands.Cmd_EleUnpinchTimed;
-import org.usfirst.frc.team1250.robot.commands.Cmd_IntantPinch;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**

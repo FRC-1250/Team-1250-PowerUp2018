@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
 		
 		CameraServer.getInstance().startAutomaticCapture();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
-		s_climberright.midPoint();
+		s_climberright.resetServo();
 	}
 
 	/**+
@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
 		s_drivetrain.setToCoast();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 		SmartDashboard.putNumber("DS_Message length", -1);
-		s_climberright.midPoint();
+		s_climberright.resetServo();
 		//DS_Msg = getAutoMessage();
 	}
 
@@ -131,7 +131,7 @@ public class Robot extends TimedRobot {
 //			CrossMid = false;
 //		}
 		
-		s_climberright.midPoint();
+		s_climberright.resetServo();
 		
 		
 		

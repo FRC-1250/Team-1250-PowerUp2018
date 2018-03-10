@@ -29,7 +29,7 @@ public class Sub_Elevator extends Subsystem {
 
 	// In inches from ground
 	public final int SCALE_POS = 70;
-	public final int SWITCH_POS = 23;
+	public final int SWITCH_POS = 33;
 	public final double HOME_POS = 2;
 	public final double ELE_TICKS = 31;
 			

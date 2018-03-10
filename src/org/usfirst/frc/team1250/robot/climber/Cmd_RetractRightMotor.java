@@ -17,7 +17,10 @@ public class Cmd_RetractRightMotor extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.s_climberright.runMotorOut();
+		if (Robot.s_climberright.getServoStatus())
+			Robot.s_climberright.runMotorOut();
+		else
+			Robot.s_climberright.runMotorIn();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

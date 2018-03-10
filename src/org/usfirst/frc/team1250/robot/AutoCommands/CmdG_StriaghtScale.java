@@ -26,8 +26,9 @@ public class CmdG_StriaghtScale extends CommandGroup {
     	 addSequential(new Cmd_AutoDrive(237, 1 , .3));
     	 addSequential(new Cmd_Reset());
     	 addSequential(new CmdG_Droper());
-//    	 addParallel(new Cmd_EleDownSensor());
-//    	 addSequential(new Cmd_AutoDrive(-24, .8 , .3));
+//    	 addSequential(new Cmd_DoNothing(1));
+////    	 addParallel(new Cmd_EleDownSensor());
+//    	 addSequential(new Cmd_AutoDrive(-30, .8 , .3));
 //    	 addParallel(new Cmd_IntakeTest());
 //    	 //addParallel(new Cmd_EleHome());
 ////    	 addParallel(new Cmd_EleDownSensor());

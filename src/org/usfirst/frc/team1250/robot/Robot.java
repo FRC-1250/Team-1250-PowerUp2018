@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Robot Position Message", "UN_INIT");
 		
 		CameraServer.getInstance().startAutomaticCapture();
+		CameraServer.getInstance().startAutomaticCapture(1);
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(0);
 		s_climberright.resetServo();
 	}
@@ -216,6 +217,7 @@ public class Robot extends TimedRobot {
 		
 		s_drivetrain.resetGyro();
 		s_drivetrain.setToCoast();
+		s_climberright.resetServo();
 	}
 
 	/**
@@ -242,6 +244,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("sensor Pos", s_elevator.eleMotor.getSelectedSensorPosition(0));
 //		SmartDashboard.putNumber("Motor V", s_elevator.eleMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Gyro POS", s_drivetrain.getGyroAngle());
+		SmartDashboard.putBoolean("Ready To Climb?", !s_climberright.getServoStatus());
 //		SmartDashboard.putNumber("Right Encoder Ticks", s_drivetrain.getRightSideSensorPosInTicks());
 //		SmartDashboard.putNumber("Left Encoder Ticks", s_drivetrain.getLeftSideSensorPosInTicks());
 //		SmartDashboard.putNumber("Right Encoder Inches", s_drivetrain.getRightSideSensorPosInInches());

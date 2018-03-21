@@ -40,6 +40,7 @@ public class Robot extends TimedRobot {
 	public static final Sub_Intake s_intake = new Sub_Intake();
 	public static final Sub_Elevator s_elevator = new Sub_Elevator();
 	public static final Sub_LimeLight s_limelight = new Sub_LimeLight();
+	public static final Sub_NewIntake s_newintake = new Sub_NewIntake();
 	
 	
 	

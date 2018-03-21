@@ -29,5 +29,6 @@ public class Cmd_IntakeCollect extends Command {
     }
 
     protected void interrupted() {
+    	Robot.s_intake.stop();
     }
 }

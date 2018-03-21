@@ -22,7 +22,7 @@ public class Cmd_IntakeSpit extends TimedCommand {
     }
 
     protected void end() {
-    	Robot.s_intake.stop();
+    	Robot.s_newintake.stop();
     }
     
     protected void interrupted() {

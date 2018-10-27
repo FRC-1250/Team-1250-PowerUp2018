@@ -37,7 +37,7 @@ public class Sub_DriveTrain extends Subsystem {
 	private SpeedController gLeftMotor = new SpeedControllerGroup(fLeftMotor, bLeftMotor, mLeftMotor);
 	private SpeedController gRightMotor = new SpeedControllerGroup(fRightMotor, bRightMotor, mRightMotor);
 	private DifferentialDrive diffDriveGroup = new DifferentialDrive(gLeftMotor, gRightMotor);
-
+	
 
 
 	// Shift variables
@@ -61,16 +61,23 @@ public class Sub_DriveTrain extends Subsystem {
 	double WHEELBASE_RADIUS = 23 / 2;
 	
 	private double CUBE_AREA_SETPOINT= 0;
-
+// 5 is half for child mode 10 is full speed
 	public Sub_DriveTrain() {
 		fLeftMotor.setInverted(true);
 		fRightMotor.setInverted(true);
+//		fLeftMotor.set(.2);
+//		mLeftMotor.set(.2);
+//		bLeftMotor.set(.2);
+//		fRightMotor.set(.2);
+//		mRightMotor.set(.2);
+//		bRightMotor.set(.2);
 		fLeftMotor.configOpenloopRamp(0.1, 10);
 		mLeftMotor.configOpenloopRamp(0.1, 10);
 		bLeftMotor.configOpenloopRamp(0.1, 10);
 		fRightMotor.configOpenloopRamp(0.1, 10);
 		mRightMotor.configOpenloopRamp(0.1, 10);
 		bRightMotor.configOpenloopRamp(0.1, 10);
+		
 		
 		fLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		fRightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);

@@ -47,6 +47,7 @@ public class RobotMap {
 	public static final int INTAKE_SENS_RIGHT  = 1;
 	public static final int INTAKE_SENS_LEFT   = 0;
 	public static final int INTAKE_SENS_FINAL  = 3;
+	public static final int INTAKE_SENS_FINAL2  = 4;
 
 	
 	//Elevator Motor Control IDs

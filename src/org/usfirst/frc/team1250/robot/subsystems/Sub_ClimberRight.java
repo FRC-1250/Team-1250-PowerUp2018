@@ -41,6 +41,9 @@ public class Sub_ClimberRight extends Subsystem {
 	public void resetServo() {
 		climberServoRight.set(0.85);
 	}
+	public void servoSet(double num) {
+		climberServoRight.set(num);
+	}
 	
 	public void toggleServo() {
 		if (climberServoRight.get() > 0.89) {
@@ -63,11 +66,11 @@ public class Sub_ClimberRight extends Subsystem {
 	}
 	
 	public void runMotorOut() {
-		climberMotorRight.set(0.5);
-	}
+		climberMotorRight.set(1.0);
+		}
 	
 	public void runMotorIn() {
-		climberMotorRight.set(-0.5);
+		climberMotorRight.set(-1.0);
 	}
 	
 	public void stopMotor() {

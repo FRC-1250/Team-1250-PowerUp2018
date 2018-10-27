@@ -16,6 +16,7 @@ public class Sub_NewIntake extends Subsystem {
 	private WPI_VictorSPX rightClaw = new WPI_VictorSPX(RobotMap.CLW_RIGHT);
 	
 	private DigitalInput backSensor = new DigitalInput(RobotMap.INTAKE_SENS_FINAL);
+	private DigitalInput backSensor2 = new DigitalInput(RobotMap.INTAKE_SENS_FINAL2);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -24,8 +25,14 @@ public class Sub_NewIntake extends Subsystem {
     
     public void setIntakeSpeed(double speed) {
 		leftClaw.set(speed);
-		rightClaw.set(speed);
+		rightClaw.set(-speed);
 	}
+    public void setIntakeSpeedLeft(double speed) {
+		leftClaw.set(speed);
+    }
+    public void setIntakeSpeedRight(double speed) {
+		rightClaw.set(-speed);
+    }
     
 	public void stop() {
 
@@ -36,6 +43,9 @@ public class Sub_NewIntake extends Subsystem {
 	
 	public boolean getSensorValue() {
 		return backSensor.get();
+	}
+	public boolean getSensorValue2() {
+		return backSensor2.get();
 	}
     
 	

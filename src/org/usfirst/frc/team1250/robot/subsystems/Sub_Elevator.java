@@ -25,7 +25,7 @@ public class Sub_Elevator extends Subsystem {
 	public final int SCALE_POS = 70;
 	public final int SWITCH_POS = 33;
 	public final double HOME_POS = 2;
-	public final double ELE_TICKS = 31;
+	public final double ELE_TICKS = 49.6;
 			
 	public static int eleSetpoint;
 
@@ -35,7 +35,7 @@ public class Sub_Elevator extends Subsystem {
 
 		eleMotor.configNominalOutputForward(0, 10);
 		eleMotor.configNominalOutputReverse(0, 10);
-		eleMotor.configPeakOutputForward(.6, 10);
+		eleMotor.configPeakOutputForward(.8, 10);
 		eleMotor.configPeakOutputReverse(-.6, 10);
 		eleMotor.setNeutralMode(NeutralMode.Brake);
 		eleMotor.config_kF(0, 0.0, 10);

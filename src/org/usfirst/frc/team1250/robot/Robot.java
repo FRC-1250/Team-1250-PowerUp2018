@@ -37,10 +37,11 @@ public class Robot extends TimedRobot {
 	//Subsystems
 	public static final Sub_DriveTrain s_drivetrain = new Sub_DriveTrain();
 	public static final Sub_Shifter s_shifter = new Sub_Shifter();
-	public static final Sub_Intake s_intake = new Sub_Intake();
+//	public static final Sub_Intake s_intake = new Sub_Intake();
 	public static final Sub_Elevator s_elevator = new Sub_Elevator();
 	public static final Sub_LimeLight s_limelight = new Sub_LimeLight();
 	public static final Sub_NewIntake s_newintake = new Sub_NewIntake();
+	public static final Sub_ClimberRight s_climber = new Sub_ClimberRight();
 	
 	
 	
@@ -144,6 +145,8 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		
 			Scheduler.getInstance().run();
+//			s_newintake.setIntakeSpeed(-.1);
+
 	}
 
 	
@@ -168,7 +171,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
 		this.log();
+//		s_newintake.setIntakeSpeed(-.1);
 	}
 
 	/**

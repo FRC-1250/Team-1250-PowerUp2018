@@ -9,15 +9,16 @@ package org.usfirst.frc.team1250.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-import org.usfirst.frc.team1250.robot.commandIntake.Cmd_IntakeSpitFast;
+import org.usfirst.frc.team1250.robot.NewIntake.CmdG_TestRoutine;
+import org.usfirst.frc.team1250.robot.NewIntake.Cmd_IntakeSpit;
+import org.usfirst.frc.team1250.robot.NewIntake.Cmd_IntakeSpitSlow;
+import org.usfirst.frc.team1250.robot.NewIntake.Cmd_IntakeStop;
+import org.usfirst.frc.team1250.robot.NewIntake.Cmd_LowIn;
 import org.usfirst.frc.team1250.robot.commands.*;
 import org.usfirst.frc.team1250.robot.drive.*;
 import org.usfirst.frc.team1250.robot.elevator.CmdG_Dropper;
+import org.usfirst.frc.team1250.robot.elevator.Cmd_EleHigh;
 import org.usfirst.frc.team1250.robot.elevator.Cmd_EleUnpinch;
-import org.usfirst.frc.team1250.robot.intake.CmdG_FullCollect;
-import org.usfirst.frc.team1250.robot.intake.Cmd_IntakePinch;
-import org.usfirst.frc.team1250.robot.intake.Cmd_IntakeUnPinch;
-import org.usfirst.frc.team1250.robot.test.Cmd_IntakeTest;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;;
 
 /**
@@ -56,23 +57,28 @@ public class OI {
 
 	public OI() {
 		// Drivers controller
-		lb.whenPressed(new CmdG_Dropper());	
+		lb.whenPressed(new Cmd_IntakeSpit(1));	
 		y.whenPressed(new Cmd_AutoTurn(180 , 1 , 1));
-
+		rb.whenPressed(new Cmd_IntakeSpitSlow(1));	
+		b.whileHeld(new Cmd_ClimbUp());
+		a.whileHeld(new Cmd_ClimbExtend());
+		x.whileHeld(new Cmd_ClimbStop());
 		 
 		//OPs controller
 		
-		
-		btn12.whenInactive(new Cmd_IntakeTest());
-		btn11.whenInactive(new CmdG_FullCollect());
-		//btn10.whenInactive(new Cmd_RetractRightMotor());	
+		btn12.whenInactive(new CmdG_TestRoutine());
+		btn11.whenInactive(new Cmd_LowIn());
+//		btn12.whenInactive(new Cmd_IntakeTest());
+//		btn11.whenInactive(new CmdG_FullCollect());
+		btn10.whenInactive(new Cmd_IntakeStop());	
 		//btn9.whenInactive(new Cmd_RetractLeftMotor());
-		btn8.whenInactive(new Cmd_IntakeSpitFast(1));
-		btn7.whenInactive(new Cmd_IntakeUnPinch());
-		btn6.whenInactive(new Cmd_IntakePinch());
+	    btn8.whenInactive(new Cmd_ClimbUp());
+//		btn7.whenInactive(new Cmd_ClimbExtend());
+//		btn7.whileHeld(new Cmd_ClimbExtend());
+//		btn6.whenInactive(new Cmd_IntakePinch());
 		btn5.whenInactive(new Cmd_EleUnpinch());	
 		btn4.whenInactive(new Cmd_Popper(.5));
-//		btn3.whenInactive(new Cmd_EleHigh());
+		btn3.whenInactive(new Cmd_TimedEleUp(1.8));
 //		btn4.whenInactive(new Cmd_EleHigh());
 		//btn2.whenInactive(new Cmd_ToggleLeftServo());	
 

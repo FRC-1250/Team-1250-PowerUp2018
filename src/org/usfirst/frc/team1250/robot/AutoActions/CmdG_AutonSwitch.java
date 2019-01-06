@@ -22,7 +22,7 @@ public class CmdG_AutonSwitch extends CommandGroup {
 		
     public CmdG_AutonSwitch(int dir) {
     	 addSequential(new Cmd_Reset());
-    	 addParallel(new Cmd_EleTimed(.8));
+    	 addParallel(new Cmd_EleTimed(1));
     	 addSequential(new Cmd_AutoDrive(38, .7 , .3));
     	 addSequential(new Cmd_DoNothing(.1));
     	 addSequential(new Cmd_Reset());

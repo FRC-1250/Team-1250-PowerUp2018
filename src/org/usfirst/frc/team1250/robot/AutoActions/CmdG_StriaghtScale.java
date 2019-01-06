@@ -18,12 +18,12 @@ public class CmdG_StriaghtScale extends CommandGroup {
     public CmdG_StriaghtScale(int dir) {
     	 Robot.s_drivetrain.setToBrake();
     	 addSequential(new Cmd_Reset());
-    	 addParallel(new Cmd_TimedEleUp(2.1));
+    	 addParallel(new Cmd_TimedEleUp(2.3));
     	 //addSequential(new Cmd_AutoDrive(100, .8 , .3));
-    	 addSequential(new Cmd_AutoDrive(246, 1 , .3));
+    	 addSequential(new Cmd_AutoDrive(100, 1 , .3));
     	 addSequential(new Cmd_Reset());
-    	 addSequential(new Cmd_IntakeSpitSlow(1));
-    	 addSequential(new Cmd_AutoDrive(-48, 1 , .3));
+//    	 addSequential(new Cmd_IntakeSpitSlow(1));
+//    	 addSequential(new Cmd_AutoDrive(-60, 1 , .3));
 //    	 addSequential(new Cmd_DoNothing(1));
 ////    	 addParallel(new Cmd_EleDownSensor());
 //    	 addSequential(new Cmd_AutoDrive(-30, .8 , .3));
